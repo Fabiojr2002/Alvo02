@@ -8,3 +8,7 @@ desktop.ini
 .idea/
 *.swp
 *.log
+
+# Scripts temporarios e backups locais
+*.py
+_arquivos_originais_backup/

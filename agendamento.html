@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agendar Aula Experimental Gratuita | Alvo02Fit - Academia em São Mateus</title>
+  <meta name="description"
+    content="Agende sua aula experimental 100% gratuita na Alvo02Fit. Escolha a modalidade, dia e horário ideal para o seu treino em São Mateus, SP." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="./css/style.css" rel="stylesheet" type="text/css" />
+  <script src="./js/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    WebFont.load({ google: { families: ["Anton:300,400,500,600,700", "Inter Tight:300,400,500,600,700", "Onest:300,400,500,600,700"] } });
+  </script>
+  <link rel="shortcut icon" href="./images/alvo02fit-logo.png" type="image/x-icon" />
+
+  <style>
+    :root {
+      --primary: #f96a24;
+      --primary-hover: #ff4d00;
+      --primary-glow: rgba(249, 106, 36, 0.35);
+      --bg-dark: #0f0503;
+      --card-bg: rgba(255, 255, 255, 0.035);
+      --card-border: rgba(110, 83, 72, 0.35);
+      --card-border-active: #f96a24;
+      --text-muted: #a89e96;
+      --text-light: #f5f0eb;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      font-family: var(--_font-family---secondary-color, 'Inter Tight', sans-serif);
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    /* Container equilibrado para que toda a pagina caiba na tela sem zoom */
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+      box-sizing: border-box;
+    }
+
+    /* Navbar específica de agendamento */
+    .schedule-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(15, 5, 3, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 16px 0;
+    }
+
+    .schedule-nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .schedule-logo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .schedule-logo-img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .schedule-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .back-home-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .back-home-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Header Hero */
+    .schedule-hero {
+      padding: 56px 0 32px 0;
+      text-align: center;
+      position: relative;
+    }
+
+    .schedule-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 100px;
+      background: rgba(249, 106, 36, 0.12);
+      border: 1px solid rgba(249, 106, 36, 0.35);
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .schedule-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #26d07c;
+      box-shadow: 0 0 8px #26d07c;
+    }
+
+    .schedule-title {
+      font-family: Anton, sans-serif;
+      font-size: clamp(28px, 4.8vw, 56px);
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #ffffff;
+      margin: 0 auto 16px auto;
+      max-width: 840px;
+      word-break: break-word;
+    }
+
+    .schedule-title span {
+      color: var(--primary);
+    }
+
+    .schedule-desc {
+      font-size: clamp(15px, 2vw, 17px);
+      line-height: 1.5;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 28px auto;
+    }
+
+    .schedule-trust-pills {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .trust-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 13px;
+      color: #e2dbd5;
+    }
+
+    /* Grid do Agendador */
+    .schedule-main-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 370px;
+      gap: 28px;
+      align-items: start;
+      margin-bottom: 80px;
+      min-width: 0;
+    }
+
+    .schedule-steps-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      min-width: 0;
+    }
+
+    /* Card de Passo */
+    .step-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0%, rgba(249, 106, 36, 0.03) 50%, rgba(255, 255, 255, 0.02) 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+      transition: border-color 0.3s ease;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    .step-card.active {
+      border-color: rgba(249, 106, 36, 0.5);
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .step-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #f96a24, #e05310);
+      color: #ffffff;
+      font-family: Anton, sans-serif;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px rgba(249, 106, 36, 0.35);
+      flex-shrink: 0;
+    }
+
+    .step-title-wrap h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .step-title-wrap p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 4px 0 0 0;
+    }
+
+    /* Passo 1: Cards de Modalidades */
+    .modalities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .modality-option {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 16px 14px;
+      cursor: pointer;
+      transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+      user-select: none;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    .modality-option:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(249, 106, 36, 0.4);
+      transform: translateY(-3px);
+    }
+
+    .modality-option.selected {
+      background: linear-gradient(135deg, rgba(249, 106, 36, 0.16) 0%, rgba(249, 106, 36, 0.06) 100%);
+      border-color: #f96a24;
+      box-shadow: 0 8px 24px rgba(249, 106, 36, 0.28);
+    }
+
+    .modality-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modality-icon-pill {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(249, 106, 36, 0.15);
+      border: 1px solid rgba(249, 106, 36, 0.3);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modality-option.selected .modality-icon-pill {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .modality-badge {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      padding: 3px 8px;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #c9bfb5;
+    }
+
+    .modality-option.selected .modality-badge {
+      background: rgba(249, 106, 36, 0.25);
+      color: #ffffff;
+    }
+
+    .modality-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .modality-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.35;
+    }
+
+    /* Passo 2: Seletor de Dias */
+    .dates-slider-wrapper {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary) transparent;
+      min-width: 0;
+    }
+
+    .dates-slider-wrapper::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .dates-slider-wrapper::-webkit-scrollbar-thumb {
+      background: rgba(249, 106, 36, 0.5);
+      border-radius: 6px;
+    }
+
+    .date-card-btn {
+      flex: 0 0 76px;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 12px 6px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      user-select: none;
+      box-sizing: border-box;
+    }
+
+    .date-card-btn:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(249, 106, 36, 0.35);
+      transform: translateY(-2px);
+    }
+
+    .date-card-btn.selected {
+      background: linear-gradient(135deg, #f96a24, #d84b07);
+      border-color: #f96a24;
+      color: #ffffff;
+      box-shadow: 0 8px 20px rgba(249, 106, 36, 0.35);
+    }
+
+    .date-weekday {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .date-card-btn.selected .date-weekday {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .date-day-number {
+      font-family: Anton, sans-serif;
+      font-size: 26px;
+      line-height: 1.1;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+
+    .date-month {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: capitalize;
+    }
+
+    .date-card-btn.selected .date-month {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .date-custom-row {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .date-custom-input {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 8px 12px;
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .date-custom-input:focus {
+      border-color: var(--primary);
+    }
+
+    /* Passo 3: Horários */
+    .time-periods-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .period-tab-btn {
+      padding: 7px 14px;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #c9bfb5;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .period-tab-btn.active,
+    .period-tab-btn:hover {
+      background: rgba(249, 106, 36, 0.15);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .times-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .time-pill-btn {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 12px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      user-select: none;
+    }
+
+    .time-pill-btn:hover:not(.disabled) {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(249, 106, 36, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .time-pill-btn.selected {
+      background: linear-gradient(135deg, #f96a24, #d84b07);
+      border-color: #f96a24;
+      color: #ffffff;
+      box-shadow: 0 6px 18px rgba(249, 106, 36, 0.35);
+    }
+
+    .time-pill-btn.disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      border-color: rgba(255, 255, 255, 0.04);
+      text-decoration: line-through;
+    }
+
+    .time-val {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+    }
+
+    .time-tag {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .time-pill-btn.selected .time-tag {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    /* Passo 4: Dados Pessoais */
+    .form-fields-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-field-full {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #e2dbd5;
+      margin-bottom: 6px;
+    }
+
+    .form-input-wrap {
+      position: relative;
+    }
+
+    .form-input-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .form-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 13px 14px 13px 44px;
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .form-input:focus {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(249, 106, 36, 0.15);
+    }
+
+    .form-input::placeholder {
+      color: #6e645e;
+    }
+
+    .experience-radio-group {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .exp-radio-label {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #c9bfb5;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: block;
+      user-select: none;
+    }
+
+    .exp-radio-label:hover {
+      border-color: rgba(249, 106, 36, 0.35);
+    }
+
+    .exp-radio-label input {
+      display: none;
+    }
+
+    .exp-radio-label.checked {
+      background: rgba(249, 106, 36, 0.15);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    /* Coluna Direita: Resumo Fixo (Summary Voucher) */
+    .schedule-summary-sticky {
+      position: sticky;
+      top: 86px;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    .summary-card {
+      background: linear-gradient(145deg, #180a06 0%, #120704 100%);
+      border: 1.5px solid rgba(249, 106, 36, 0.4);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 40px rgba(249, 106, 36, 0.1);
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+      min-width: 0;
+    }
+
+    .summary-card::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(249, 106, 36, 0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .summary-badge-free {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 100px;
+      background: #26d07c;
+      color: #0b2e1a;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .summary-header-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 4px 0;
+    }
+
+    .summary-header-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0 0 20px 0;
+    }
+
+    .voucher-details-box {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .voucher-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .voucher-row-label {
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .voucher-row-val {
+      font-weight: 700;
+      color: #ffffff;
+      text-align: right;
+    }
+
+    .voucher-row-val.highlight {
+      color: var(--primary);
+    }
+
+    .voucher-row-val.price {
+      color: #26d07c;
+      font-size: 16px;
+    }
+
+    .summary-benefits-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .summary-benefits-list li {
+      font-size: 13px;
+      color: #d1c8c0;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .summary-benefits-list svg {
+      color: #26d07c;
+      flex-shrink: 0;
+    }
+
+    .confirm-booking-btn {
+      width: 100%;
+      padding: 16px 24px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #f96a24 0%, #e05310 100%);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      font-family: Anton, sans-serif;
+      font-size: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 10px 28px rgba(249, 106, 36, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .confirm-booking-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 16px 36px rgba(249, 106, 36, 0.55);
+    }
+
+    .summary-safe-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* Modal de Sucesso */
+    .success-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .success-modal-overlay.open {
+      display: flex;
+      animation: fadeInModal 0.3s ease forwards;
+    }
+
+    @keyframes fadeInModal {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .success-modal-card {
+      background: linear-gradient(145deg, #1a0b06 0%, #100603 100%);
+      border: 1.5px solid rgba(249, 106, 36, 0.45);
+      border-radius: 28px;
+      max-width: 540px;
+      width: 100%;
+      padding: 36px 32px;
+      text-align: center;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+      position: relative;
+      animation: scaleUpModal 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes scaleUpModal {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .success-icon-wrap {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(38, 208, 124, 0.15);
+      border: 2px solid #26d07c;
+      color: #26d07c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px auto;
+      box-shadow: 0 0 30px rgba(38, 208, 124, 0.4);
+    }
+
+    .success-title {
+      font-family: Anton, sans-serif;
+      font-size: 32px;
+      color: #ffffff;
+      margin: 0 0 10px 0;
+      letter-spacing: 0.5px;
+    }
+
+    .success-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 0 0 24px 0;
+      line-height: 1.5;
+    }
+
+    .success-voucher-ticket {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px dashed rgba(249, 106, 36, 0.35);
+      border-radius: 16px;
+      padding: 18px;
+      text-align: left;
+      margin-bottom: 24px;
+    }
+
+    .success-voucher-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .success-voucher-code {
+      color: var(--primary);
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .success-modal-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .whatsapp-confirm-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 22px;
+      border-radius: 14px;
+      background: #25D366;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      box-shadow: 0 8px 22px rgba(37, 211, 102, 0.35);
+      transition: all 0.25s ease;
+    }
+
+    .whatsapp-confirm-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(37, 211, 102, 0.5);
+    }
+
+    .close-modal-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-muted);
+      padding: 12px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .close-modal-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+    }
+
+    /* FAQ do Agendamento */
+    .schedule-faq-section {
+      padding: 60px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .faq-accordion-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .sched-faq-card {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .sched-faq-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 8px 0;
+    }
+
+    .sched-faq-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    @media screen and (max-width: 1120px) {
+      .modalities-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media screen and (max-width: 991px) {
+      .schedule-main-layout {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+      .schedule-summary-sticky {
+        position: static;
+        max-width: 480px;
+        margin: 0 auto;
+        width: 100%;
+      }
+      .faq-accordion-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media screen and (max-width: 640px) {
+      .modalities-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-fields-grid {
+        grid-template-columns: 1fr;
+      }
+      .experience-radio-group {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media screen and (max-width: 479px) {
+      .container {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+      .schedule-logo-img {
+        height: 32px;
+      }
+      .schedule-nav-inner {
+        gap: 8px;
+      }
+      .schedule-nav-actions {
+        gap: 6px;
+      }
+      .back-home-btn {
+        padding: 6px 10px;
+        font-size: 11px;
+        gap: 4px;
+      }
+      .step-card {
+        padding: 18px 14px;
+        border-radius: 16px;
+      }
+      .summary-card {
+        padding: 18px 14px;
+        border-radius: 18px;
+      }
+      .schedule-hero {
+        padding: 24px 0 16px 0;
+      }
+      .schedule-title {
+        font-size: 24px !important;
+        letter-spacing: 0.5px;
+      }
+      .schedule-desc {
+        font-size: 13px;
+        margin-bottom: 18px;
+      }
+      .schedule-trust-pills {
+        gap: 6px;
+      }
+      .trust-pill {
+        font-size: 11px;
+        padding: 4px 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header / Navbar -->
+  <header class="schedule-nav">
+    <div class="container w-container">
+      <div class="schedule-nav-inner">
+        <a href="./index.html" class="schedule-logo-link" title="Voltar para a página principal">
+          <img src="./images/alvo02fit-logo.png" alt="Alvo02Fit Academia" class="schedule-logo-img" />
+        </a>
+
+        <div class="schedule-nav-actions">
+          <a href="./index.html" class="back-home-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span>Voltar ao Site</span>
+          </a>
+          <a href="https://wa.me/5511930025829" target="_blank" rel="noopener noreferrer" class="back-home-btn" style="background: rgba(37, 211, 102, 0.15); border-color: rgba(37, 211, 102, 0.4); color: #25D366;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+            </svg>
+            <span>Recepção</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="schedule-hero">
+    <div class="container w-container">
+      <div class="schedule-badge">
+        <span class="schedule-badge-dot"></span>
+        100% Gratuita &bull; Sem Compromisso
+      </div>
+      <h1 class="schedule-title">Agende sua <span>Aula Experimental</span></h1>
+      <p class="schedule-desc">
+        Escolha a modalidade desejada, selecione o dia e horário que melhor se encaixam na sua rotina e venha treinar na melhor academia de São Mateus.
+      </p>
+
+      <div class="schedule-trust-pills">
+        <div class="trust-pill">
+          <span>🏋️‍♂️</span>
+          <span>Acesso a toda a estrutura</span>
+        </div>
+        <div class="trust-pill">
+          <span>👥</span>
+          <span>Acompanhamento com professor</span>
+        </div>
+        <div class="trust-pill">
+          <span>📍</span>
+          <span>Av. Sapopemba, 12.847</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Layout Principal de Agendamento -->
+  <main class="container w-container">
+    <form id="booking-form" onsubmit="event.preventDefault(); handleBookingSubmit();">
+      <div class="schedule-main-layout">
+        <!-- Coluna Esquerda: Passos do Agendamento -->
+        <div class="schedule-steps-wrapper">
+
+          <!-- PASSO 1: MODALIDADE -->
+          <div class="step-card active" id="step-card-modality">
+            <div class="step-header">
+              <div class="step-number">1</div>
+              <div class="step-title-wrap">
+                <h3>Escolha a Modalidade</h3>
+                <p>Selecione a atividade que você quer experimentar hoje</p>
+              </div>
+            </div>
+
+            <div class="modalities-grid" id="modalities-container">
+              <!-- Musculação -->
+              <div class="modality-option selected" data-modality="Musculação" data-icon="dumbbell" onclick="selectModality(this)">
+                <div class="modality-top-row">
+                  <div class="modality-icon-pill">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 5v14M18 5v14M2 9v6M22 9v6M6 12h12"></path>
+                    </svg>
+                  </div>
+                  <span class="modality-badge">Mais Procurada</span>
+                </div>
+                <h4 class="modality-name">Musculação</h4>
+                <p class="modality-desc">Aparelhos modernos, peso livre e orientação para todos os níveis.</p>
+              </div>
+
+              <!-- Treino Funcional -->
+              <div class="modality-option" data-modality="Treino Funcional" data-icon="zap" onclick="selectModality(this)">
+                <div class="modality-top-row">
+                  <div class="modality-icon-pill">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                  </div>
+                  <span class="modality-badge">Alta Queima</span>
+                </div>
+                <h4 class="modality-name">Treino Funcional</h4>
+                <p class="modality-desc">Circuitos dinâmicos para agilidade, força e condicionamento.</p>
+              </div>
+
+              <!-- Pilates -->
+              <div class="modality-option" data-modality="Pilates" data-icon="feather" onclick="selectModality(this)">
+                <div class="modality-top-row">
+                  <div class="modality-icon-pill">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="M8 12s1.5-2 4-2 4 2 4 2-1.5 2-4 2-4-2-4-2z"></path>
+                    </svg>
+                  </div>
+                  <span class="modality-badge">Postura & Core</span>
+                </div>
+                <h4 class="modality-name">Pilates</h4>
+                <p class="modality-desc">Flexibilidade, respiração e fortalecimento muscular profundo.</p>
+              </div>
+
+              <!-- FitDance -->
+              <div class="modality-option" data-modality="FitDance" data-icon="music" onclick="selectModality(this)">
+                <div class="modality-top-row">
+                  <div class="modality-icon-pill">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M9 18V5l12-2v13"></path>
+                      <circle cx="6" cy="18" r="3"></circle>
+                      <circle cx="18" cy="16" r="3"></circle>
+                    </svg>
+                  </div>
+                  <span class="modality-badge">Dança & Ritmo</span>
+                </div>
+                <h4 class="modality-name">FitDance</h4>
+                <p class="modality-desc">Coreografias animadas dos maiores hits para queimar se divertindo.</p>
+              </div>
+
+              <!-- Ritbox -->
+              <div class="modality-option" data-modality="Ritbox" data-icon="activity" onclick="selectModality(this)">
+                <div class="modality-top-row">
+                  <div class="modality-icon-pill">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                  </div>
+                  <span class="modality-badge">Treino no Beat</span>
+                </div>
+                <h4 class="modality-name">Ritbox</h4>
+                <p class="modality-desc">Exercícios funcionais sincronizados na batida da música.</p>
+              </div>
+
+              <!-- Zumba -->
+              <div class="modality-option" data-modality="Zumba" data-icon="sun" onclick="selectModality(this)">
+                <div class="modality-top-row">
+                  <div class="modality-icon-pill">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="5"></circle>
+                      <line x1="12" y1="1" x2="12" y2="3"></line>
+                      <line x1="12" y1="21" x2="12" y2="23"></line>
+                      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    </svg>
+                  </div>
+                  <span class="modality-badge">Energia Pura</span>
+                </div>
+                <h4 class="modality-name">Zumba</h4>
+                <p class="modality-desc">Mix de ritmos latinos e aeróbicos em um clima de festa e saúde.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASSO 2: DIA DO AGENDAMENTO -->
+          <div class="step-card" id="step-card-date">
+            <div class="step-header">
+              <div class="step-number">2</div>
+              <div class="step-title-wrap">
+                <h3>Escolha o Dia</h3>
+                <p>Selecione um dos próximos 14 dias disponíveis</p>
+              </div>
+            </div>
+
+            <!-- Slider dinâmico de datas gerado por JS -->
+            <div class="dates-slider-wrapper" id="dates-slider">
+              <!-- Preenchido via JavaScript dinamicamente -->
+            </div>
+
+            <div class="date-custom-row">
+              <span>Ou escolha uma data específica:</span>
+              <input type="date" id="date-custom-picker" class="date-custom-input" onchange="handleCustomDateChange(this.value)" />
+            </div>
+          </div>
+
+          <!-- PASSO 3: HORÁRIO -->
+          <div class="step-card" id="step-card-time">
+            <div class="step-header">
+              <div class="step-number">3</div>
+              <div class="step-title-wrap">
+                <h3>Escolha o Horário</h3>
+                <p>Selecione o turno e o horário de início da sua aula</p>
+              </div>
+            </div>
+
+            <div class="time-periods-bar">
+              <button type="button" class="period-tab-btn active" onclick="filterTimes('all', this)">Todos</button>
+              <button type="button" class="period-tab-btn" onclick="filterTimes('morning', this)">Manhã (06h - 11h)</button>
+              <button type="button" class="period-tab-btn" onclick="filterTimes('afternoon', this)">Tarde (14h - 17h)</button>
+              <button type="button" class="period-tab-btn" onclick="filterTimes('evening', this)">Noite (18h - 21h)</button>
+            </div>
+
+            <div class="times-grid" id="times-container">
+              <!-- Horários dinâmicos preenchidos via JS -->
+            </div>
+          </div>
+
+          <!-- PASSO 4: SEUS DADOS -->
+          <div class="step-card" id="step-card-user">
+            <div class="step-header">
+              <div class="step-number">4</div>
+              <div class="step-title-wrap">
+                <h3>Seus Dados de Contato</h3>
+                <p>Para reservarmos sua vaga e enviarmos seu comprovante</p>
+              </div>
+            </div>
+
+            <div class="form-fields-grid">
+              <div>
+                <label class="form-label" for="user-name">Nome Completo *</label>
+                <div class="form-input-wrap">
+                  <div class="form-input-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                  </div>
+                  <input type="text" id="user-name" class="form-input" placeholder="Ex: Rodrigo Mendonça" required oninput="updateSummary()" />
+                </div>
+              </div>
+
+              <div>
+                <label class="form-label" for="user-phone">WhatsApp com DDD *</label>
+                <div class="form-input-wrap">
+                  <div class="form-input-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                  </div>
+                  <input type="tel" id="user-phone" class="form-input" placeholder="(11) 98765-4321" required oninput="formatPhone(this); updateSummary();" />
+                </div>
+              </div>
+
+              <div class="form-field-full">
+                <label class="form-label">Você já tem experiência com treinos?</label>
+                <div class="experience-radio-group">
+                  <label class="exp-radio-label checked" onclick="selectExperience(this)">
+                    <input type="radio" name="exp" value="Iniciante (Primeira vez)" checked />
+                    Iniciante (Primeira vez)
+                  </label>
+                  <label class="exp-radio-label" onclick="selectExperience(this)">
+                    <input type="radio" name="exp" value="Já treinei antes" />
+                    Já treinei antes
+                  </label>
+                  <label class="exp-radio-label" onclick="selectExperience(this)">
+                    <input type="radio" name="exp" value="Treino frequentemente" />
+                    Treino frequentemente
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-field-full">
+                <label class="form-label" for="user-goal">Algum objetivo ou observação especial? (Opcional)</label>
+                <div class="form-input-wrap">
+                  <div class="form-input-icon" style="top: 20px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 20h9"></path>
+                      <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
+                  </div>
+                  <textarea id="user-goal" class="form-input" style="height: 80px; resize: vertical; padding-top: 12px;" placeholder="Ex: Gostaria de focar em emagrecimento, hipertrofia ou postura..."></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Coluna Direita: Resumo Fixo (Summary Card) -->
+        <div class="schedule-summary-sticky">
+          <div class="summary-card">
+            <div class="summary-badge-free">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+              </svg>
+              <span>Vaga 100% Gratuita</span>
+            </div>
+
+            <h3 class="summary-header-title">Resumo do Agendamento</h3>
+            <p class="summary-header-sub">Confira os detalhes da sua aula experimental na Alvo02Fit</p>
+
+            <div class="voucher-details-box">
+              <div class="voucher-row">
+                <span class="voucher-row-label">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5v14M18 5v14M2 9v6M22 9v6M6 12h12"></path></svg>
+                  Modalidade:
+                </span>
+                <span class="voucher-row-val highlight" id="sum-modality">Musculação</span>
+              </div>
+
+              <div class="voucher-row">
+                <span class="voucher-row-label">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  Data:
+                </span>
+                <span class="voucher-row-val" id="sum-date">Carregando...</span>
+              </div>
+
+              <div class="voucher-row">
+                <span class="voucher-row-label">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  Horário:
+                </span>
+                <span class="voucher-row-val highlight" id="sum-time">19:00</span>
+              </div>
+
+              <div class="voucher-row">
+                <span class="voucher-row-label">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  Unidade:
+                </span>
+                <span class="voucher-row-val">Alvo02Fit - São Mateus</span>
+              </div>
+
+              <div class="voucher-row" style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 10px;">
+                <span class="voucher-row-label">Investimento:</span>
+                <span class="voucher-row-val price">R$ 0,00 (Grátis)</span>
+              </div>
+            </div>
+
+            <ul class="summary-benefits-list">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Acesso total à estrutura no horário marcado</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Acompanhamento com instrutor da equipe</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Sem taxa de matrícula ou cobrança oculta</span>
+              </li>
+            </ul>
+
+            <button type="submit" class="confirm-booking-btn">
+              <span>Confirmar Agendamento</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+
+            <div class="summary-safe-note">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <span>Confirmação instantânea via WhatsApp</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </main>
+
+  <!-- FAQ Rápido sobre a Aula Experimental -->
+  <section class="schedule-faq-section">
+    <div class="container w-container">
+      <div style="text-align: center; max-width: 650px; margin: 0 auto;">
+        <h3 style="font-family: Anton, sans-serif; font-size: 32px; color: #fff; margin: 0 0 8px 0;">Dúvidas Frequentes</h3>
+        <p style="color: var(--text-muted); font-size: 15px; margin: 0;">Tudo o que você precisa saber antes do seu primeiro treino na Alvo02Fit</p>
+      </div>
+
+      <div class="faq-accordion-grid">
+        <div class="sched-faq-card">
+          <h4>O que preciso levar no dia da aula?</h4>
+          <p>Venha com roupas confortáveis para treino (camiseta, bermuda/calça legging), tênis apropriado e traga uma garrafa de água para se hidratar.</p>
+        </div>
+        <div class="sched-faq-card">
+          <h4>A aula experimental é realmente gratuita?</h4>
+          <p>Sim, 100% gratuita! Você não paga absolutamente nada para conhecer o espaço, treinar e testar nossas modalidades.</p>
+        </div>
+        <div class="sched-faq-card">
+          <h4>Eu nunca treinei antes, vou ter ajuda?</h4>
+          <p>Com certeza! Nossos professores estarão com você do início ao fim, ajustando os aparelhos e orientando a postura correta.</p>
+        </div>
+        <div class="sched-faq-card">
+          <h4>Posso levar um amigo para treinar comigo?</h4>
+          <p>Claro! Convide seu amigo para agendar uma aula experimental aqui pelo site também para garantirmos a vaga de vocês no mesmo horário.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé Oficial Alvo02Fit -->
+  <footer class="footer" style="padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.08); background: #0b0302;">
+    <div class="container w-container" style="text-align: center;">
+      <a href="./index.html">
+        <img src="./images/alvo02fit-logo.png" alt="Alvo02Fit" style="height: 44px; margin-bottom: 16px;" />
+      </a>
+      <p style="color: var(--text-muted); font-size: 13px; margin: 0 0 10px 0;">
+        Av. Sapopemba, 12.847 &bull; Jardim Adutora / São Mateus &bull; São Paulo - SP
+      </p>
+      <p style="color: rgba(255,255,255,0.4); font-size: 12px; margin: 0;">
+        &copy; 2026 Alvo02Fit. Todos os direitos reservados.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Modal de Confirmação e Sucesso -->
+  <div class="success-modal-overlay" id="success-modal">
+    <div class="success-modal-card">
+      <div class="success-icon-wrap">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+
+      <h2 class="success-title">Agendamento Confirmado!</h2>
+      <p class="success-sub">Sua aula experimental gratuita foi pré-agendada com sucesso. Preparamos o seu voucher de acesso abaixo:</p>
+
+      <div class="success-voucher-ticket">
+        <div class="success-voucher-header">
+          <span>COMPROVANTE DE RESERVA</span>
+          <span class="success-voucher-code" id="modal-code">#ALVO-7492</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
+          <div><strong style="color: #fff;">Aluno(a):</strong> <span id="modal-name" style="color: #e2dbd5;">-</span></div>
+          <div><strong style="color: #fff;">Modalidade:</strong> <span id="modal-modality" style="color: var(--primary); font-weight: 700;">-</span></div>
+          <div><strong style="color: #fff;">Data & Horário:</strong> <span id="modal-datetime" style="color: #fff;">-</span></div>
+          <div><strong style="color: #fff;">Unidade:</strong> <span style="color: #c9bfb5;">Av. Sapopemba, 12.847 - São Mateus, SP</span></div>
+        </div>
+      </div>
+
+      <div class="success-modal-actions">
+        <a id="modal-whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer" class="whatsapp-confirm-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+          </svg>
+          <span>Confirmar Vaga no WhatsApp</span>
+        </a>
+        <button type="button" class="close-modal-btn" onclick="closeModal()">Voltar para a Página Principal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script Lógico do Agendamento Interativo -->
+  <script>
+    // Estado do Agendamento
+    const state = {
+      modality: "Musculação",
+      selectedDate: null,
+      selectedTime: "19:00",
+      userName: "",
+      userPhone: "",
+      experience: "Iniciante (Primeira vez)",
+      goal: ""
+    };
+
+    const weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+    const months = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+
+    // Horários Base
+    const timeSlots = [
+      { time: "06:00", period: "morning" },
+      { time: "07:00", period: "morning" },
+      { time: "08:00", period: "morning" },
+      { time: "09:00", period: "morning" },
+      { time: "10:00", period: "morning" },
+      { time: "11:00", period: "morning" },
+      { time: "14:00", period: "afternoon" },
+      { time: "15:00", period: "afternoon" },
+      { time: "16:00", period: "afternoon" },
+      { time: "17:00", period: "afternoon" },
+      { time: "18:00", period: "evening" },
+      { time: "19:00", period: "evening" },
+      { time: "20:00", period: "evening" },
+      { time: "21:00", period: "evening" },
+    ];
+
+    // Inicialização
+    document.addEventListener("DOMContentLoaded", function () {
+      generateDateCards();
+      renderTimeSlots();
+
+      // Suporte para URL params (?modalidade=...)
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const modParam = urlParams.get("modalidade");
+        if (modParam) {
+          const cleanMod = decodeURIComponent(modParam).trim().toLowerCase();
+          const target = Array.from(document.querySelectorAll(".modality-option")).find(el => {
+            const m = (el.dataset.modality || "").toLowerCase();
+            return m.includes(cleanMod) || cleanMod.includes(m);
+          });
+          if (target) {
+            selectModality(target);
+          }
+        }
+      } catch (e) {
+        console.warn("Param read error:", e);
+      }
+
+      updateSummary();
+    });
+
+    // Gera os próximos 14 dias a partir de amanhã (ou hoje se for cedo)
+    function generateDateCards() {
+      const container = document.getElementById("dates-slider");
+      container.innerHTML = "";
+
+      const today = new Date();
+      // Inicia em hoje ou amanhã dependendo do horário
+      const startOffset = today.getHours() >= 20 ? 1 : 0;
+
+      for (let i = startOffset; i < startOffset + 14; i++) {
+        const d = new Date();
+        d.setDate(today.getDate() + i);
+
+        const dayName = i === 0 ? "Hoje" : weekdays[d.getDay()];
+        const dayNumber = d.getDate();
+        const monthName = months[d.getMonth()];
+        const isoString = d.toISOString().split("T")[0];
+
+        const card = document.createElement("div");
+        card.className = "date-card-btn" + (i === startOffset ? " selected" : "");
+        card.dataset.dateIso = isoString;
+        card.dataset.dateDisplay = `${dayName}, ${dayNumber} de ${monthName}`;
+        card.dataset.dayOfWeek = d.getDay();
+
+        if (i === startOffset) {
+          state.selectedDate = {
+            iso: isoString,
+            display: `${dayName}, ${dayNumber} de ${monthName}`,
+            dayOfWeek: d.getDay()
+          };
+          document.getElementById("date-custom-picker").value = isoString;
+        }
+
+        card.innerHTML = `
+          <div class="date-weekday">${dayName}</div>
+          <div class="date-day-number">${dayNumber}</div>
+          <div class="date-month">${monthName}</div>
+        `;
+
+        card.onclick = function () {
+          document.querySelectorAll(".date-card-btn").forEach(c => c.classList.remove("selected"));
+          card.classList.add("selected");
+          state.selectedDate = {
+            iso: isoString,
+            display: `${dayName}, ${dayNumber} de ${monthName}`,
+            dayOfWeek: d.getDay()
+          };
+          document.getElementById("date-custom-picker").value = isoString;
+          renderTimeSlots();
+          updateSummary();
+        };
+
+        container.appendChild(card);
+      }
+    }
+
+    // Seletor de data livre
+    function handleCustomDateChange(val) {
+      if (!val) return;
+      const parts = val.split("-");
+      const d = new Date(parts[0], parts[1] - 1, parts[2]);
+      const dayName = weekdays[d.getDay()];
+      const dayNumber = d.getDate();
+      const monthName = months[d.getMonth()];
+
+      state.selectedDate = {
+        iso: val,
+        display: `${dayName}, ${dayNumber} de ${monthName}`,
+        dayOfWeek: d.getDay()
+      };
+
+      document.querySelectorAll(".date-card-btn").forEach(card => {
+        if (card.dataset.dateIso === val) {
+          card.classList.add("selected");
+          card.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+        } else {
+          card.classList.remove("selected");
+        }
+      });
+
+      renderTimeSlots();
+      updateSummary();
+    }
+
+    // Renderiza horários respeitando limites da academia (sábado até 15h, domingo até 13h30)
+    function renderTimeSlots(periodFilter = "all") {
+      const container = document.getElementById("times-container");
+      container.innerHTML = "";
+
+      const dayOfWeek = state.selectedDate ? state.selectedDate.dayOfWeek : 1;
+
+      timeSlots.forEach(slot => {
+        if (periodFilter !== "all" && slot.period !== periodFilter) return;
+
+        const hour = parseInt(slot.time.split(":")[0]);
+        let isDisabled = false;
+
+        // Regras de horário da Alvo02Fit:
+        // Domingo (0): abre até 13h30
+        if (dayOfWeek === 0 && hour >= 14) isDisabled = true;
+        // Sábado (6): abre até 15h
+        if (dayOfWeek === 6 && hour >= 15) isDisabled = true;
+        // Sexta (5): fecha às 22h (horário das 21h permitido)
+
+        const btn = document.createElement("div");
+        btn.className = "time-pill-btn" + (slot.time === state.selectedTime && !isDisabled ? " selected" : "") + (isDisabled ? " disabled" : "");
+        btn.innerHTML = `
+          <div class="time-val">${slot.time}</div>
+          <div class="time-tag">${isDisabled ? "Fechado" : (hour < 12 ? "Manhã" : hour < 18 ? "Tarde" : "Noite")}</div>
+        `;
+
+        if (!isDisabled) {
+          btn.onclick = function () {
+            document.querySelectorAll(".time-pill-btn").forEach(b => b.classList.remove("selected"));
+            btn.classList.add("selected");
+            state.selectedTime = slot.time;
+            updateSummary();
+          };
+        }
+
+        container.appendChild(btn);
+      });
+
+      // Se o horário atual ficou desabilitado, seleciona o primeiro disponível
+      const activeBtn = container.querySelector(".time-pill-btn.selected");
+      if (!activeBtn) {
+        const firstAvailable = container.querySelector(".time-pill-btn:not(.disabled)");
+        if (firstAvailable) {
+          firstAvailable.classList.add("selected");
+          state.selectedTime = firstAvailable.querySelector(".time-val").innerText;
+          updateSummary();
+        }
+      }
+    }
+
+    // Filtro de turnos
+    function filterTimes(period, btn) {
+      document.querySelectorAll(".period-tab-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      renderTimeSlots(period);
+    }
+
+    // Seleção de Modalidade
+    function selectModality(element) {
+      document.querySelectorAll(".modality-option").forEach(el => el.classList.remove("selected"));
+      element.classList.add("selected");
+      state.modality = element.dataset.modality;
+      updateSummary();
+    }
+
+    // Seleção de Experiência
+    function selectExperience(label) {
+      document.querySelectorAll(".exp-radio-label").forEach(l => l.classList.remove("checked"));
+      label.classList.add("checked");
+      const input = label.querySelector("input");
+      if (input) {
+        input.checked = true;
+        state.experience = input.value;
+      }
+    }
+
+    // Formatação de Telefone / WhatsApp
+    function formatPhone(input) {
+      let v = input.value.replace(/\D/g, "");
+      if (v.length > 11) v = v.slice(0, 11);
+      if (v.length > 6) {
+        input.value = `(${v.slice(0, 2)}) ${v.slice(2, 7)}-${v.slice(7)}`;
+      } else if (v.length > 2) {
+        input.value = `(${v.slice(0, 2)}) ${v.slice(2)}`;
+      } else {
+        input.value = v;
+      }
+      state.userPhone = input.value;
+    }
+
+    // Atualiza Painel de Resumo
+    function updateSummary() {
+      document.getElementById("sum-modality").innerText = state.modality;
+      document.getElementById("sum-date").innerText = state.selectedDate ? state.selectedDate.display : "A definir";
+      document.getElementById("sum-time").innerText = state.selectedTime || "A definir";
+
+      state.userName = document.getElementById("user-name").value;
+      state.userPhone = document.getElementById("user-phone").value;
+      state.goal = document.getElementById("user-goal").value;
+    }
+
+    // Envio e Abertura do Modal de Sucesso
+    function handleBookingSubmit() {
+      const name = document.getElementById("user-name").value.trim();
+      const phone = document.getElementById("user-phone").value.trim();
+
+      if (!name) {
+        alert("Por favor, preencha o seu nome completo.");
+        document.getElementById("user-name").focus();
+        return;
+      }
+
+      if (!phone || phone.length < 14) {
+        alert("Por favor, preencha um número de WhatsApp válido com DDD.");
+        document.getElementById("user-phone").focus();
+        return;
+      }
+
+      const randomCode = "#ALVO-" + Math.floor(1000 + Math.random() * 9000);
+
+      // Preenche os dados no modal
+      document.getElementById("modal-code").innerText = randomCode;
+      document.getElementById("modal-name").innerText = name;
+      document.getElementById("modal-modality").innerText = state.modality;
+      document.getElementById("modal-datetime").innerText = `${state.selectedDate.display} às ${state.selectedTime}`;
+
+      // Monta a mensagem para o WhatsApp Oficial da Alvo02Fit
+      const messageText = `Olá equipe Alvo02Fit! 👋
+Acabei de fazer meu agendamento de Aula Experimental Gratuita pelo site:
+
+🏋️ Modalidade: ${state.modality}
+📅 Data: ${state.selectedDate.display}
+⏰ Horário: ${state.selectedTime}
+👤 Aluno(a): ${name}
+📱 WhatsApp: ${phone}
+🎯 Nível: ${state.experience}
+${state.goal ? '📝 Objetivo: ' + state.goal : ''}
+🎟️ Código: ${randomCode}
+
+Podem confirmar minha vaga e me passar as orientações para o treino?`;
+
+      const whatsappUrl = `https://wa.me/5511930025829?text=${encodeURIComponent(messageText)}`;
+      document.getElementById("modal-whatsapp-btn").href = whatsappUrl;
+
+      // Abre o modal
+      document.getElementById("success-modal").classList.add("open");
+    }
+
+    function closeModal() {
+      window.location.href = "./index.html";
+    }
+  </script>
+</body>
+
+</html>

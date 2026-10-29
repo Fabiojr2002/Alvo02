@@ -2,18 +2,19 @@
 
 Landing page oficial e institucional da **Academia ALVO02FIT**, localizada na Av. Sapopemba, Cidade São Mateus — São Paulo, SP.
 
-Desenvolvida com foco em alta performance, identidade visual esportiva (Black & Electric Orange), tipografia de impacto e experiência interativa.
+Desenvolvida com foco em alta performance, identidade visual esportiva (Black & Electric Orange), tipografia de impacto (Anton, Onest, Inter Tight) e experiência fluida e moderna.
 
 ---
 
 ## ⚡ Recursos e Funcionalidades
 
-- **Hero Cinemática com Vídeo de Fundo:** Vídeo em loop contínuo com overlay degradê e iluminação esportiva.
-- **Mini Galeria Circular:** Esfera com fotos reais da academia em rotação automática suave (crossfade).
-- **Grade Interativa de Aulas Coletivas:** Seletor por abas com detecção automática do dia da semana atual (GAP, Funcional Kids, Funcional, Zumba, Rit Box, Alongamento / Pilates Solo, Flash Back).
-- **Status em Tempo Real:** Indicador dinâmico informando se a academia está aberta agora ou quando reabre.
-- **Horários e Localização:** Cards modernos de funcionamento e botão integrado para o Google Maps.
-- **Design System Oficial:** 100% responsivo, paleta com alto contraste (WCAG AAA) e suporte fluido para mobile e desktop.
+- **Hero Cinemática com Vídeo de Fundo:** Vídeo em loop contínuo de névoa e iluminação de academia, com suporte nativo a cross-browser (`playsinline`, `autoplay`, `muted`).
+- **Seção Sobre a Alvo02Fit:** Atleta oficial emoldurado por uma mancha laranja orgânica fluida com profundidade e satélite dinâmico.
+- **Grade Interativa de Modalidades e Aulas:** Musculação, Treino Funcional, Pilates Solo, FitDance, Lutas e Alongamento.
+- **Página de Agendamento Online:** Fluxo dedicado para escolha de horários e modalidades (`agendamento.html`).
+- **Canais e Localização Integrada:** Trajeto direto via **Google Maps** e **Waze**, status de funcionamento em tempo real e links para Instagram e WhatsApp.
+- **Parcerias Oficiais:** Integração e badges de **Wellhub** (antigo Gympass), **TotalPass**, PrimeStar, Studio Lumiér e outros parceiros locais.
+- **Design 100% Responsivo:** Otimizado para telas ultra-wide, desktop, tablets e smartphones.
 
 ---
 
@@ -21,36 +22,44 @@ Desenvolvida com foco em alta performance, identidade visual esportiva (Black & 
 
 ```text
 Alvo02/
-├── images/                             # Imagens oficiais da academia e galeria
-│   ├── hero-slide-1.png
-│   ├── hero-slide-2.png
-│   └── hero-slide-3.jpg
-├── ALVO02FIT — Site institucional.html # Arquivo HTML original
-├── index.html                          # Ponto de entrada padrão web
-├── style.css                           # Folha de estilos completa
-├── script.js                           # Scripts interativos (aulas, status, galeria)
-├── hero-bg.mp4                         # Vídeo de background da seção hero
-└── README.md                           # Documentação do projeto
+├── index.html                                        # Página principal da academia
+├── agendamento.html                                  # Página de agendamento de treinos e aulas
+├── css/
+│   └── style.css                                     # Folha de estilos consolidada
+├── js/                                               # Scripts de interação e navegação
+├── images/                                           # Identidade visual, logos, ícones e mídias
+│   ├── instrutor-alvo02fit.png                       # Atleta com recorte e mancha orgânica
+│   ├── mancha-laranja.svg                            # Vetor da mancha laranja
+│   ├── hero-video.mp4                                # Vídeo de background do Hero
+│   └── ...                                           # Logos oficiais e parceiros
+├── Animate_background_fog_without_m…_dc2f279a_1080p.mp4 # Vídeo original do Hero
+├── start-server.ps1                                  # Servidor de desenvolvimento local
+└── README.md                                         # Documentação do projeto
 ```
 
 ---
 
 ## 🚀 Como Executar Localmente
 
-Você pode abrir o projeto diretamente pelo navegador abrindo o arquivo `index.html`, ou rodar um servidor HTTP local:
+Você pode executar o servidor local através do PowerShell:
+
+```powershell
+.\start-server.ps1
+```
+
+Ou usando o servidor HTTP embutido do Python:
 
 ```bash
-# Com Python 3
-python -m http.server 3000
-
-# Acesse no navegador
-http://localhost:3000
+python -m http.server 8080
 ```
+
+Acesse no navegador: `http://localhost:8080`
 
 ---
 
 ## 📍 Localização & Contato
 
-- **Endereço:** Av. Sapopemba, 12.847 — Cidade São Mateus, São Paulo · SP
+- **Endereço:** Av. Sapopemba, 12.847 — Jardim Adutora / São Mateus, São Paulo - SP
 - **Instagram:** [@alvo02fit](https://www.instagram.com/alvo02fit/)
-- **Slogan:** *#VEMPRAALVO02FIT — Seu melhor alvo é você!*
+- **WhatsApp Recepção:** (11) 93002-5829
+- **Slogan:** *#VEMPRAALVO02FIT — Seu objetivo começa aqui!*
