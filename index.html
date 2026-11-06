@@ -637,6 +637,7 @@
       overflow: hidden !important;
     }
 
+    #hero-bg-video,
     .home-hero-image,
     .home-hero-video {
       position: absolute !important;
@@ -648,9 +649,16 @@
       min-height: 100% !important;
       object-fit: cover !important;
       object-position: center center !important;
-      transform: none !important;
       pointer-events: none !important;
       display: block !important;
+      /* Renderização nativa Full HD por hardware sem compressão de textura */
+      -webkit-transform: translate3d(0, 0, 0) !important;
+      transform: translate3d(0, 0, 0) !important;
+      -webkit-backface-visibility: hidden !important;
+      backface-visibility: hidden !important;
+      will-change: transform !important;
+      image-rendering: high-quality !important;
+      image-rendering: -webkit-optimize-contrast !important;
     }
 
     .home-hero-block {
@@ -4762,7 +4770,7 @@
       }, { passive: true });
     })();
   </script>
-  <!-- Script: Troca Dinamica de Video Hero (Mobile vs Computador) -->
+  <!-- Script: Troca Dinamica de Video Hero (Mobile vs Computador) com Maxima Qualidade -->
   <script id="alvo-hero-video-switcher">
     (function() {
       var video = document.getElementById('hero-bg-video');
@@ -4771,10 +4779,19 @@
       var mql = window.matchMedia('(max-width: 768px)');
       var lastIsMobile = mql.matches;
 
+      function applyPoster(isMobile) {
+        var posterUrl = isMobile ? './images/hero-poster-mobile.jpg' : './images/hero-poster.jpg';
+        video.setAttribute('poster', posterUrl);
+      }
+
+      // Inicializa poster correspondente
+      applyPoster(lastIsMobile);
+
       function checkVideoSwitch() {
         var currentIsMobile = mql.matches;
         if (currentIsMobile !== lastIsMobile) {
           lastIsMobile = currentIsMobile;
+          applyPoster(currentIsMobile);
           video.load();
           var playPromise = video.play();
           if (playPromise !== undefined) {
