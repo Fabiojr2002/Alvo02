@@ -1995,10 +1995,12 @@
     </div>
     <div id="hero" class="home-hero-bg-block">
       <div class="home-hero-bg-wrap">
-        <video class="home-hero-image home-hero-video" autoplay muted loop playsinline poster="./images/hero-bg.jpg">
+        <video id="hero-bg-video" class="home-hero-image home-hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hero-bg.jpg">
+          <!-- Video Vertical para Dispositivo Movel (<= 768px) -->
+          <source src="./images/hero_cll.mp4" type="video/mp4" media="(max-width: 768px)" />
+          <!-- Video Horizontal para Computador / Desktop (> 768px) -->
           <source src="./images/hero.mp4" type="video/mp4" />
           <source src="./hero.mp4" type="video/mp4" />
-          <source src="./images/hero-video.mp4" type="video/mp4" />
           <img src="./images/hero-bg.jpg" loading="eager" fetchpriority="high" alt="Alvo02Fit - Treino e Performance" class="home-hero-image" />
         </video>
       </div>
@@ -4757,6 +4759,38 @@
         if (menu.classList.contains('is-open')) {
           updateRevealOrigin();
         }
+      }, { passive: true });
+    })();
+  </script>
+  <!-- Script: Troca Dinamica de Video Hero (Mobile vs Computador) -->
+  <script id="alvo-hero-video-switcher">
+    (function() {
+      var video = document.getElementById('hero-bg-video');
+      if (!video) return;
+
+      var mql = window.matchMedia('(max-width: 768px)');
+      var lastIsMobile = mql.matches;
+
+      function checkVideoSwitch() {
+        var currentIsMobile = mql.matches;
+        if (currentIsMobile !== lastIsMobile) {
+          lastIsMobile = currentIsMobile;
+          video.load();
+          var playPromise = video.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(function() {});
+          }
+        }
+      }
+
+      if (mql.addEventListener) {
+        mql.addEventListener('change', checkVideoSwitch);
+      } else if (mql.addListener) {
+        mql.addListener(checkVideoSwitch);
+      }
+      window.addEventListener('orientationchange', checkVideoSwitch);
+      window.addEventListener('resize', function() {
+        checkVideoSwitch();
       }, { passive: true });
     })();
   </script>
