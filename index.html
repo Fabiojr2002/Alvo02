@@ -1881,134 +1881,21 @@
       }
     }
   </style>
-  <!-- Estilos Hero Left-Aligned (Estilo Smart Fit: MIRE ALTO... VA ALEM.) -->
-  <style id="alvo-hero-smart-style">
-    /* Layout do bloco Hero alinhado à esquerda */
-    .section-title-wrap.hero-smart-wrap {
-      align-items: flex-start !important;
-      justify-content: flex-start !important;
-      text-align: left !important;
-      width: 100% !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      text-shadow: none !important;
-    }
-
-    .hero-inner-wrap.hero-smart-inner {
-      display: block !important;
-      overflow: visible !important;
-      width: 100% !important;
-      max-width: 100% !important;
-    }
-
-    .hero-smart-title {
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: flex-start !important;
-      justify-content: flex-start !important;
-      text-align: left !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      font-family: 'Anton', sans-serif !important;
-      font-weight: 400 !important;
-      text-transform: uppercase !important;
-      line-height: 0.96 !important;
-      letter-spacing: 1.5px !important;
-      gap: 4px !important;
-    }
-
-    .hero-smart-line {
-      display: block !important;
-      white-space: nowrap !important;
-      text-shadow: 0 6px 26px rgba(0, 0, 0, 0.72) !important;
-    }
-
-    .hero-smart-white {
-      color: #ffffff !important;
-      animation: heroSmartReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) both !important;
-    }
-
-    .hero-smart-orange {
+  <!-- Estilo Subtitulo Hero Laranja -->
+  <style id="alvo-hero-subtitle-style">
+    .section.home-hero .paragraph-extra-large {
       color: #f96a24 !important;
-      animation: heroSmartReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.14s both !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.2px !important;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9) !important;
     }
 
-    @keyframes heroSmartReveal {
-      from {
-        opacity: 0;
-        transform: translateX(-24px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    /* Desktop (>= 992px): Posicionamento lateral esquerdo equilibrado estilo Smart Fit */
-    @media screen and (min-width: 992px) {
-      .home-hero-block {
-        min-height: 100vh !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: space-between !important;
-        align-items: flex-start !important;
-        padding-top: clamp(165px, 24vh, 245px) !important;
-        padding-bottom: clamp(44px, 6.5vh, 76px) !important;
-        grid-row-gap: 32px !important;
-      }
-
-      .hero-smart-title {
-        font-size: clamp(58px, 6vw, 88px) !important;
-      }
-
-      .home-hero-card-wrap {
-        position: relative !important;
-        top: 0 !important;
-        margin-top: auto !important;
-      }
-    }
-
-    /* Tablet (768px - 991px) */
-    @media screen and (max-width: 991px) and (min-width: 768px) {
-      .home-hero-block {
-        min-height: 92vh !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: space-between !important;
-        align-items: flex-start !important;
-        padding-top: 150px !important;
-        padding-bottom: 48px !important;
-      }
-
-      .section-title-wrap.hero-smart-wrap {
-        padding-left: 16px !important;
-      }
-
-      .hero-smart-title {
-        font-size: clamp(50px, 7.5vw, 66px) !important;
-      }
-
-      .home-hero-card-wrap {
-        top: 0 !important;
-        margin-top: auto !important;
-      }
-    }
-
-    /* Mobile (<= 767px) */
     @media screen and (max-width: 767px) {
-      .home-hero-block {
-        padding-top: clamp(115px, 16vh, 145px) !important;
-        align-items: flex-start !important;
-      }
-
-      .section-title-wrap.hero-smart-wrap {
-        padding-left: 12px !important;
-        padding-right: 12px !important;
-      }
-
-      .hero-smart-title {
-        font-size: clamp(44px, 12vw, 58px) !important;
-        letter-spacing: 1px !important;
+      .section.home-hero .paragraph-extra-large {
+        font-size: 16px !important;
+        line-height: 1.4 !important;
+        max-width: 320px !important;
+        margin: 6px auto 0 auto !important;
       }
     }
   </style>
@@ -2150,12 +2037,12 @@
       <section class="section home-hero">
         <div class="w-layout-blockcontainer container w-container">
           <div class="home-hero-block">
-            <div class="section-title-wrap hero-smart-wrap">
-              <div class="hero-inner-wrap hero-smart-inner">
-                <h1 class="hero-smart-title">
-                  <span class="hero-smart-line hero-smart-white">MIRE ALTO...</span>
-                  <span class="hero-smart-line hero-smart-orange">V&Aacute; AL&Eacute;M.</span>
-                </h1>
+            <div class="section-title-wrap">
+              <div class="hero-inner-wrap">
+                <h1 class="hero-title">SEU OBJETIVO COME&Ccedil;A AQUI</h1>
+              </div>
+              <div class="paragraph-large-wrap">
+                <p class="paragraph-extra-large">Porque s&oacute; prometer na segunda nunca acertou o alvo.</p>
               </div>
             </div>
             <div class="home-hero-card-wrap _01"
