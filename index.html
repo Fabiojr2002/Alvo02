@@ -1889,14 +1889,14 @@
       inset: 0 !important;
       z-index: 1 !important;
       pointer-events: none !important;
-      background: linear-gradient(180deg, rgba(15, 5, 3, 0.52) 0%, rgba(15, 5, 3, 0.12) 28%, rgba(15, 5, 3, 0.1) 75%, #0f0503 100%) !important;
+      background: linear-gradient(180deg, rgba(15, 5, 3, 0.52) 0%, rgba(15, 5, 3, 0.12) 28%, rgba(15, 5, 3, 0) 85%, #0f0503 100%) !important;
     }
 
     @media screen and (min-width: 992px) {
       .hero-editorial-scrim {
         background:
           linear-gradient(90deg, rgba(15, 5, 3, 0.82) 0%, rgba(15, 5, 3, 0.45) 36%, rgba(15, 5, 3, 0) 64%),
-          linear-gradient(180deg, rgba(15, 5, 3, 0.45) 0%, transparent 22%, transparent 78%, #0f0503 100%) !important;
+          linear-gradient(180deg, rgba(15, 5, 3, 0.45) 0%, transparent 22%, transparent 87%, #0f0503 100%) !important;
       }
     }
 
@@ -2064,7 +2064,7 @@
         justify-content: space-between !important;
         align-items: flex-start !important;
         padding-top: clamp(140px, 21vh, 225px) !important;
-        padding-bottom: clamp(28px, 4.5vh, 52px) !important;
+        padding-bottom: clamp(78px, 10.5vh, 114px) !important;
         grid-row-gap: 24px !important;
       }
 
@@ -2209,6 +2209,45 @@
       .hero-cta-secondary {
         padding: 11px 16px !important;
         font-size: 11.5px !important;
+      }
+    }
+
+    /* ============================================================
+       FAIXAS DE MODALIDADES (MARQUEE) RENTES AO FINAL DA HERO
+       Cobre a transição/borda entre o vídeo da Hero e a próxima seção
+       ============================================================ */
+    .section.marque {
+      position: relative !important;
+      z-index: 8 !important;
+      padding-top: 0 !important;
+      padding-bottom: clamp(44px, 6vw, 76px) !important;
+      margin-top: -32px !important;
+      background-color: transparent !important;
+      overflow-x: clip !important;
+      overflow-y: visible !important;
+    }
+
+    .section.marque .marque-block {
+      margin-top: 0 !important;
+    }
+
+    @media screen and (max-width: 991px) {
+      .section.marque {
+        margin-top: -42px !important;
+        padding-top: 0 !important;
+        padding-bottom: 48px !important;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      .section.home-hero {
+        padding-bottom: clamp(240px, 34vh, 330px) !important;
+      }
+
+      .section.marque {
+        margin-top: -36px !important;
+        padding-top: 0 !important;
+        padding-bottom: 42px !important;
       }
     }
   </style>
