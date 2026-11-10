@@ -2254,6 +2254,43 @@
       transform: none !important;
     }
 
+    @keyframes alvo-marquee-scroll {
+      0% {
+        transform: translate3d(0%, 0, 0);
+      }
+      100% {
+        transform: translate3d(-20%, 0, 0);
+      }
+    }
+
+    .section.marque .maque-content-block {
+      flex: none !important;
+      display: flex !important;
+      flex-flow: row nowrap !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      grid-column-gap: 0 !important;
+      gap: 0 !important;
+      width: max-content !important;
+      will-change: transform;
+      animation: alvo-marquee-scroll 44s linear infinite !important;
+    }
+
+    .section.marque .marque-single-card.primary-color .maque-content-block {
+      animation-duration: 50s !important;
+    }
+
+    .section.marque .marque-content-wrapper {
+      flex: none !important;
+      display: flex !important;
+      flex-flow: row nowrap !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      padding-right: 30px !important;
+      box-sizing: border-box !important;
+      overflow: visible !important;
+    }
+
     .section.marque .marque-single-card._01,
     .section.marque .marque-single-card.primary-color {
       width: 124vw !important;
@@ -2281,6 +2318,14 @@
         margin-top: clamp(-172px, -19.5dvh, -138px) !important;
         padding-top: 0 !important;
         padding-bottom: 42px !important;
+      }
+
+      .section.marque .maque-content-block {
+        animation-duration: 32s !important;
+      }
+
+      .section.marque .marque-single-card.primary-color .maque-content-block {
+        animation-duration: 36s !important;
       }
     }
   </style>
@@ -2713,6 +2758,29 @@
         </div>
       </div>
     </section>
+    <script id="alvo-marquee-init">
+      (function () {
+        var blocks = document.querySelectorAll('.section.marque .maque-content-block');
+        blocks.forEach(function (block) {
+          if (block.dataset.marqueeCloned === '1') return;
+          var track = block.querySelector('.marque-content-wrapper');
+          if (!track) return;
+          block.querySelectorAll('.marque-logo-image').forEach(function (img) {
+            img.loading = 'eager';
+            img.decoding = 'async';
+          });
+          for (var i = 0; i < 2; i++) {
+            var before = track.cloneNode(true);
+            before.setAttribute('aria-hidden', 'true');
+            block.insertBefore(before, track);
+            var after = track.cloneNode(true);
+            after.setAttribute('aria-hidden', 'true');
+            block.appendChild(after);
+          }
+          block.dataset.marqueeCloned = '1';
+        });
+      })();
+    </script>
 
     <!-- ========================================================
      04. NOSSAS MODALIDADES (MUSCULACAO, FUNCIONAL, ETC.)
@@ -4585,7 +4653,7 @@
   <script src="./js/webflow.schunk.36b8fb49256177c8.js" type="text/javascript"></script>
   <script src="./js/webflow.schunk.e063ac219db66666.js" type="text/javascript"></script>
   <script src="./js/webflow.schunk.f919141e3448519b.js" type="text/javascript"></script>
-  <script src="./js/webflow.js?v=2" type="text/javascript"></script>
+  <script src="./js/webflow.js?v=4" type="text/javascript"></script>
   <script src="./js/gsap.min.js" type="text/javascript"></script>
   <script src="./js/SplitText.min.js" type="text/javascript"></script>
   <script src="./js/ScrollTrigger.min.js" type="text/javascript"></script>
