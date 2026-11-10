@@ -1881,21 +1881,367 @@
       }
     }
   </style>
-  <!-- Estilo Subtitulo Hero Laranja -->
-  <style id="alvo-hero-subtitle-style">
-    .section.home-hero .paragraph-extra-large {
-      color: #f96a24 !important;
-      font-weight: 500 !important;
-      letter-spacing: 0.2px !important;
-      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9) !important;
+  <!-- Estilo Hero Editorial High-Impact Alvo02Fit -->
+  <style id="alvo-hero-editorial-style">
+    /* Vignette / Scrim cinematográfico para destacar o texto sem apagar o atleta */
+    .hero-editorial-scrim {
+      position: absolute !important;
+      inset: 0 !important;
+      z-index: 1 !important;
+      pointer-events: none !important;
+      background: linear-gradient(180deg, rgba(15, 5, 3, 0.52) 0%, rgba(15, 5, 3, 0.12) 28%, rgba(15, 5, 3, 0.1) 75%, #0f0503 100%) !important;
     }
 
-    @media screen and (max-width: 767px) {
-      .section.home-hero .paragraph-extra-large {
+    @media screen and (min-width: 992px) {
+      .hero-editorial-scrim {
+        background:
+          linear-gradient(90deg, rgba(15, 5, 3, 0.82) 0%, rgba(15, 5, 3, 0.45) 36%, rgba(15, 5, 3, 0) 64%),
+          linear-gradient(180deg, rgba(15, 5, 3, 0.45) 0%, transparent 22%, transparent 78%, #0f0503 100%) !important;
+      }
+    }
+
+    .section.home-hero .container,
+    .home-hero-block {
+      position: relative !important;
+      z-index: 2 !important;
+    }
+
+    .hero-editorial-wrap {
+      z-index: 100 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 14px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      text-shadow: none !important;
+    }
+
+    /* Pill Badge com ícone de Alvo */
+    .hero-target-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      padding: 6px 14px 6px 10px !important;
+      border-radius: 100px !important;
+      background: rgba(18, 8, 5, 0.72) !important;
+      border: 1px solid rgba(249, 106, 36, 0.42) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+      backdrop-filter: blur(12px) !important;
+      color: rgba(255, 255, 255, 0.92) !important;
+      font-family: 'Onest', 'Inter Tight', sans-serif !important;
+      font-size: 11.5px !important;
+      font-weight: 600 !important;
+      letter-spacing: 1px !important;
+      text-transform: uppercase !important;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+      animation: heroEdFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+    }
+
+    .hero-target-icon {
+      color: #f96a24 !important;
+      flex-shrink: 0 !important;
+      filter: drop-shadow(0 0 6px rgba(249, 106, 36, 0.75)) !important;
+    }
+
+    /* Headline Two-Tone em Anton */
+    .hero-editorial-h1 {
+      display: flex !important;
+      flex-direction: column !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      font-family: 'Anton', sans-serif !important;
+      font-weight: 400 !important;
+      text-transform: uppercase !important;
+      line-height: 0.96 !important;
+      letter-spacing: 1.2px !important;
+      gap: 4px !important;
+    }
+
+    .hero-ed-line {
+      display: block !important;
+      text-shadow: 0 6px 28px rgba(0, 0, 0, 0.8) !important;
+    }
+
+    .hero-ed-white {
+      color: #ffffff !important;
+      animation: heroEdFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both !important;
+    }
+
+    .hero-ed-orange {
+      color: #f96a24 !important;
+      background: none !important;
+      -webkit-background-clip: border-box !important;
+      -webkit-text-fill-color: #f96a24 !important;
+      filter: none !important;
+      text-shadow: 0 6px 28px rgba(0, 0, 0, 0.88), 0 0 28px rgba(249, 106, 36, 0.22) !important;
+      animation: heroEdFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.16s both !important;
+    }
+
+    /* Subtítulo Editorial */
+    .hero-editorial-sub {
+      font-family: 'Inter Tight', 'Onest', sans-serif !important;
+      font-weight: 400 !important;
+      color: rgba(255, 255, 255, 0.86) !important;
+      margin: 0 !important;
+      line-height: 1.45 !important;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.88) !important;
+      animation: heroEdFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both !important;
+    }
+
+    /* Botões CTA na Hero */
+    .hero-editorial-actions {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      align-items: center !important;
+      gap: 12px !important;
+      margin-top: 6px !important;
+      animation: heroEdFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both !important;
+    }
+
+    .hero-cta-primary {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 12px !important;
+      padding: 6px 6px 6px 20px !important;
+      border-radius: 100px !important;
+      background: linear-gradient(135deg, #ff7e36 0%, #f15a24 55%, #d63f09 100%) !important;
+      color: #ffffff !important;
+      font-family: 'Inter Tight', 'Onest', sans-serif !important;
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.6px !important;
+      text-transform: uppercase !important;
+      text-decoration: none !important;
+      box-shadow: 0 10px 28px rgba(241, 90, 36, 0.45) !important;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease !important;
+    }
+
+    .hero-cta-primary:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 14px 34px rgba(249, 106, 36, 0.62) !important;
+    }
+
+    .hero-cta-circle {
+      width: 34px !important;
+      height: 34px !important;
+      border-radius: 50% !important;
+      background: #ffffff !important;
+      color: #110604 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-shrink: 0 !important;
+      transition: transform 0.25s ease !important;
+    }
+
+    .hero-cta-primary:hover .hero-cta-circle {
+      transform: rotate(12deg) scale(1.06) !important;
+    }
+
+    .hero-cta-secondary {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 13px 22px !important;
+      border-radius: 100px !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.26) !important;
+      -webkit-backdrop-filter: blur(10px) !important;
+      backdrop-filter: blur(10px) !important;
+      color: #ffffff !important;
+      font-family: 'Inter Tight', 'Onest', sans-serif !important;
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.6px !important;
+      text-transform: uppercase !important;
+      text-decoration: none !important;
+      transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease !important;
+    }
+
+    .hero-cta-secondary:hover {
+      background: rgba(255, 255, 255, 0.16) !important;
+      border-color: rgba(249, 106, 36, 0.65) !important;
+      transform: translateY(-2px) !important;
+    }
+
+    @keyframes heroEdFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ============================================================
+       DESKTOP (>= 992px): Bloco Editorial no Quadrante Esquerdo
+       (Deixa o atleta central 100% visível e livre de cortes)
+       ============================================================ */
+    @media screen and (min-width: 992px) {
+      .home-hero-bg-block {
+        min-height: 100vh !important;
+      }
+
+      .home-hero-block {
+        min-height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        align-items: flex-start !important;
+        padding-top: clamp(118px, 18vh, 200px) !important;
+        padding-bottom: clamp(28px, 4.5vh, 52px) !important;
+        grid-row-gap: 24px !important;
+      }
+
+      .hero-editorial-wrap {
+        align-items: flex-start !important;
+        text-align: left !important;
+        max-width: clamp(380px, 38vw, 540px) !important;
+      }
+
+      .hero-editorial-h1 {
+        align-items: flex-start !important;
+        text-align: left !important;
+        font-size: clamp(44px, 4.4vw, 68px) !important;
+      }
+
+      .hero-ed-line {
+        white-space: nowrap !important;
+      }
+
+      .hero-editorial-sub {
+        text-align: left !important;
+        font-size: clamp(14.5px, 1.15vw, 17px) !important;
+        max-width: 420px !important;
+      }
+
+      .hero-editorial-actions {
+        justify-content: flex-start !important;
+      }
+
+      .home-hero-card-wrap._01 {
+        position: relative !important;
+        top: 0 !important;
+        margin-top: auto !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 100% !important;
+      }
+    }
+
+    /* ============================================================
+       TABLET (768px - 991px): Centralizado no topo acima do atleta
+       ============================================================ */
+    @media screen and (max-width: 991px) and (min-width: 768px) {
+      .home-hero-bg-block {
+        min-height: 100vh !important;
+      }
+
+      .home-hero-block {
+        min-height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        padding-top: clamp(120px, 14vh, 160px) !important;
+        padding-bottom: 42px !important;
+      }
+
+      .hero-editorial-wrap {
+        align-items: center !important;
+        text-align: center !important;
+        max-width: 600px !important;
+      }
+
+      .hero-editorial-h1 {
+        align-items: center !important;
+        text-align: center !important;
+        font-size: clamp(48px, 7.2vw, 64px) !important;
+      }
+
+      .hero-editorial-sub {
+        text-align: center !important;
         font-size: 16px !important;
+        max-width: 480px !important;
+      }
+
+      .hero-editorial-actions {
+        justify-content: center !important;
+      }
+
+      .home-hero-card-wrap._01 {
+        display: none !important;
+      }
+    }
+
+    /* ============================================================
+       MOBILE (<= 767px): Centralizado preenchendo a metade superior
+       ============================================================ */
+    @media screen and (max-width: 767px) {
+      .home-hero-bg-block {
+        min-height: 100dvh !important;
+      }
+
+      .section.home-hero {
+        padding-bottom: clamp(340px, 46vh, 450px) !important;
+      }
+
+      .home-hero-block {
+        padding-top: clamp(84px, 11vh, 114px) !important;
+        padding-bottom: 0 !important;
+        min-height: auto !important;
+        align-items: center !important;
+      }
+
+      .hero-editorial-wrap {
+        align-items: center !important;
+        text-align: center !important;
+        gap: 10px !important;
+        width: 100% !important;
+      }
+
+      .hero-target-badge {
+        font-size: 10.5px !important;
+        padding: 5px 12px 5px 9px !important;
+        letter-spacing: 0.7px !important;
+      }
+
+      .hero-editorial-h1 {
+        align-items: center !important;
+        text-align: center !important;
+        font-size: clamp(36px, 10vw, 48px) !important;
+        letter-spacing: 0.8px !important;
+      }
+
+      .hero-editorial-sub {
+        text-align: center !important;
+        font-size: 14px !important;
+        max-width: 315px !important;
         line-height: 1.4 !important;
-        max-width: 320px !important;
-        margin: 6px auto 0 auto !important;
+      }
+
+      .hero-editorial-actions {
+        justify-content: center !important;
+        gap: 8px !important;
+        margin-top: 4px !important;
+      }
+
+      .hero-cta-primary {
+        padding: 5px 5px 5px 16px !important;
+        font-size: 11.5px !important;
+        gap: 8px !important;
+      }
+
+      .hero-cta-circle {
+        width: 30px !important;
+        height: 30px !important;
+      }
+
+      .hero-cta-secondary {
+        padding: 11px 16px !important;
+        font-size: 11.5px !important;
       }
     }
   </style>
@@ -2029,6 +2375,7 @@
           <source src="./hero.mp4" type="video/mp4" />
           <img src="./images/hero-bg.jpg" loading="eager" fetchpriority="high" alt="Alvo02Fit - Treino e Performance" class="home-hero-image" />
         </video>
+        <div class="hero-editorial-scrim" aria-hidden="true"></div>
       </div>
 
       <!-- ========================================================
@@ -2037,16 +2384,41 @@
       <section class="section home-hero">
         <div class="w-layout-blockcontainer container w-container">
           <div class="home-hero-block">
-            <div class="section-title-wrap">
-              <div class="hero-inner-wrap">
-                <h1 class="hero-title">SEU OBJETIVO COME&Ccedil;A AQUI</h1>
+            <div class="section-title-wrap hero-editorial-wrap">
+              <div class="hero-target-badge">
+                <svg class="hero-target-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <circle cx="12" cy="12" r="4.5"></circle>
+                  <circle cx="12" cy="12" r="1.5" fill="currentColor"></circle>
+                </svg>
+                <span>S&atilde;o Mateus, SP &bull; 4.8 &#9733; no Google</span>
               </div>
-              <div class="paragraph-large-wrap">
-                <p class="paragraph-extra-large">Porque s&oacute; prometer na segunda nunca acertou o alvo.</p>
+              <div class="hero-inner-wrap hero-smart-inner">
+                <h1 class="hero-editorial-h1">
+                  <span class="hero-ed-line hero-ed-white">CHEGA DE PROMESSA.</span>
+                  <span class="hero-ed-line hero-ed-orange">ACERTE O ALVO.</span>
+                </h1>
+              </div>
+              <p class="hero-editorial-sub">
+                Muscula&ccedil;&atilde;o, funcional e aulas coletivas para quem cansou de come&ccedil;ar s&oacute; na segunda.
+              </p>
+              <div class="hero-editorial-actions">
+                <a href="agendamento.html" class="hero-cta-primary">
+                  <span>Agendar Aula Gr&aacute;tis</span>
+                  <span class="hero-cta-circle" aria-hidden="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="7" y1="17" x2="17" y2="7"></line>
+                      <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                  </span>
+                </a>
+                <a href="#planos" class="hero-cta-secondary">
+                  <span>Ver Planos</span>
+                </a>
               </div>
             </div>
             <div class="home-hero-card-wrap _01"
-              style="padding-left: clamp(45px, 4vw, 65px) !important; padding-right: clamp(45px, 4vw, 65px) !important; box-sizing: border-box !important;">
+              style="box-sizing: border-box !important;">
               <div class="home-hero-left-card">
                 <img
                   src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ccf9e3fcf95f9e2bbb3d63_Subtract.webp"
