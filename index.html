@@ -2063,8 +2063,8 @@
         flex-direction: row !important;
         justify-content: space-between !important;
         align-items: center !important;
-        padding-top: clamp(110px, 13vh, 150px) !important;
-        padding-bottom: clamp(95px, 13vh, 135px) !important;
+        padding-top: clamp(96px, 11vh, 135px) !important;
+        padding-bottom: clamp(148px, 19vh, 210px) !important;
         grid-row-gap: 0px !important;
         gap: 24px !important;
       }
@@ -2074,7 +2074,7 @@
         text-align: left !important;
         max-width: clamp(380px, 38vw, 540px) !important;
         align-self: center !important;
-        margin-bottom: 3vh !important;
+        margin-bottom: 1.5vh !important;
       }
 
       .hero-editorial-h1 {
@@ -2298,6 +2298,59 @@
       margin-left: -12vw !important;
       left: 0 !important;
       right: auto !important;
+    }
+
+    /* Desktop (>= 992px): faixas mais finas e posicionadas mais acima para ambas aparecerem sem rolar */
+    @media screen and (min-width: 992px) {
+      .section.marque {
+        margin-top: clamp(-182px, -19.5vh, -142px) !important;
+        padding-top: 0 !important;
+        padding-bottom: clamp(44px, 5vw, 68px) !important;
+      }
+
+      .section.marque .marque-single-card._01,
+      .section.marque .marque-single-card.primary-color {
+        height: clamp(62px, 6.8vh, 72px) !important;
+      }
+
+      .section.marque .marque-single-card._01 {
+        transform: rotate(3.2deg) !important;
+      }
+
+      .section.marque .marque-single-card.primary-color {
+        transform: rotate(-3.2deg) !important;
+      }
+
+      .section.marque .marque-text {
+        font-size: clamp(27px, 2.2vw, 33px) !important;
+        line-height: 1 !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+      }
+
+      .section.marque .marque-logo-image {
+        width: clamp(22px, 1.85vw, 27px) !important;
+        height: auto !important;
+      }
+
+      .section.marque .marque-content-wrap {
+        grid-column-gap: 24px !important;
+        grid-row-gap: 24px !important;
+      }
+
+      .section.marque .marque-content-wrapper {
+        grid-column-gap: 24px !important;
+        grid-row-gap: 24px !important;
+        padding-right: 24px !important;
+      }
+
+      .section.marque .maque-content-block {
+        animation-duration: 36s !important;
+      }
+
+      .section.marque .marque-single-card.primary-color .maque-content-block {
+        animation-duration: 40s !important;
+      }
     }
 
     @media screen and (max-width: 991px) {
