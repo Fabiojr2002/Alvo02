@@ -2265,7 +2265,7 @@
 
     @media screen and (max-width: 991px) {
       .section.marque {
-        margin-top: -64px !important;
+        margin-top: -115px !important;
         padding-top: 0 !important;
         padding-bottom: 48px !important;
       }
@@ -2276,8 +2276,9 @@
         padding-bottom: clamp(240px, 34vh, 330px) !important;
       }
 
+      /* No Mobile: posiciona as duas faixas mais acima na base da Hero, visíveis sem subir no Monitor */
       .section.marque {
-        margin-top: -58px !important;
+        margin-top: clamp(-172px, -19.5dvh, -138px) !important;
         padding-top: 0 !important;
         padding-bottom: 42px !important;
       }
