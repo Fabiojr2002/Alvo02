@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <!-- This site was created in Webflow. https://webflow.com -->
 
@@ -131,7 +131,11 @@
     }
 
     html {
-      scroll-behavior: smooth;
+      scroll-behavior: auto !important;
+    }
+
+    a, button {
+      touch-action: manipulation;
     }
 
     .hero-modalidades-btn {
@@ -176,8 +180,8 @@
     }
 
     /* Espaçamento do topo ao rolar para cada seção através da navegação */
-    #hero, #modalidades, #estrutura, #planos, #avaliacoes, #contato {
-      scroll-margin-top: 70px;
+    #hero, #modalidades, #estrutura, #planos, #avaliacoes, #localizacao, #contato {
+      scroll-margin-top: 96px;
     }
 
     /* ==========================================================================
@@ -617,11 +621,61 @@
   </style>
 
   <style>
+    html, body {
+      overflow-x: clip;
+    }
+
+    .page-wrapper {
+      overflow: visible !important;
+      overflow-x: clip !important;
+    }
+
     .home-hero-bg-block {
-      min-height: 110vh !important;
-      position: relative !important;
+      min-height: 100vh !important;
+      height: 100vh !important;
+      max-height: 100vh !important;
+      position: -webkit-sticky !important;
+      position: sticky !important;
+      top: 0 !important;
       width: 100% !important;
       overflow: hidden !important;
+      z-index: 1 !important;
+      transform-origin: center center;
+      will-change: transform, opacity;
+    }
+
+    .home-hero-bg-block ~ .section,
+    .home-hero-bg-block ~ footer,
+    .home-hero-bg-block ~ .footer {
+      position: relative !important;
+      z-index: 10 !important;
+      background-color: rgb(15, 5, 3) !important;
+    }
+
+    .section.marque {
+      border-top: 1px solid rgba(255, 90, 0, 0.25) !important;
+      box-shadow: 0 -30px 60px rgba(0, 0, 0, 0.95) !important;
+    }
+
+    @supports (animation-timeline: scroll()) {
+      @keyframes heroScrollDim {
+        0% {
+          opacity: 1;
+          transform: scale(1);
+          filter: brightness(1);
+        }
+        100% {
+          opacity: 0.45;
+          transform: scale(0.96);
+          filter: brightness(0.65);
+        }
+      }
+
+      .home-hero-bg-block {
+        animation: heroScrollDim linear both;
+        animation-timeline: scroll();
+        animation-range: 0px 100vh;
+      }
     }
 
     .home-hero-bg-wrap {
@@ -5274,23 +5328,11 @@
         });
       }
 
-      // Fechar menu ao clicar em links âncora e navegar suavemente
-      var links = menu.querySelectorAll('.radial-menu-link');
+      // Fechar menu imediatamente ao clicar em links (rolagem rápida tratada sem atraso abaixo)
+      var links = menu.querySelectorAll('.radial-menu-link, .radial-menu-logo');
       links.forEach(function (link) {
-        link.addEventListener('click', function (e) {
-          var href = link.getAttribute('href');
-          if (href && href.startsWith('#')) {
-            e.preventDefault();
-            closeMenu();
-            setTimeout(function () {
-              var target = document.querySelector(href);
-              if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-              }
-            }, 360);
-          } else {
-            closeMenu();
-          }
+        link.addEventListener('click', function () {
+          closeMenu();
         });
       });
 
@@ -5348,6 +5390,104 @@
       window.addEventListener('resize', function() {
         checkVideoSwitch();
       }, { passive: true });
+    })();
+  </script>
+  <!-- Script: Navegacao Imediata entre Secoes (elimina atraso de ~1.5s-2s do scroll padrao) -->
+  <script id="alvo-fast-anchor-scroll">
+    (function () {
+      var activeRaf = null;
+      var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      function cancelActiveScroll() {
+        if (activeRaf !== null) {
+          cancelAnimationFrame(activeRaf);
+          activeRaf = null;
+        }
+      }
+
+      function jumpTo(y) {
+        try {
+          window.scrollTo({ top: y, left: 0, behavior: 'instant' });
+        } catch (err) {
+          window.scrollTo(0, y);
+        }
+      }
+
+      function animateTo(targetY, duration) {
+        cancelActiveScroll();
+        var startY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        var delta = targetY - startY;
+        if (Math.abs(delta) < 2 || duration <= 0) {
+          jumpTo(targetY);
+          return;
+        }
+        var startTime = performance.now();
+        function step(now) {
+          var progress = Math.min(1, (now - startTime) / duration);
+          // easeOutQuart: resposta visual imediata logo no primeiro frame
+          var eased = 1 - Math.pow(1 - progress, 4);
+          jumpTo(Math.round(startY + delta * eased));
+          if (progress < 1) {
+            activeRaf = requestAnimationFrame(step);
+          } else {
+            activeRaf = null;
+          }
+        }
+        activeRaf = requestAnimationFrame(step);
+      }
+
+      ['wheel', 'touchstart', 'pointerdown'].forEach(function (evt) {
+        window.addEventListener(evt, cancelActiveScroll, { passive: true });
+      });
+      window.addEventListener('keydown', function (e) {
+        if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].indexOf(e.key) !== -1) {
+          cancelActiveScroll();
+        }
+      }, { passive: true });
+
+      document.body.addEventListener('click', function (e) {
+        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        var link = e.target && e.target.closest ? e.target.closest('a[href*="#"]') : null;
+        if (!link || link.classList.contains('w-tab-link')) return;
+
+        var rawHref = (link.getAttribute('href') || '').trim();
+        if (!rawHref || rawHref === '#') return;
+        var hash = link.hash;
+        if (!hash || hash.length < 2) return;
+        if (link.host !== window.location.host || link.pathname.replace(/\/index\.html$/, '/') !== window.location.pathname.replace(/\/index\.html$/, '/')) return;
+
+        var target = null;
+        try {
+          target = document.getElementById(decodeURIComponent(hash.slice(1))) || document.querySelector(hash);
+        } catch (err) {
+          return;
+        }
+        if (!target) return;
+
+        // Intercepta antes do $(document) do Webflow para eliminar o lag de 1.3s-2s
+        e.preventDefault();
+        e.stopPropagation();
+
+        var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        var maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+        var targetY = 0;
+        if (hash !== '#hero') {
+          var navEl = document.querySelector('.navbar');
+          var navH = navEl ? navEl.getBoundingClientRect().height : 78;
+          var cssMargin = parseFloat(window.getComputedStyle(target).scrollMarginTop) || 0;
+          var margin = Math.max(cssMargin, Math.round(navH + 22));
+          targetY = Math.round(target.getBoundingClientRect().top + scrollY - margin);
+        }
+        targetY = Math.max(0, Math.min(maxScroll, targetY));
+
+        if (window.history && window.history.pushState && window.location.hash !== hash) {
+          window.history.pushState({ hash: hash }, '', hash);
+        }
+
+        var dist = Math.abs(targetY - scrollY);
+        var duration = (prefersReduced && prefersReduced.matches) ? 0 : Math.min(380, Math.max(220, 180 + dist * 0.045));
+        animateTo(targetY, duration);
+      }, false);
     })();
   </script>
 </body>
