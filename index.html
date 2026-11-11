@@ -657,6 +657,71 @@
       box-shadow: 0 -30px 60px rgba(0, 0, 0, 0.95) !important;
     }
 
+    /* ========================================================
+       COLAGEM E ELEVACAO DAS FAIXAS MARQUEE
+       As faixas ficam POR CIMA do topo da secao e cobrem o sombreado da hero
+       ======================================================== */
+    .section.marque {
+      position: relative !important;
+      z-index: 50 !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      margin-bottom: 0 !important;
+      margin-top: -198px !important;
+      background-color: transparent !important;
+      overflow-x: clip !important;
+      overflow-y: visible !important;
+      pointer-events: none !important;
+    }
+
+    .section.marque .marque-block {
+      z-index: 50 !important;
+    }
+
+    .section.marque .marque-single-card {
+      pointer-events: auto !important;
+      z-index: 50 !important;
+    }
+
+    .section.marque .marque-single-card._01 {
+      z-index: 51 !important;
+    }
+
+    .section.marque .marque-single-card.primary-color {
+      z-index: 52 !important;
+    }
+
+    .section-modalidades,
+    .section.marque ~ .section:not(.marque):first-of-type {
+      position: relative !important;
+      z-index: 10 !important;
+      background-color: rgb(15, 5, 3) !important;
+      margin-top: -190px !important;
+      padding-top: 130px !important;
+    }
+
+    @media screen and (max-width: 991px) {
+      .section.marque {
+        padding-bottom: 0 !important;
+      }
+      .section-modalidades,
+      .section.marque ~ .section:not(.marque):first-of-type {
+        margin-top: -180px !important;
+        padding-top: 120px !important;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      .section.marque {
+        padding-bottom: 0 !important;
+      }
+      .section-modalidades,
+      .section.marque ~ .section:not(.marque):first-of-type {
+        margin-top: -178px !important;
+        padding-top: 110px !important;
+      }
+    }
+
     @supports (animation-timeline: scroll()) {
       @keyframes heroScrollDim {
         0% {
@@ -2292,7 +2357,7 @@
        ============================================================ */
     .section.marque {
       position: relative !important;
-      z-index: 8 !important;
+      z-index: 50 !important;
       padding-top: 0 !important;
       padding-bottom: clamp(44px, 6vw, 76px) !important;
       margin-top: clamp(-86px, -9vh, -64px) !important;
@@ -2357,7 +2422,9 @@
     /* Desktop (>= 992px): proporção igual ao Mobile — espessura encorpada, cruzamento suave sem cortar texto e ambas visíveis sem rolar */
     @media screen and (min-width: 992px) {
       .section.marque {
-        margin-top: clamp(-162px, -16.9vh, -122px) !important;
+        margin-top: -198px !important;
+        z-index: 50 !important;
+        padding-bottom: 0 !important;
         padding-top: 0 !important;
         padding-bottom: clamp(44px, 5vw, 68px) !important;
       }
@@ -2407,7 +2474,9 @@
 
     @media screen and (max-width: 991px) {
       .section.marque {
-        margin-top: -115px !important;
+        margin-top: -145px !important;
+        z-index: 50 !important;
+        padding-bottom: 0 !important;
         padding-top: 0 !important;
         padding-bottom: 48px !important;
       }
@@ -2420,7 +2489,9 @@
 
       /* No Mobile: posiciona as duas faixas mais acima na base da Hero, visíveis sem subir no Monitor */
       .section.marque {
-        margin-top: clamp(-172px, -19.5dvh, -138px) !important;
+        margin-top: -202px !important;
+        z-index: 50 !important;
+        padding-bottom: 0 !important;
         padding-top: 0 !important;
         padding-bottom: 42px !important;
       }
@@ -2890,7 +2961,7 @@
     <!-- ========================================================
      04. NOSSAS MODALIDADES (MUSCULACAO, FUNCIONAL, ETC.)
      ======================================================== -->
-    <section class="section">
+    <section class="section section-modalidades">
       <div class="w-layout-blockcontainer container w-container">
         <div id="modalidades" class="service-block-home" style="scroll-margin-top: 60px;">
           <div class="service-title-wrap">
@@ -3150,162 +3221,7 @@
     </section>
 
     <!-- ========================================================
-     05. ESTRUTURA COMPLETA
-     ======================================================== -->
-    <section class="section">
-      <div class="w-layout-blockcontainer container w-container">
-        <div id="estrutura" class="expect-block">
-          <div id="w-node-ea721245-f6b5-826b-230e-3cda638e6f11-8f6f26de" class="expect-top-block">
-            <div class="carousel-3d-wrapper" id="carousel-3d-container">
-              <!-- Botões de Navegação 3D -->
-              <button type="button" class="carousel-3d-nav-btn carousel-3d-prev-btn" id="carousel-prev" aria-label="Imagem Anterior">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-              </button>
-              <button type="button" class="carousel-3d-nav-btn carousel-3d-next-btn" id="carousel-next" aria-label="Próxima Imagem">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </button>
-
-              <!-- Stage dos Cards 3D -->
-              <div class="inner-design-image-block" id="estrutura-cards-track" tabindex="0" role="region" aria-label="Galeria da Estrutura Alvo02 Fit">
-                <div class="design-card pos-active" data-card-idx="0">
-                  <div class="design-card-inner">
-                    <img
-                      src="./images/estrutura-1.webp"
-                      loading="lazy" alt="Estrutura Alvo02 Fit - Musculação e Definição" class="design-image" />
-                    <button type="button" class="design-card-zoom-btn" aria-label="Ampliar foto" title="Clique para ampliar">
-                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="15 3 21 3 21 9"></polyline>
-                        <polyline points="9 21 3 21 3 15"></polyline>
-                        <line x1="21" y1="3" x2="14" y2="10"></line>
-                        <line x1="3" y1="21" x2="10" y2="14"></line>
-                      </svg>
-                    </button>
-                    <div class="design-card-overlay"></div>
-                    <div class="design-card-caption">
-                      <span class="design-card-tag">ESTRUTURA 01</span>
-                      <h4 class="design-card-title">Musculação &amp; Definição</h4>
-                    </div>
-                  </div>
-                </div>
-                <div class="design-card pos-next" data-card-idx="1">
-                  <div class="design-card-inner">
-                    <img
-                      src="./images/estrutura-2.webp"
-                      loading="lazy" alt="Estrutura Alvo02 Fit - Treino com Halteres" class="design-image" />
-                    <button type="button" class="design-card-zoom-btn" aria-label="Ampliar foto" title="Clique para ampliar">
-                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="15 3 21 3 21 9"></polyline>
-                        <polyline points="9 21 3 21 3 15"></polyline>
-                        <line x1="21" y1="3" x2="14" y2="10"></line>
-                        <line x1="3" y1="21" x2="10" y2="14"></line>
-                      </svg>
-                    </button>
-                    <div class="design-card-overlay"></div>
-                    <div class="design-card-caption">
-                      <span class="design-card-tag">ESTRUTURA 02</span>
-                      <h4 class="design-card-title">Treino com Halteres</h4>
-                    </div>
-                  </div>
-                </div>
-                <div class="design-card pos-back" data-card-idx="2">
-                  <div class="design-card-inner">
-                    <img
-                      src="./images/estrutura-3.jpg"
-                      loading="lazy" alt="Estrutura Alvo02 Fit - Peso Livre e Levantamento" class="design-image" />
-                    <button type="button" class="design-card-zoom-btn" aria-label="Ampliar foto" title="Clique para ampliar">
-                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="15 3 21 3 21 9"></polyline>
-                        <polyline points="9 21 3 21 3 15"></polyline>
-                        <line x1="21" y1="3" x2="14" y2="10"></line>
-                        <line x1="3" y1="21" x2="10" y2="14"></line>
-                      </svg>
-                    </button>
-                    <div class="design-card-overlay"></div>
-                    <div class="design-card-caption">
-                      <span class="design-card-tag">ESTRUTURA 03</span>
-                      <h4 class="design-card-title">Peso Livre &amp; Levantamento</h4>
-                    </div>
-                  </div>
-                </div>
-                <div class="design-card pos-prev" data-card-idx="3">
-                  <div class="design-card-inner">
-                    <img
-                      src="./images/estrutura-4.webp"
-                      loading="lazy" alt="Estrutura Alvo02 Fit - Equipamentos Biomecânicos" class="design-image" />
-                    <button type="button" class="design-card-zoom-btn" aria-label="Ampliar foto" title="Clique para ampliar">
-                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="15 3 21 3 21 9"></polyline>
-                        <polyline points="9 21 3 21 3 15"></polyline>
-                        <line x1="21" y1="3" x2="14" y2="10"></line>
-                        <line x1="3" y1="21" x2="10" y2="14"></line>
-                      </svg>
-                    </button>
-                    <div class="design-card-overlay"></div>
-                    <div class="design-card-caption">
-                      <span class="design-card-tag">ESTRUTURA 04</span>
-                      <h4 class="design-card-title">Equipamentos Biomecânicos</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Indicadores de Navegação (Dots) -->
-              <div class="carousel-3d-dots" id="carousel-dots" role="tablist" aria-label="Indicadores da galeria">
-                <button type="button" class="carousel-3d-dot is-active" data-index="0" aria-label="Foto 1"></button>
-                <button type="button" class="carousel-3d-dot" data-index="1" aria-label="Foto 2"></button>
-                <button type="button" class="carousel-3d-dot" data-index="2" aria-label="Foto 3"></button>
-                <button type="button" class="carousel-3d-dot" data-index="3" aria-label="Foto 4"></button>
-              </div>
-            </div>
-          </div>
-          <div id="w-node-_0cd4159e-155e-d907-2c18-f6e2363e93f4-8f6f26de" class="ecpect-bottom-block">
-            <div class="expect-title-wrap expect">
-              <div data-w-id="bb3f7d8a-6244-b962-7d83-3bfea7159875"
-                style="-webkit-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
-                class="heading-title-wrap">
-                <h2 class="heading-title">Ambiente Completo para Voc&ecirc; Evoluir</h2>
-              </div>
-              <div data-w-id="02032dc1-7671-2b2d-6dee-c9faf6c1ddde"
-                style="-webkit-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
-                class="pragraph-small-wrap expect">
-                <p class="paragraph-small">Espa&ccedil;o climatizado, equipamentos modernos de muscula&ccedil;&atilde;o,
-                  &aacute;rea de peso livre e salas para aulas coletivas com orienta&ccedil;&atilde;o pr&oacute;xima
-                  todos os dias.</p>
-              </div>
-            </div>
-            <div data-w-id="9da5d85f-2804-6eec-f87b-5cc58e28bd0c"
-              style="-webkit-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
-              class="service-button-wrap">
-              <a href="https://wa.me/5511930025829?text=Ol%C3%A1,%20gostaria%20de%20conhecer%20a%20estrutura%20da%20Alvo02Fit"
-                target="_blank" rel="noopener noreferrer" class="pricing-button w-inline-block">
-                <div class="button-box">
-                  <div class="button-text-wrap">
-                    <div class="button-flex">
-                      <div class="primary-button-text">FALAR NO WHATSAPP</div>
-                      <div class="primary-button-text-bottom">FALAR NO WHATSAPP</div>
-                    </div>
-                  </div>
-                  <div class="button-arrow-wrap">
-                    <img
-                      src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ce23789b5884025bcce8c7_Arrow%20-%20Up.svg"
-                      loading="lazy" alt="" class="button-icon" />
-                  </div>
-                </div>
-                <div class="button-bg">
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================================================
-     06. PLANOS & MENSALIDADES (MENSAL, GOLD, SEMESTRAL)
+     05. PLANOS & MENSALIDADES (MENSAL, GOLD, SEMESTRAL)
      ======================================================== -->
     <section class="section">
       <div class="w-layout-blockcontainer container w-container">
@@ -3525,6 +3441,161 @@
               <div class="save-text-wrap">
                 <p class="paragraph-small price">Econ&ocirc;mico</p>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+     06. ESTRUTURA COMPLETA
+     ======================================================== -->
+    <section class="section">
+      <div class="w-layout-blockcontainer container w-container">
+        <div id="estrutura" class="expect-block">
+          <div id="w-node-ea721245-f6b5-826b-230e-3cda638e6f11-8f6f26de" class="expect-top-block">
+            <div class="carousel-3d-wrapper" id="carousel-3d-container">
+              <!-- Botões de Navegação 3D -->
+              <button type="button" class="carousel-3d-nav-btn carousel-3d-prev-btn" id="carousel-prev" aria-label="Imagem Anterior">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <button type="button" class="carousel-3d-nav-btn carousel-3d-next-btn" id="carousel-next" aria-label="Próxima Imagem">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+
+              <!-- Stage dos Cards 3D -->
+              <div class="inner-design-image-block" id="estrutura-cards-track" tabindex="0" role="region" aria-label="Galeria da Estrutura Alvo02 Fit">
+                <div class="design-card pos-active" data-card-idx="0">
+                  <div class="design-card-inner">
+                    <img
+                      src="./images/estrutura-1.webp"
+                      loading="lazy" alt="Estrutura Alvo02 Fit - Musculação e Definição" class="design-image" />
+                    <button type="button" class="design-card-zoom-btn" aria-label="Ampliar foto" title="Clique para ampliar">
+                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <polyline points="9 21 3 21 3 15"></polyline>
+                        <line x1="21" y1="3" x2="14" y2="10"></line>
+                        <line x1="3" y1="21" x2="10" y2="14"></line>
+                      </svg>
+                    </button>
+                    <div class="design-card-overlay"></div>
+                    <div class="design-card-caption">
+                      <span class="design-card-tag">ESTRUTURA 01</span>
+                      <h4 class="design-card-title">Musculação &amp; Definição</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="design-card pos-next" data-card-idx="1">
+                  <div class="design-card-inner">
+                    <img
+                      src="./images/estrutura-2.webp"
+                      loading="lazy" alt="Estrutura Alvo02 Fit - Treino com Halteres" class="design-image" />
+                    <button type="button" class="design-card-zoom-btn" aria-label="Ampliar foto" title="Clique para ampliar">
+                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <polyline points="9 21 3 21 3 15"></polyline>
+                        <line x1="21" y1="3" x2="14" y2="10"></line>
+                        <line x1="3" y1="21" x2="10" y2="14"></line>
+                      </svg>
+                    </button>
+                    <div class="design-card-overlay"></div>
+                    <div class="design-card-caption">
+                      <span class="design-card-tag">ESTRUTURA 02</span>
+                      <h4 class="design-card-title">Treino com Halteres</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="design-card pos-back" data-card-idx="2">
+                  <div class="design-card-inner">
+                    <img
+                      src="./images/estrutura-3.jpg"
+                      loading="lazy" alt="Estrutura Alvo02 Fit - Peso Livre e Levantamento" class="design-image" />
+                    <button type="button" class="design-card-zoom-btn" aria-label="Ampliar foto" title="Clique para ampliar">
+                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <polyline points="9 21 3 21 3 15"></polyline>
+                        <line x1="21" y1="3" x2="14" y2="10"></line>
+                        <line x1="3" y1="21" x2="10" y2="14"></line>
+                      </svg>
+                    </button>
+                    <div class="design-card-overlay"></div>
+                    <div class="design-card-caption">
+                      <span class="design-card-tag">ESTRUTURA 03</span>
+                      <h4 class="design-card-title">Peso Livre &amp; Levantamento</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="design-card pos-prev" data-card-idx="3">
+                  <div class="design-card-inner">
+                    <img
+                      src="./images/estrutura-4.webp"
+                      loading="lazy" alt="Estrutura Alvo02 Fit - Equipamentos Biomecânicos" class="design-image" />
+                    <button type="button" class="design-card-zoom-btn" aria-label="Ampliar foto" title="Clique para ampliar">
+                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <polyline points="9 21 3 21 3 15"></polyline>
+                        <line x1="21" y1="3" x2="14" y2="10"></line>
+                        <line x1="3" y1="21" x2="10" y2="14"></line>
+                      </svg>
+                    </button>
+                    <div class="design-card-overlay"></div>
+                    <div class="design-card-caption">
+                      <span class="design-card-tag">ESTRUTURA 04</span>
+                      <h4 class="design-card-title">Equipamentos Biomecânicos</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Indicadores de Navegação (Dots) -->
+              <div class="carousel-3d-dots" id="carousel-dots" role="tablist" aria-label="Indicadores da galeria">
+                <button type="button" class="carousel-3d-dot is-active" data-index="0" aria-label="Foto 1"></button>
+                <button type="button" class="carousel-3d-dot" data-index="1" aria-label="Foto 2"></button>
+                <button type="button" class="carousel-3d-dot" data-index="2" aria-label="Foto 3"></button>
+                <button type="button" class="carousel-3d-dot" data-index="3" aria-label="Foto 4"></button>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_0cd4159e-155e-d907-2c18-f6e2363e93f4-8f6f26de" class="ecpect-bottom-block">
+            <div class="expect-title-wrap expect">
+              <div data-w-id="bb3f7d8a-6244-b962-7d83-3bfea7159875"
+                style="-webkit-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
+                class="heading-title-wrap">
+                <h2 class="heading-title">Ambiente Completo para Voc&ecirc; Evoluir</h2>
+              </div>
+              <div data-w-id="02032dc1-7671-2b2d-6dee-c9faf6c1ddde"
+                style="-webkit-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
+                class="pragraph-small-wrap expect">
+                <p class="paragraph-small">Espa&ccedil;o climatizado, equipamentos modernos de muscula&ccedil;&atilde;o,
+                  &aacute;rea de peso livre e salas para aulas coletivas com orienta&ccedil;&atilde;o pr&oacute;xima
+                  todos os dias.</p>
+              </div>
+            </div>
+            <div data-w-id="9da5d85f-2804-6eec-f87b-5cc58e28bd0c"
+              style="-webkit-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
+              class="service-button-wrap">
+              <a href="https://wa.me/5511930025829?text=Ol%C3%A1,%20gostaria%20de%20conhecer%20a%20estrutura%20da%20Alvo02Fit"
+                target="_blank" rel="noopener noreferrer" class="pricing-button w-inline-block">
+                <div class="button-box">
+                  <div class="button-text-wrap">
+                    <div class="button-flex">
+                      <div class="primary-button-text">FALAR NO WHATSAPP</div>
+                      <div class="primary-button-text-bottom">FALAR NO WHATSAPP</div>
+                    </div>
+                  </div>
+                  <div class="button-arrow-wrap">
+                    <img
+                      src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ce23789b5884025bcce8c7_Arrow%20-%20Up.svg"
+                      loading="lazy" alt="" class="button-icon" />
+                  </div>
+                </div>
+                <div class="button-bg">
+                </div>
+              </a>
             </div>
           </div>
         </div>
@@ -3799,135 +3870,7 @@
     </section>
 
     <!-- ========================================================
-     08. DIFERENCIAIS DA ALVO02FIT
-     ======================================================== -->
-    <section class="section">
-      <div class="w-layout-blockcontainer container w-container">
-        <div class="award-block">
-          <div class="award-title-wrap">
-            <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b209" class="heading-title-wrap">
-              <h2 class="heading-title">Diferenciais Alvo02Fit</h2>
-            </div>
-            <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b20c" class="pragraph-small-wrap award">
-              <p class="paragraph-normal-1">Nossa dedica&ccedil;&atilde;o a treinos de alto n&iacute;vel, estrutura
-                moderna e foco na evolu&ccedil;&atilde;o de cada aluno nos tornam refer&ecirc;ncia na regi&atilde;o.</p>
-            </div>
-          </div>
-          <div class="award-card-block">
-            <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b210" class="award-mid-block">
-              <p class="recipient-name-text">Reconhecimento</p>
-              <p class="recipient-name-text">Excel&ecirc;ncia Fitness</p>
-              <p class="recipient-name-text">Destaque</p>
-            </div>
-            <div class="award-single-card-block">
-              <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b218" class="service-straight-line">
-              </div>
-              <div class="award-desktop-card-wrapper">
-                <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b21a" class="award-single-card-wrap">
-                  <div class="award-ab-bg-color-wrap">
-                    <div class="award-ab-bg-color">
-                    </div>
-                  </div>
-                  <div class="award-content-padding">
-                    <div class="award-content-wrap">
-                      <div id="w-node-a5da0019-8b20-3697-39e0-853d3511b21f-3511b205" class="award-single-left-card">
-                        <div class="award-logo-wrap">
-                          <img loading="lazy"
-                            src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69d0e9c167074bbb54a699fd_Group%20143.svg"
-                            alt="" class="award-logo" />
-                        </div>
-                        <h3 class="award-medium-text">Atendimento Pr&oacute;ximo &amp; Familiar</h3>
-                      </div>
-                      <p class="paragraph-small white">Aten&ccedil;&atilde;o dedicada para iniciantes e alunos de todas
-                        as idades.</p>
-                      <h4 class="award-date-text">Diferencial 01</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b228" class="service-straight-line">
-              </div>
-              <div class="award-card-wrapper">
-                <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b22a" class="award-single-card-wrap">
-                  <div class="award-ab-bg-color-wrap">
-                    <div class="award-ab-bg-color">
-                    </div>
-                  </div>
-                  <div class="award-content-padding">
-                    <div class="award-content-wrap">
-                      <div class="award-single-left-card">
-                        <div class="award-logo-wrap">
-                          <img loading="lazy"
-                            src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69d0e9c17556a03a91eb13c3_Group%20144.svg"
-                            alt="" class="award-logo" />
-                        </div>
-                        <h5 class="award-medium-text">Estrutura Completa</h5>
-                      </div>
-                      <p class="paragraph-small white">Ambiente climatizado, equipamentos modernos e espa&ccedil;o amplo
-                        para o seu treino render mais.</p>
-                      <h6 class="award-date-text">Diferencial 02</h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b238" class="service-straight-line">
-              </div>
-              <div class="award-card-wrapper">
-                <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b23a" class="award-single-card-wrap">
-                  <div class="award-ab-bg-color-wrap">
-                    <div class="award-ab-bg-color">
-                    </div>
-                  </div>
-                  <div class="award-content-padding">
-                    <div class="award-content-wrap">
-                      <div class="award-single-left-card">
-                        <div class="award-logo-wrap">
-                          <img loading="lazy"
-                            src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69d0e9c1188e1df85c38c1bf_Group%20145.svg"
-                            alt="" class="award-logo" />
-                        </div>
-                        <h5 class="award-medium-text">Excel&ecirc;ncia em Atendimento</h5>
-                      </div>
-                      <p class="paragraph-small white">Alto &iacute;ndice de aprova&ccedil;&atilde;o dos alunos
-                        atrav&eacute;s de um acompanhamento pr&oacute;ximo e atencioso.</p>
-                      <h6 class="award-date-text">Diferencial 03</h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b248" class="service-straight-line">
-              </div>
-              <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b249" class="award-single-card-wrap">
-                <div class="award-ab-bg-color-wrap">
-                  <div class="award-ab-bg-color">
-                  </div>
-                </div>
-                <div class="award-content-padding">
-                  <div class="award-content-wrap">
-                    <div class="award-single-left-card">
-                      <div class="award-logo-wrap">
-                        <img loading="lazy"
-                          src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69d0e9c1ae00dda769d8642f_Group%20146.svg"
-                          alt="" class="award-logo" />
-                      </div>
-                      <h5 class="award-medium-text">Profissionais Qualificados</h5>
-                    </div>
-                    <p class="paragraph-small white">Professores capacitados garantindo treinos seguros, eficientes e
-                      motivadores todos os dias.</p>
-                    <h6 class="award-date-text">Diferencial 04</h6>
-                  </div>
-                </div>
-              </div>
-              <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b257" class="service-straight-line">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================================================
-     09. DUVIDAS FREQUENTES (FAQ)
+     08. DUVIDAS FREQUENTES (FAQ)
      ======================================================== -->
     <section class="section">
       <div class="w-layout-blockcontainer container w-container">
@@ -4112,6 +4055,134 @@
     </section>
 
     <!-- ========================================================
+     09. DIFERENCIAIS DA ALVO02FIT
+     ======================================================== -->
+    <section class="section">
+      <div class="w-layout-blockcontainer container w-container">
+        <div class="award-block">
+          <div class="award-title-wrap">
+            <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b209" class="heading-title-wrap">
+              <h2 class="heading-title">Diferenciais Alvo02Fit</h2>
+            </div>
+            <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b20c" class="pragraph-small-wrap award">
+              <p class="paragraph-normal-1">Nossa dedica&ccedil;&atilde;o a treinos de alto n&iacute;vel, estrutura
+                moderna e foco na evolu&ccedil;&atilde;o de cada aluno nos tornam refer&ecirc;ncia na regi&atilde;o.</p>
+            </div>
+          </div>
+          <div class="award-card-block">
+            <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b210" class="award-mid-block">
+              <p class="recipient-name-text">Reconhecimento</p>
+              <p class="recipient-name-text">Excel&ecirc;ncia Fitness</p>
+              <p class="recipient-name-text">Destaque</p>
+            </div>
+            <div class="award-single-card-block">
+              <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b218" class="service-straight-line">
+              </div>
+              <div class="award-desktop-card-wrapper">
+                <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b21a" class="award-single-card-wrap">
+                  <div class="award-ab-bg-color-wrap">
+                    <div class="award-ab-bg-color">
+                    </div>
+                  </div>
+                  <div class="award-content-padding">
+                    <div class="award-content-wrap">
+                      <div id="w-node-a5da0019-8b20-3697-39e0-853d3511b21f-3511b205" class="award-single-left-card">
+                        <div class="award-logo-wrap">
+                          <img loading="lazy"
+                            src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69d0e9c167074bbb54a699fd_Group%20143.svg"
+                            alt="" class="award-logo" />
+                        </div>
+                        <h3 class="award-medium-text">Atendimento Pr&oacute;ximo &amp; Familiar</h3>
+                      </div>
+                      <p class="paragraph-small white">Aten&ccedil;&atilde;o dedicada para iniciantes e alunos de todas
+                        as idades.</p>
+                      <h4 class="award-date-text">Diferencial 01</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b228" class="service-straight-line">
+              </div>
+              <div class="award-card-wrapper">
+                <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b22a" class="award-single-card-wrap">
+                  <div class="award-ab-bg-color-wrap">
+                    <div class="award-ab-bg-color">
+                    </div>
+                  </div>
+                  <div class="award-content-padding">
+                    <div class="award-content-wrap">
+                      <div class="award-single-left-card">
+                        <div class="award-logo-wrap">
+                          <img loading="lazy"
+                            src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69d0e9c17556a03a91eb13c3_Group%20144.svg"
+                            alt="" class="award-logo" />
+                        </div>
+                        <h5 class="award-medium-text">Estrutura Completa</h5>
+                      </div>
+                      <p class="paragraph-small white">Ambiente climatizado, equipamentos modernos e espa&ccedil;o amplo
+                        para o seu treino render mais.</p>
+                      <h6 class="award-date-text">Diferencial 02</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b238" class="service-straight-line">
+              </div>
+              <div class="award-card-wrapper">
+                <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b23a" class="award-single-card-wrap">
+                  <div class="award-ab-bg-color-wrap">
+                    <div class="award-ab-bg-color">
+                    </div>
+                  </div>
+                  <div class="award-content-padding">
+                    <div class="award-content-wrap">
+                      <div class="award-single-left-card">
+                        <div class="award-logo-wrap">
+                          <img loading="lazy"
+                            src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69d0e9c1188e1df85c38c1bf_Group%20145.svg"
+                            alt="" class="award-logo" />
+                        </div>
+                        <h5 class="award-medium-text">Excel&ecirc;ncia em Atendimento</h5>
+                      </div>
+                      <p class="paragraph-small white">Alto &iacute;ndice de aprova&ccedil;&atilde;o dos alunos
+                        atrav&eacute;s de um acompanhamento pr&oacute;ximo e atencioso.</p>
+                      <h6 class="award-date-text">Diferencial 03</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b248" class="service-straight-line">
+              </div>
+              <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b249" class="award-single-card-wrap">
+                <div class="award-ab-bg-color-wrap">
+                  <div class="award-ab-bg-color">
+                  </div>
+                </div>
+                <div class="award-content-padding">
+                  <div class="award-content-wrap">
+                    <div class="award-single-left-card">
+                      <div class="award-logo-wrap">
+                        <img loading="lazy"
+                          src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69d0e9c1ae00dda769d8642f_Group%20146.svg"
+                          alt="" class="award-logo" />
+                      </div>
+                      <h5 class="award-medium-text">Profissionais Qualificados</h5>
+                    </div>
+                    <p class="paragraph-small white">Professores capacitados garantindo treinos seguros, eficientes e
+                      motivadores todos os dias.</p>
+                    <h6 class="award-date-text">Diferencial 04</h6>
+                  </div>
+                </div>
+              </div>
+              <div data-w-id="a5da0019-8b20-3697-39e0-853d3511b257" class="service-straight-line">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
      10. AVALIACOES DOS ALUNOS
      ======================================================== -->
     <section class="section">
@@ -4220,7 +4291,7 @@
       </div>
     </section>
 
-        <!-- ========================================================
+    <!-- ========================================================
      11. LOCALIZACAO & REDES SOCIAIS
      ======================================================== -->
     <section id="localizacao" class="section" style="scroll-margin-top: 60px;">
