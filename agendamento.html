@@ -1033,6 +1033,57 @@
         padding: 4px 10px;
       }
     }
+
+    /* Rodapé idêntico ao site oficial (index.html) */
+    #contato.footer {
+      background-color: rgb(15, 5, 3);
+    }
+
+    #contato.footer .container {
+      max-width: 1350px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    .footer-logo-link {
+      display: inline-flex !important;
+      align-items: center !important;
+    }
+
+    .footer-logo-link .footer-logo-image {
+      width: auto !important;
+      max-width: clamp(190px, 18vw, 260px) !important;
+      height: auto !important;
+      max-height: clamp(58px, 7vw, 82px) !important;
+      object-fit: contain !important;
+      display: block !important;
+      transition: transform 0.3s ease !important;
+    }
+
+    .footer-logo-link:hover .footer-logo-image {
+      transform: scale(1.03);
+    }
+
+    .footer-heading {
+      font-family: var(--_font-family---primary-font, 'Anton', sans-serif);
+      color: var(--_color---white, #ffffff);
+      font-weight: 400;
+    }
+
+    .footer-link .nav-text {
+      transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+      will-change: transform;
+    }
+
+    .footer-link:hover .nav-text {
+      transform: translate3d(0, -100%, 0);
+    }
+
+    @media screen and (max-width: 991px) {
+      .footer-heading {
+        font-size: 18px;
+      }
+    }
   </style>
 </head>
 
@@ -1435,20 +1486,136 @@
     </div>
   </section>
 
-  <!-- Rodapé Oficial Alvo02Fit -->
-  <footer class="footer" style="padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.08); background: #0b0302;">
-    <div class="container w-container" style="text-align: center;">
-      <a href="./index.html">
-        <img src="./images/alvo02fit-logo.png" alt="Alvo02Fit" style="height: 44px; margin-bottom: 16px;" />
-      </a>
-      <p style="color: var(--text-muted); font-size: 13px; margin: 0 0 10px 0;">
-        Av. Sapopemba, 12.847 &bull; Jardim Adutora / São Mateus &bull; São Paulo - SP
-      </p>
-      <p style="color: rgba(255,255,255,0.4); font-size: 12px; margin: 0;">
-        &copy; 2026 Alvo02Fit. Todos os direitos reservados.
-      </p>
+  <!-- ========================================================
+       RODAPE & CONTATO (IGUAL AO SITE OFICIAL)
+       ======================================================== -->
+  <section id="contato" class="footer">
+    <div class="w-layout-blockcontainer container w-container">
+      <div class="footer-block">
+        <div class="footer-inner">
+          <div class="footer-left-block">
+            <a href="./index.html" class="footer-logo-link w-inline-block">
+              <img loading="lazy" src="./images/alvo02fit-logo.png" alt="Alvo02Fit - Academia" class="footer-logo-image" />
+            </a>
+            <div class="social-media-link-holder">
+              <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="social-media-link-cover w-inline-block" aria-label="Facebook">
+                <img loading="lazy"
+                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ccc0dd75cc2d406089689a_SVG.svg"
+                  alt="" class="social-link" />
+              </a>
+              <a href="https://www.instagram.com/alvo02fit/" target="_blank" rel="noopener noreferrer"
+                class="social-media-link-cover w-inline-block" aria-label="Instagram Alvo02Fit">
+                <img loading="lazy"
+                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ccc0ddd196de209851550d_SVG%20(1).svg"
+                  alt="" class="social-link" />
+              </a>
+              <a href="https://x.com/" target="_blank" rel="noopener noreferrer" class="social-media-link-cover w-inline-block" aria-label="X">
+                <img loading="lazy"
+                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ccc0dd9812da8a08df0ffc_twitter%20(1)%201.svg"
+                  alt="" class="social-link" />
+              </a>
+              <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" class="social-media-link-cover w-inline-block" aria-label="LinkedIn">
+                <img loading="lazy"
+                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ccc0dd57e933df6e32d766_linkedin%201.svg"
+                  alt="" class="social-link" />
+              </a>
+            </div>
+          </div>
+          <div class="footer-grid">
+            <div class="footer-grid-content">
+              <h6 class="footer-heading">Navega&ccedil;&atilde;o</h6>
+              <div class="footer-link-holder">
+                <a href="./index.html#hero" class="footer-link w-inline-block">
+                  <div class="footer-text-wrap">
+                    <div class="nav-text">In&iacute;cio</div>
+                    <div class="nav-text text-2 color">In&iacute;cio</div>
+                  </div>
+                </a>
+                <a href="./index.html#sobre" class="footer-link w-inline-block">
+                  <div class="footer-text-wrap">
+                    <div class="nav-text">Sobre</div>
+                    <div class="nav-text text-2 color">Sobre</div>
+                  </div>
+                </a>
+                <a href="./index.html#modalidades" class="footer-link w-inline-block">
+                  <div class="footer-text-wrap">
+                    <div class="nav-text">Modalidades</div>
+                    <div class="nav-text text-2 color">Modalidades</div>
+                  </div>
+                </a>
+                <a href="./index.html#localizacao" class="footer-link w-inline-block">
+                  <div class="footer-text-wrap">
+                    <div class="nav-text">Localiza&ccedil;&atilde;o</div>
+                    <div class="nav-text text-2 color">Localiza&ccedil;&atilde;o</div>
+                  </div>
+                </a>
+                <a href="#contato" class="footer-link w-inline-block">
+                  <div class="footer-text-wrap">
+                    <div class="nav-text">Contato</div>
+                    <div class="nav-text text-2 color">Contato</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="footer-grid-content">
+              <h6 class="footer-heading">Institucional</h6>
+              <div class="footer-link-holder">
+                <a href="./index.html#planos" class="footer-link w-inline-block">
+                  <div class="footer-text-wrap">
+                    <div class="nav-text">Planos</div>
+                    <div class="nav-text text-2 color">Planos</div>
+                  </div>
+                </a>
+                <a href="./index.html#avaliacoes" class="footer-link w-inline-block">
+                  <div class="footer-text-wrap">
+                    <div class="nav-text">Avalia&ccedil;&otilde;es</div>
+                    <div class="nav-text text-2 color">Avalia&ccedil;&otilde;es</div>
+                  </div>
+                </a>
+                <a href="./index.html#estrutura" class="footer-link w-inline-block">
+                  <div class="footer-text-wrap">
+                    <div class="nav-text">Estrutura</div>
+                    <div class="nav-text text-2 color">Estrutura</div>
+                  </div>
+                </a>
+                <a href="./index.html#faq" class="footer-link w-inline-block">
+                  <div class="footer-text-wrap">
+                    <div class="nav-text">D&uacute;vidas</div>
+                    <div class="nav-text text-2 color">D&uacute;vidas</div>
+                  </div>
+                </a>
+                <a href="./index.html#planos" class="footer-link w-inline-block">
+                  <div class="footer-text-wrap">
+                    <div class="nav-text">Matr&iacute;cula</div>
+                    <div class="nav-text text-2 color">Matr&iacute;cula</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="footer-grid-content">
+              <h6 class="footer-heading">Atendimento</h6>
+              <div class="footer-link-holder">
+                <a href="mailto:contato@alvo02fit.com.br" class="footercontact-text">contato@alvo02fit.com.br</a>
+                <a href="https://wa.me/5511930025829?text=Ol%C3%A1,%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20Alvo02Fit"
+                  target="_blank" rel="noopener noreferrer" class="footercontact-text">(11) 93002-5829</a>
+                <a href="https://www.google.com/maps/place/Alvo+02+Fit/@-23.5937989,-46.4947475,17z/data=!3m1!4b1!4m6!3m5!1s0x94ce68786df3ffff:0x12d8fd6018b1be8!8m2!3d-23.5937989!4d-46.4947475!16s%2Fg%2F11y1y99v6b"
+                  target="_blank" rel="noopener noreferrer" class="footercontact-text content">Av. Sapopemba, 12.847 - S&atilde;o Mateus, SP</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom-content">
+          <div class="footer-big-image-wrap">
+            <img loading="lazy" src="./images/alvo02fit-footer.svg" alt="" class="footer-big-image" />
+          </div>
+          <div class="copyright-text-wrap">
+            <div class="copyright-text">&copy; 2026 Alvo02Fit. Todos
+              os direitos reservados. Academia em S&atilde;o Mateus - SP.</div>
+          </div>
+        </div>
+      </div>
     </div>
-  </footer>
+  </section>
 
   <!-- Modal de Confirmação e Sucesso -->
   <div class="success-modal-overlay" id="success-modal">
