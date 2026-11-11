@@ -5424,8 +5424,8 @@
         var startTime = performance.now();
         function step(now) {
           var progress = Math.min(1, (now - startTime) / duration);
-          // easeOutQuart: resposta visual imediata logo no primeiro frame
-          var eased = 1 - Math.pow(1 - progress, 4);
+          // easeOutCubic: resposta imediata com desaceleracao suave e natural
+          var eased = 1 - Math.pow(1 - progress, 3);
           jumpTo(Math.round(startY + delta * eased));
           if (progress < 1) {
             activeRaf = requestAnimationFrame(step);
@@ -5485,7 +5485,7 @@
         }
 
         var dist = Math.abs(targetY - scrollY);
-        var duration = (prefersReduced && prefersReduced.matches) ? 0 : Math.min(380, Math.max(220, 180 + dist * 0.045));
+        var duration = (prefersReduced && prefersReduced.matches) ? 0 : Math.min(820, Math.max(540, 480 + dist * 0.085));
         animateTo(targetY, duration);
       }, false);
     })();
