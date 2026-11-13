@@ -761,53 +761,184 @@
       transform: none !important;
     }
 
-    .section-modalidades .service-title-wrap {
+    .sf-modalidade-card {
       position: relative !important;
-      top: auto !important;
+      width: 100% !important;
+      border-radius: 24px !important;
+      overflow: hidden !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-end !important;
+      border: 1px solid rgba(255, 90, 0, 0.25) !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+      background-color: #0f0503 !important;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease !important;
+      box-sizing: border-box !important;
+    }
+
+    .sf-card-bg-img {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+      z-index: 0 !important;
+    }
+
+    .sf-card-overlay {
+      position: absolute !important;
+      inset: 0 !important;
+      background: linear-gradient(to top, rgba(15, 5, 3, 0.95) 0%, rgba(15, 5, 3, 0.65) 45%, rgba(15, 5, 3, 0.15) 75%, transparent 100%) !important;
+      pointer-events: none !important;
       z-index: 1 !important;
-      background-color: transparent !important;
-      padding-top: 0px !important;
-      padding-bottom: 0px !important;
-      margin-bottom: 35px !important;
     }
 
-    .section-modalidades .service-co-list {
+    .sf-card-content {
       position: relative !important;
-      overflow: visible !important;
+      z-index: 2 !important;
+      display: flex !important;
+      align-items: flex-end !important;
+      justify-content: space-between !important;
+      padding: 24px 20px !important;
+      gap: 12px !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
     }
 
-    .section-modalidades .service-co-list::after {
-      display: none !important;
+    .sf-card-info {
+      display: flex !important;
+      flex-direction: column !important;
+      text-align: left !important;
+      flex: 1 1 auto !important;
+      min-width: 0 !important;
     }
 
-    .section-modalidades .service-co-item {
-      position: relative !important;
-      top: auto !important;
-      z-index: 1 !important;
-      margin-bottom: 20px !important;
+    .sf-card-badge {
+      display: inline-block !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      letter-spacing: 1.2px !important;
+      color: #ff5a00 !important;
+      margin-bottom: 6px !important;
+      text-transform: uppercase !important;
+      font-family: Inter, sans-serif !important;
     }
 
-    .section-modalidades .service-co-item .service-single-card {
-      overflow: visible !important;
+    .sf-card-title {
+      color: #ffffff !important;
+      font-size: 22px !important;
+      font-weight: 800 !important;
+      line-height: 1.15 !important;
+      margin: 0 0 6px 0 !important;
+      font-family: Anton, sans-serif !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.5px !important;
+      word-break: break-word !important;
     }
 
-    .section-modalidades .service-co-item .service-content-block-wrapper {
-      background: linear-gradient(135deg, #1b0a06 0%, #110503 100%) !important;
-      border: 1px solid rgba(255, 90, 0, 0.28) !important;
-      border-radius: 20px !important;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
-      padding: 24px 32px !important;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease !important;
+    .sf-card-desc {
+      color: rgba(255, 255, 255, 0.88) !important;
+      font-size: 13px !important;
+      font-weight: 500 !important;
+      line-height: 1.35 !important;
+      margin: 0 !important;
+      font-family: Inter, sans-serif !important;
     }
 
-    .section-modalidades .service-co-item:hover .service-content-block-wrapper {
-      border-color: rgba(255, 90, 0, 0.65) !important;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 90, 0, 0.2) !important;
-      transform: translateY(-2px) !important;
+    .sf-card-btn {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 46px !important;
+      height: 46px !important;
+      min-width: 46px !important;
+      border-radius: 50% !important;
+      background-color: #ffffff !important;
+      color: #0f0503 !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45) !important;
+      transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease !important;
+      flex-shrink: 0 !important;
+    }
+
+    .sf-card-btn-icon {
+      width: 16px !important;
+      height: 16px !important;
+      display: block !important;
     }
 
     .section-modalidades .service-co-item .service-straight-line {
       display: none !important;
+    }
+
+    /* ========================================================
+       DESKTOP / TABLET (GRID RESPONSIVA, SEM STICKY)
+       ======================================================== */
+    @media screen and (min-width: 768px) {
+      .section-modalidades .service-title-wrap {
+        position: relative !important;
+        top: auto !important;
+        z-index: 1 !important;
+        background-color: transparent !important;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        margin-bottom: 40px !important;
+        text-align: center !important;
+      }
+
+      .section-modalidades .service-co-list {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 20px !important;
+        position: relative !important;
+        overflow: visible !important;
+        padding-bottom: 30px !important;
+      }
+
+      .section-modalidades .service-co-list::after {
+        display: none !important;
+      }
+
+      .section-modalidades .service-co-item {
+        position: relative !important;
+        top: auto !important;
+        z-index: 1 !important;
+        margin-bottom: 0px !important;
+      }
+
+      .sf-modalidade-card {
+        height: 440px !important;
+      }
+
+      .section-modalidades .service-co-item:hover .sf-modalidade-card {
+        transform: translateY(-8px) !important;
+        border-color: rgba(255, 90, 0, 0.65) !important;
+        box-shadow: 0 18px 38px rgba(0, 0, 0, 0.85), 0 0 25px rgba(255, 90, 0, 0.22) !important;
+      }
+
+      .section-modalidades .service-co-item:hover .sf-card-bg-img {
+        transform: scale(1.06) !important;
+      }
+
+      .section-modalidades .service-co-item:hover .sf-card-btn {
+        background-color: #ff5a00 !important;
+        color: #ffffff !important;
+        transform: scale(1.08) !important;
+      }
+
+      .section-modalidades .service-co-item:hover .sf-card-btn-icon path {
+        stroke: #ffffff !important;
+      }
+    }
+
+    @media screen and (max-width: 1050px) and (min-width: 768px) {
+      .section-modalidades .service-co-list {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+      }
+      .sf-modalidade-card {
+        height: 380px !important;
+      }
     }
 
     /* ========================================================
@@ -830,6 +961,7 @@
       }
 
       .section-modalidades .service-co-list {
+        display: block !important;
         position: relative !important;
         overflow: visible !important;
       }
@@ -845,7 +977,10 @@
       .section-modalidades .service-co-item {
         position: -webkit-sticky !important;
         position: sticky !important;
-        margin-bottom: 100px !important;
+        margin-bottom: 90px !important;
+        max-width: 420px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
       }
 
       .section-modalidades .service-co-item:nth-child(1) {
@@ -869,15 +1004,24 @@
         margin-bottom: 0px !important;
       }
 
-      .section-modalidades .service-co-item .service-content-block-wrapper {
-        padding: 18px 20px !important;
-        border-radius: 16px !important;
+      .sf-modalidade-card {
+        height: 350px !important;
+        border-radius: 20px !important;
         box-shadow: 0 -12px 28px rgba(0, 0, 0, 0.85), 0 8px 20px rgba(0, 0, 0, 0.5) !important;
-        transform: none !important;
       }
 
-      .section-modalidades .service-co-item:hover .service-content-block-wrapper {
-        transform: none !important;
+      .sf-card-content {
+        padding: 20px 18px !important;
+      }
+
+      .sf-card-title {
+        font-size: 20px !important;
+      }
+
+      .sf-card-btn {
+        width: 42px !important;
+        height: 42px !important;
+        min-width: 42px !important;
       }
     }
 
@@ -2158,6 +2302,329 @@
         height: 42px !important;
       }
     }
+
+    /* ========================================================
+       MODAL DE ESCOLHA: "COMEÇAR AGORA" (WHATSAPP OU AGENDAMENTO)
+       ======================================================== */
+    body.alvo-modal-locked {
+      overflow: hidden !important;
+      touch-action: none !important;
+    }
+
+    .alvo-modal {
+      position: fixed !important;
+      inset: 0 !important;
+      z-index: 999999 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 16px !important;
+      box-sizing: border-box !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      visibility: hidden !important;
+      transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  visibility 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    .alvo-modal.is-open {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      visibility: visible !important;
+    }
+
+    .alvo-modal-backdrop {
+      position: absolute !important;
+      inset: 0 !important;
+      background: rgba(6, 4, 3, 0.84) !important;
+      -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+      backdrop-filter: blur(16px) saturate(160%) !important;
+      cursor: pointer !important;
+    }
+
+    .alvo-modal-container {
+      position: relative !important;
+      z-index: 2 !important;
+      width: 100% !important;
+      max-width: 520px !important;
+      box-sizing: border-box !important;
+    }
+
+    .alvo-modal-card {
+      position: relative !important;
+      background: linear-gradient(165deg, #190f0c 0%, #0d0705 100%) !important;
+      border: 1px solid rgba(255, 90, 0, 0.32) !important;
+      border-radius: 24px !important;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95),
+                  0 0 50px rgba(255, 90, 0, 0.14),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+      padding: 34px 30px 26px !important;
+      box-sizing: border-box !important;
+      transform: scale(0.92) translateY(18px) !important;
+      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.28s ease !important;
+    }
+
+    .alvo-modal.is-open .alvo-modal-card {
+      transform: scale(1) translateY(0) !important;
+    }
+
+    .alvo-modal-close {
+      position: absolute !important;
+      top: 18px !important;
+      right: 18px !important;
+      width: 38px !important;
+      height: 38px !important;
+      border-radius: 50% !important;
+      background: rgba(255, 255, 255, 0.06) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      color: rgba(255, 255, 255, 0.8) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: pointer !important;
+      padding: 0 !important;
+      transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
+    }
+
+    .alvo-modal-close:hover {
+      background: rgba(255, 90, 0, 0.22) !important;
+      border-color: rgba(255, 90, 0, 0.55) !important;
+      color: #ff5a00 !important;
+      transform: rotate(90deg) !important;
+    }
+
+    .alvo-modal-header {
+      margin-bottom: 22px !important;
+      text-align: left !important;
+    }
+
+    .alvo-modal-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 7px !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.8px !important;
+      color: #ff5a00 !important;
+      background: rgba(255, 90, 0, 0.12) !important;
+      border: 1px solid rgba(255, 90, 0, 0.28) !important;
+      border-radius: 100px !important;
+      padding: 4px 12px !important;
+      margin-bottom: 12px !important;
+    }
+
+    .alvo-modal-badge-dot {
+      width: 6px !important;
+      height: 6px !important;
+      border-radius: 50% !important;
+      background: #ff5a00 !important;
+      box-shadow: 0 0 8px #ff5a00 !important;
+    }
+
+    .alvo-modal-title {
+      font-family: 'Anton', sans-serif !important;
+      font-size: clamp(24px, 5.5vw, 32px) !important;
+      line-height: 1.1 !important;
+      letter-spacing: 0.5px !important;
+      color: #ffffff !important;
+      margin: 0 0 8px 0 !important;
+      text-transform: uppercase !important;
+    }
+
+    .alvo-modal-subtitle {
+      font-size: 13.5px !important;
+      line-height: 1.45 !important;
+      color: rgba(255, 255, 255, 0.68) !important;
+      margin: 0 !important;
+    }
+
+    .alvo-modal-options {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 14px !important;
+      margin-bottom: 20px !important;
+    }
+
+    .alvo-modal-option-card {
+      display: flex !important;
+      align-items: center !important;
+      gap: 16px !important;
+      padding: 18px 20px !important;
+      border-radius: 18px !important;
+      background: rgba(255, 255, 255, 0.035) !important;
+      border: 1px solid rgba(255, 255, 255, 0.09) !important;
+      text-decoration: none !important;
+      color: inherit !important;
+      box-sizing: border-box !important;
+      position: relative !important;
+      overflow: hidden !important;
+      cursor: pointer !important;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.25s ease,
+                  background 0.25s ease,
+                  box-shadow 0.25s ease !important;
+    }
+
+    .alvo-modal-option-card:hover {
+      transform: translateY(-2px) !important;
+    }
+
+    /* Card WhatsApp */
+    .alvo-modal-option-card.option-whatsapp:hover {
+      background: linear-gradient(135deg, rgba(37, 211, 102, 0.12) 0%, rgba(37, 211, 102, 0.03) 100%) !important;
+      border-color: rgba(37, 211, 102, 0.55) !important;
+      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.18), inset 0 0 20px rgba(37, 211, 102, 0.06) !important;
+    }
+
+    .alvo-option-icon-box.whatsapp-box {
+      width: 52px !important;
+      height: 52px !important;
+      border-radius: 14px !important;
+      background: rgba(37, 211, 102, 0.15) !important;
+      border: 1px solid rgba(37, 211, 102, 0.32) !important;
+      color: #25D366 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-shrink: 0 !important;
+      transition: transform 0.25s ease, background 0.25s ease !important;
+    }
+
+    .alvo-modal-option-card.option-whatsapp:hover .alvo-option-icon-box.whatsapp-box {
+      transform: scale(1.06) !important;
+      background: rgba(37, 211, 102, 0.22) !important;
+    }
+
+    .alvo-option-tag.tag-whatsapp {
+      font-size: 10px !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.8px !important;
+      color: #25D366 !important;
+      margin-bottom: 2px !important;
+    }
+
+    /* Card Agendamento */
+    .alvo-modal-option-card.option-agendamento:hover {
+      background: linear-gradient(135deg, rgba(255, 90, 0, 0.14) 0%, rgba(255, 90, 0, 0.03) 100%) !important;
+      border-color: rgba(255, 90, 0, 0.6) !important;
+      box-shadow: 0 12px 30px rgba(255, 90, 0, 0.22), inset 0 0 20px rgba(255, 90, 0, 0.06) !important;
+    }
+
+    .alvo-option-icon-box.agendamento-box {
+      width: 52px !important;
+      height: 52px !important;
+      border-radius: 14px !important;
+      background: rgba(255, 90, 0, 0.15) !important;
+      border: 1px solid rgba(255, 90, 0, 0.35) !important;
+      color: #ff5a00 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-shrink: 0 !important;
+      transition: transform 0.25s ease, background 0.25s ease !important;
+    }
+
+    .alvo-modal-option-card.option-agendamento:hover .alvo-option-icon-box.agendamento-box {
+      transform: scale(1.06) !important;
+      background: rgba(255, 90, 0, 0.24) !important;
+    }
+
+    .alvo-option-tag.tag-agendamento {
+      font-size: 10px !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.8px !important;
+      color: #ff7e36 !important;
+      margin-bottom: 2px !important;
+    }
+
+    .alvo-option-info {
+      flex: 1 !important;
+      min-width: 0 !important;
+      text-align: left !important;
+    }
+
+    .alvo-option-title {
+      font-family: 'Anton', sans-serif !important;
+      font-size: 19px !important;
+      letter-spacing: 0.4px !important;
+      color: #ffffff !important;
+      margin: 0 0 3px 0 !important;
+      line-height: 1.2 !important;
+      text-transform: uppercase !important;
+    }
+
+    .alvo-option-desc {
+      font-size: 12.5px !important;
+      line-height: 1.38 !important;
+      color: rgba(255, 255, 255, 0.65) !important;
+      margin: 0 !important;
+    }
+
+    .alvo-option-arrow {
+      width: 36px !important;
+      height: 36px !important;
+      border-radius: 50% !important;
+      background: rgba(255, 255, 255, 0.05) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      color: rgba(255, 255, 255, 0.8) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-shrink: 0 !important;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
+    }
+
+    .alvo-modal-option-card:hover .alvo-option-arrow {
+      transform: translateX(3px) !important;
+      background: #ffffff !important;
+      border-color: #ffffff !important;
+      color: #0d0705 !important;
+    }
+
+    .alvo-modal-footer {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 7px !important;
+      font-size: 11.5px !important;
+      color: rgba(255, 255, 255, 0.42) !important;
+      text-align: center !important;
+    }
+
+    .alvo-modal-footer svg {
+      opacity: 0.7 !important;
+    }
+
+    @media screen and (max-width: 480px) {
+      .alvo-modal-card {
+        padding: 24px 18px 20px !important;
+        border-radius: 20px !important;
+      }
+      .alvo-modal-option-card {
+        padding: 14px 14px !important;
+        gap: 12px !important;
+      }
+      .alvo-option-icon-box.whatsapp-box,
+      .alvo-option-icon-box.agendamento-box {
+        width: 44px !important;
+        height: 44px !important;
+      }
+      .alvo-option-title {
+        font-size: 17px !important;
+      }
+      .alvo-option-desc {
+        font-size: 11.5px !important;
+      }
+      .alvo-option-arrow {
+        width: 30px !important;
+        height: 30px !important;
+      }
+    }
+
   </style>
   <!-- Estilo Hero Editorial High-Impact Alvo02Fit -->
   <style id="alvo-hero-editorial-style">
@@ -3140,235 +3607,82 @@
             <div class="service-co-list-wrapper w-dyn-list">
               <div role="list" class="service-co-list w-dyn-items">
                 <div role="listitem" class="service-co-item w-dyn-item">
-                  <a data-w-id="552bcb16-7636-85d4-b4f8-9766a27f655f" style="opacity:0"
-                    href="agendamento.html?modalidade=Muscula%C3%A7%C3%A3o" class="service-single-card-wrap w-inline-block" title="Agendar aula experimental de Musculação">
-                    <div class="service-single-card">
-                      <div style="background-color:rgb(15,5,3)" class="service-content-block-wrapper">
-                        <div class="service-content-block-wrap">
-                          <div class="service-content-block _02">
-                            <div class="service-content-left">
-                              <div class="service-nbr-text-wrap">
-                                <div class="service-nbr-text">01</div>
-                              </div>
-                              <div class="service-card-text-wrap">
-                                <h3 class="service-card-text">Muscula&ccedil;&atilde;o</h3>
-                              </div>
-                            </div>
-                            <div id="w-node-df0932fc-7db4-eac7-0e5a-eb2799455dbc-8f6f26de"
-                              class="service-content-right">
-                              <div class="service-small-card-wrap _02">
-                                <div class="service-small-card">
-                                  <p class="service-small-card-text">Hipertrofia</p>
-                                </div>
-                                <div class="service-small-card">
-                                  <p class="service-small-card-text">Sa&uacute;de &amp; For&ccedil;a</p>
-                                </div>
-                              </div>
-                              <div id="w-node-_552bcb16-7636-85d4-b4f8-9766a27f6570-8f6f26de"
-                                class="service-arrow-wrap">
-                                <img
-                                  src="https://cdn.prod.website-files.com/69d2008a1b90e62c61513a74/69d21b95ed4081cf9bd0da47_Arrow%20-%20Up.svg"
-                                  loading="lazy" alt="" class="service-arrow" />
-                              </div>
-                            </div>
-                          </div>
-                          <div class="service-content-block-mob">
-                            <div class="service-nbr-text-wrap">
-                              <div class="service-nbr-text">01</div>
-                            </div>
-                            <div class="service-card-text-wrap">
-                              <h3 class="service-card-text">Muscula&ccedil;&atilde;o</h3>
-                            </div>
-                            <div class="service-small-card-wrap _02">
-                              <div class="service-small-card">
-                                <p class="service-small-card-text">Hipertrofia</p>
-                              </div>
-                              <div class="service-small-card">
-                                <p class="paragraph-small">Sa&uacute;de &amp; For&ccedil;a</p>
-                              </div>
-                            </div>
-                          </div>
+                  <a href="agendamento.html?modalidade=Muscula%C3%A7%C3%A3o" class="service-single-card-wrap w-inline-block" title="Agendar aula experimental de Musculação">
+                    <div class="service-single-card sf-modalidade-card">
+                      <img src="./images/modalidade-musculacao.jpg" alt="Musculação - Academia Alvo02Fit" class="sf-card-bg-img" loading="lazy" />
+                      <div class="sf-card-overlay"></div>
+                      <div class="sf-card-content">
+                        <div class="sf-card-info">
+                          <span class="sf-card-badge">01 • MODALIDADE</span>
+                          <h3 class="sf-card-title">Musculação</h3>
+                          <p class="sf-card-desc">Hipertrofia • Saúde &amp; Força</p>
+                        </div>
+                        <div class="sf-card-btn" aria-label="Agendar">
+                          <svg viewBox="0 0 16 14" fill="none" class="sf-card-btn-icon" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 1L14 7M14 7L8 13M14 7H1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
                         </div>
                       </div>
-                      <div style="opacity:0;background-color:rgba(0,0,0,0)" class="service-content-ab-wrap">
-                      </div>
-                    </div>
-                    <div style="opacity:1" class="service-straight-line">
                     </div>
                   </a>
                 </div>
                 <div role="listitem" class="service-co-item w-dyn-item">
-                  <a data-w-id="552bcb16-7636-85d4-b4f8-9766a27f655f" style="opacity:0" href="agendamento.html?modalidade=Treino%20Funcional"
-                    class="service-single-card-wrap w-inline-block" title="Agendar aula experimental de Treino Funcional">
-                    <div class="service-single-card">
-                      <div style="background-color:rgb(15,5,3)" class="service-content-block-wrapper">
-                        <div class="service-content-block-wrap">
-                          <div class="service-content-block _02">
-                            <div class="service-content-left">
-                              <div class="service-nbr-text-wrap">
-                                <div class="service-nbr-text">02</div>
-                              </div>
-                              <div class="service-card-text-wrap">
-                                <h3 class="service-card-text">Treino Funcional</h3>
-                              </div>
-                            </div>
-                            <div id="w-node-df0932fc-7db4-eac7-0e5a-eb2799455dbc-8f6f26de"
-                              class="service-content-right">
-                              <div class="service-small-card-wrap _02">
-                                <div class="service-small-card">
-                                  <p class="service-small-card-text">Condicionamento</p>
-                                </div>
-                                <div class="service-small-card">
-                                  <p class="service-small-card-text">Agilidade</p>
-                                </div>
-                              </div>
-                              <div id="w-node-_552bcb16-7636-85d4-b4f8-9766a27f6570-8f6f26de"
-                                class="service-arrow-wrap">
-                                <img
-                                  src="https://cdn.prod.website-files.com/69d2008a1b90e62c61513a74/69d21b95ed4081cf9bd0da47_Arrow%20-%20Up.svg"
-                                  loading="lazy" alt="" class="service-arrow" />
-                              </div>
-                            </div>
-                          </div>
-                          <div class="service-content-block-mob">
-                            <div class="service-nbr-text-wrap">
-                              <div class="service-nbr-text">02</div>
-                            </div>
-                            <div class="service-card-text-wrap">
-                              <h3 class="service-card-text">Treino Funcional</h3>
-                            </div>
-                            <div class="service-small-card-wrap _02">
-                              <div class="service-small-card">
-                                <p class="service-small-card-text">Condicionamento</p>
-                              </div>
-                              <div class="service-small-card">
-                                <p class="paragraph-small">Agilidade &amp; Foco</p>
-                              </div>
-                            </div>
-                          </div>
+                  <a href="agendamento.html?modalidade=Treino%20Funcional" class="service-single-card-wrap w-inline-block" title="Agendar aula experimental de Treino Funcional">
+                    <div class="service-single-card sf-modalidade-card">
+                      <img src="./images/modalidade-funcional.jpg" alt="Treino Funcional - Academia Alvo02Fit" class="sf-card-bg-img" loading="lazy" />
+                      <div class="sf-card-overlay"></div>
+                      <div class="sf-card-content">
+                        <div class="sf-card-info">
+                          <span class="sf-card-badge">02 • MODALIDADE</span>
+                          <h3 class="sf-card-title">Treino Funcional</h3>
+                          <p class="sf-card-desc">Condicionamento • Agilidade</p>
+                        </div>
+                        <div class="sf-card-btn" aria-label="Agendar">
+                          <svg viewBox="0 0 16 14" fill="none" class="sf-card-btn-icon" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 1L14 7M14 7L8 13M14 7H1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
                         </div>
                       </div>
-                      <div style="opacity:0;background-color:rgba(0,0,0,0)" class="service-content-ab-wrap">
-                      </div>
-                    </div>
-                    <div style="opacity:1" class="service-straight-line">
                     </div>
                   </a>
                 </div>
                 <div role="listitem" class="service-co-item w-dyn-item">
-                  <a data-w-id="552bcb16-7636-85d4-b4f8-9766a27f655f" style="opacity:0"
-                    href="agendamento.html?modalidade=Pilates"
-                    class="service-single-card-wrap w-inline-block" title="Agendar aula experimental de Pilates">
-                    <div class="service-single-card">
-                      <div style="background-color:rgb(15,5,3)" class="service-content-block-wrapper">
-                        <div class="service-content-block-wrap">
-                          <div class="service-content-block _02">
-                            <div class="service-content-left">
-                              <div class="service-nbr-text-wrap">
-                                <div class="service-nbr-text">03</div>
-                              </div>
-                              <div class="service-card-text-wrap">
-                                <h3 class="service-card-text">Pilates</h3>
-                              </div>
-                            </div>
-                            <div id="w-node-df0932fc-7db4-eac7-0e5a-eb2799455dbc-8f6f26de"
-                              class="service-content-right">
-                              <div class="service-small-card-wrap _02">
-                                <div class="service-small-card">
-                                  <p class="service-small-card-text">Postura &amp; Core</p>
-                                </div>
-                                <div class="service-small-card">
-                                  <p class="service-small-card-text">Flexibilidade</p>
-                                </div>
-                              </div>
-                              <div id="w-node-_552bcb16-7636-85d4-b4f8-9766a27f6570-8f6f26de"
-                                class="service-arrow-wrap">
-                                <img
-                                  src="https://cdn.prod.website-files.com/69d2008a1b90e62c61513a74/69d21b95ed4081cf9bd0da47_Arrow%20-%20Up.svg"
-                                  loading="lazy" alt="" class="service-arrow" />
-                              </div>
-                            </div>
-                          </div>
-                          <div class="service-content-block-mob">
-                            <div class="service-nbr-text-wrap">
-                              <div class="service-nbr-text">03</div>
-                            </div>
-                            <div class="service-card-text-wrap">
-                              <h3 class="service-card-text">Pilates</h3>
-                            </div>
-                            <div class="service-small-card-wrap _02">
-                              <div class="service-small-card">
-                                <p class="service-small-card-text">Postura &amp; Core</p>
-                              </div>
-                              <div class="service-small-card">
-                                <p class="paragraph-small">Flexibilidade &amp; Postura</p>
-                              </div>
-                            </div>
-                          </div>
+                  <a href="agendamento.html?modalidade=Pilates" class="service-single-card-wrap w-inline-block" title="Agendar aula experimental de Pilates">
+                    <div class="service-single-card sf-modalidade-card">
+                      <img src="./images/modalidade-pilates.jpg" alt="Pilates - Academia Alvo02Fit" class="sf-card-bg-img" loading="lazy" />
+                      <div class="sf-card-overlay"></div>
+                      <div class="sf-card-content">
+                        <div class="sf-card-info">
+                          <span class="sf-card-badge">03 • MODALIDADE</span>
+                          <h3 class="sf-card-title">Pilates</h3>
+                          <p class="sf-card-desc">Postura &amp; Core • Flexibilidade</p>
+                        </div>
+                        <div class="sf-card-btn" aria-label="Agendar">
+                          <svg viewBox="0 0 16 14" fill="none" class="sf-card-btn-icon" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 1L14 7M14 7L8 13M14 7H1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
                         </div>
                       </div>
-                      <div style="opacity:0;background-color:rgba(0,0,0,0)" class="service-content-ab-wrap">
-                      </div>
-                    </div>
-                    <div style="opacity:1" class="service-straight-line">
                     </div>
                   </a>
                 </div>
                 <div role="listitem" class="service-co-item w-dyn-item">
-                  <a data-w-id="552bcb16-7636-85d4-b4f8-9766a27f655f" style="opacity:0"
-                    href="agendamento.html?modalidade=FitDance" class="service-single-card-wrap w-inline-block" title="Agendar aula experimental de FitDance, Ritbox e Zumba">
-                    <div class="service-single-card">
-                      <div style="background-color:rgb(15,5,3)" class="service-content-block-wrapper">
-                        <div class="service-content-block-wrap">
-                          <div class="service-content-block _02">
-                            <div class="service-content-left">
-                              <div class="service-nbr-text-wrap">
-                                <div class="service-nbr-text">04</div>
-                              </div>
-                              <div class="service-card-text-wrap">
-                                <h3 class="service-card-text">FitDance, Ritbox &amp; Zumba</h3>
-                              </div>
-                            </div>
-                            <div id="w-node-df0932fc-7db4-eac7-0e5a-eb2799455dbc-8f6f26de"
-                              class="service-content-right">
-                              <div class="service-small-card-wrap _02">
-                                <div class="service-small-card">
-                                  <p class="service-small-card-text">Queima Cal&oacute;rica</p>
-                                </div>
-                                <div class="service-small-card">
-                                  <p class="service-small-card-text">Ritmo &amp; Energia</p>
-                                </div>
-                              </div>
-                              <div id="w-node-_552bcb16-7636-85d4-b4f8-9766a27f6570-8f6f26de"
-                                class="service-arrow-wrap">
-                                <img
-                                  src="https://cdn.prod.website-files.com/69d2008a1b90e62c61513a74/69d21b95ed4081cf9bd0da47_Arrow%20-%20Up.svg"
-                                  loading="lazy" alt="" class="service-arrow" />
-                              </div>
-                            </div>
-                          </div>
-                          <div class="service-content-block-mob">
-                            <div class="service-nbr-text-wrap">
-                              <div class="service-nbr-text">04</div>
-                            </div>
-                            <div class="service-card-text-wrap">
-                              <h3 class="service-card-text">FitDance, Ritbox &amp; Zumba</h3>
-                            </div>
-                            <div class="service-small-card-wrap _02">
-                              <div class="service-small-card">
-                                <p class="service-small-card-text">Queima Cal&oacute;rica</p>
-                              </div>
-                              <div class="service-small-card">
-                                <p class="paragraph-small">Ritmo &amp; Energia</p>
-                              </div>
-                            </div>
-                          </div>
+                  <a href="agendamento.html?modalidade=FitDance" class="service-single-card-wrap w-inline-block" title="Agendar aula experimental de FitDance, Ritbox e Zumba">
+                    <div class="service-single-card sf-modalidade-card">
+                      <img src="./images/modalidade-fitdance.jpg" alt="FitDance, Ritbox e Zumba - Academia Alvo02Fit" class="sf-card-bg-img" loading="lazy" />
+                      <div class="sf-card-overlay"></div>
+                      <div class="sf-card-content">
+                        <div class="sf-card-info">
+                          <span class="sf-card-badge">04 • MODALIDADE</span>
+                          <h3 class="sf-card-title">FitDance, Ritbox &amp; Zumba</h3>
+                          <p class="sf-card-desc">Queima Calórica • Ritmo &amp; Energia</p>
+                        </div>
+                        <div class="sf-card-btn" aria-label="Agendar">
+                          <svg viewBox="0 0 16 14" fill="none" class="sf-card-btn-icon" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 1L14 7M14 7L8 13M14 7H1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
                         </div>
                       </div>
-                      <div style="opacity:0;background-color:rgba(0,0,0,0)" class="service-content-ab-wrap">
-                      </div>
-                    </div>
-                    <div style="opacity:1" class="service-straight-line">
                     </div>
                   </a>
                 </div>
@@ -3980,7 +4294,7 @@
                   <div class="div-block-43">
                     <div class="star-text-wrapper _01">
                       <div class="star-text-wrap">
-                        <div data-w-id="0d46caea-c8f1-5235-1cb2-09e39ee4b4ba" class="counter-main-wrapper">
+                        <div class="counter-main-wrapper">
                           <div class="count-wrapper">
                             <div class="count-wrap">
                               <div class="counter-single-wrapper _04">
@@ -5478,6 +5792,92 @@
     </div>
   </div>
 
+
+  <!-- ========================================================
+       MODAL DE ESCOLHA: "COMEÇAR AGORA" (WhatsApp ou Agendamento)
+       ======================================================== -->
+  <div id="alvo-choice-modal" class="alvo-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="alvo-modal-title">
+    <div class="alvo-modal-backdrop" id="alvo-modal-backdrop"></div>
+    <div class="alvo-modal-container">
+      <div class="alvo-modal-card">
+        <!-- Botão Fechar -->
+        <button type="button" class="alvo-modal-close" id="alvo-modal-close" aria-label="Fechar janela">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <!-- Cabeçalho -->
+        <div class="alvo-modal-header">
+          <div class="alvo-modal-badge">
+            <span class="alvo-modal-badge-dot"></span>
+            ALVO 02 FIT • COMEÇAR AGORA
+          </div>
+          <h2 id="alvo-modal-title" class="alvo-modal-title">COMO PREFERE INICIAR?</h2>
+          <p class="alvo-modal-subtitle">Escolha o canal de sua preferência para dar o primeiro passo na sua melhor versão:</p>
+        </div>
+
+        <!-- Opções de Escolha -->
+        <div class="alvo-modal-options">
+          <!-- Opção 1: WhatsApp da Academia -->
+          <a href="https://wa.me/5511930025829?text=Ol%C3%A1,%20gostaria%20de%20me%20matricular%20na%20Alvo02Fit" 
+             target="_blank" rel="noopener noreferrer" class="alvo-modal-option-card option-whatsapp">
+            <div class="alvo-option-icon-box whatsapp-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+              </svg>
+            </div>
+            <div class="alvo-option-info">
+              <div class="alvo-option-tag tag-whatsapp">ATENDIMENTO RÁPIDO</div>
+              <h3 class="alvo-option-title">Falar no WhatsApp</h3>
+              <p class="alvo-option-desc">Tire dúvidas sobre planos, matrículas e horários direto com nossa recepção.</p>
+            </div>
+            <div class="alvo-option-arrow">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </div>
+          </a>
+
+          <!-- Opção 2: Agendamento de Aula Grátis -->
+          <a href="agendamento.html" class="alvo-modal-option-card option-agendamento">
+            <div class="alvo-option-icon-box agendamento-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+                <circle cx="12" cy="15" r="1.5" fill="currentColor"></circle>
+              </svg>
+            </div>
+            <div class="alvo-option-info">
+              <div class="alvo-option-tag tag-agendamento">AULA EXPERIMENTAL GRÁTIS</div>
+              <h3 class="alvo-option-title">Agendar Treino Online</h3>
+              <p class="alvo-option-desc">Escolha sua modalidade (Musculação, Funcional, Pilates ou FitDance) e horário 100% online.</p>
+            </div>
+            <div class="alvo-option-arrow">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </div>
+          </a>
+        </div>
+
+        <!-- Rodapé do Modal -->
+        <div class="alvo-modal-footer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <span>Ambiente seguro • Alvo02Fit Academia</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Script: Barra de Navegação Fixa & Radial Reveal Menu -->
   <script id="alvo-radial-nav-script">
     (function () {
@@ -5499,9 +5899,9 @@
         }
         var heroHeight = hero ? hero.offsetHeight : 0;
         if (heroHeight > 100) {
-          scrollThreshold = Math.round(heroHeight * 0.26);
+          scrollThreshold = Math.round(heroHeight / 2);
         } else {
-          scrollThreshold = Math.round((window.innerHeight || 800) * 0.26);
+          scrollThreshold = Math.round((window.innerHeight || 800) / 2);
         }
       }
 
@@ -5792,6 +6192,77 @@
       updateModalidadesSync();
     })();
   </script>
+
+  <!-- Script: Modal de Escolha "COMEÇAR AGORA" (WhatsApp ou Agendamento) -->
+  <script id="alvo-choice-modal-script">
+    (function () {
+      var modal = document.getElementById('alvo-choice-modal');
+      var backdrop = document.getElementById('alvo-modal-backdrop');
+      var closeBtn = document.getElementById('alvo-modal-close');
+      if (!modal) return;
+
+      function openChoiceModal(e) {
+        if (e && e.preventDefault) e.preventDefault();
+
+        // Se o menu radial estiver aberto, fecha suavemente antes
+        var radialMenu = document.getElementById('radial-menu');
+        var trigger = document.getElementById('radial-menu-trigger');
+        if (radialMenu && radialMenu.classList.contains('is-open')) {
+          radialMenu.classList.remove('is-open');
+          radialMenu.setAttribute('aria-hidden', 'true');
+          if (trigger) {
+            trigger.classList.remove('is-active');
+            trigger.setAttribute('aria-expanded', 'false');
+          }
+          document.body.classList.remove('radial-menu-locked');
+        }
+
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('alvo-modal-locked');
+      }
+
+      function closeChoiceModal() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('alvo-modal-locked');
+      }
+
+      if (closeBtn) closeBtn.addEventListener('click', closeChoiceModal);
+      if (backdrop) backdrop.addEventListener('click', closeChoiceModal);
+
+      window.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+          closeChoiceModal();
+        }
+      });
+
+      // Interceptar cliques em todos os botões "COMEÇAR AGORA" do site
+      function bindTriggers() {
+        var selectors = [
+          '.nav-button-wrap .nav-button',
+          '.hamburg-btn-wrap .nav-button',
+          '.radial-menu-cta-button',
+          '[data-open-modal="comecar"]',
+          '.js-open-comecar'
+        ];
+        var elements = document.querySelectorAll(selectors.join(','));
+        elements.forEach(function (btn) {
+          btn.addEventListener('click', openChoiceModal);
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bindTriggers);
+      } else {
+        bindTriggers();
+      }
+
+      window.openChoiceModal = openChoiceModal;
+      window.closeChoiceModal = closeChoiceModal;
+    })();
+  </script>
+
 </body>
 
 </html>
