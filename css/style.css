@@ -8471,3 +8471,70 @@ p {
     grid-area: span 1 / span 2 / span 1 / span 2;
   }
 }
+
+/* ========================================================
+   HERO STICKY & SECTION REVEAL (CURTAIN SCROLL EFFECT)
+   Efeito inspirado na transição dinâmica da Smart Fit
+   Ativo no Desktop e no Mobile
+   ======================================================== */
+
+html, body {
+  overflow-x: clip;
+}
+
+/* Evita que o wrapper trave o position: sticky dos filhos */
+.page-wrapper {
+  overflow: visible !important;
+  overflow-x: clip !important;
+}
+
+/* 1. Hero Sticky: Fixa a seção hero na tela durante o scroll */
+.home-hero-bg-block {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1 !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  max-height: 100vh !important;
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+/* 2. Section Reveal: Seções seguintes sobem cobrindo a hero como cortina */
+.home-hero-bg-block ~ .section,
+.home-hero-bg-block ~ footer,
+.home-hero-bg-block ~ .footer {
+  position: relative !important;
+  z-index: 10 !important;
+  background-color: rgb(15, 5, 3) !important;
+}
+
+/* Acabamento com sombra profunda e borda laranja sutil na seção revelada */
+.section.marque {
+  border-top: 1px solid rgba(255, 90, 0, 0.25) !important;
+  box-shadow: 0 -30px 60px rgba(0, 0, 0, 0.95) !important;
+}
+
+/* 3. Scroll-driven Transition: Escurecimento e escala 3D sincronizados ao scroll */
+@supports (animation-timeline: scroll()) {
+  @keyframes heroScrollDim {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+      filter: brightness(1);
+    }
+    100% {
+      opacity: 0.45;
+      transform: scale(0.96);
+      filter: brightness(0.65);
+    }
+  }
+
+  .home-hero-bg-block {
+    animation: heroScrollDim linear both;
+    animation-timeline: scroll();
+    animation-range: 0px 100vh;
+  }
+}
+

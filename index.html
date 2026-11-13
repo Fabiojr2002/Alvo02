@@ -111,7 +111,7 @@
 
     @media screen and (max-width: 991px) and (min-width: 768px) {
       .home-hero-block {
-        padding-top: 110px !important;
+        padding-top: 150px !important;
         grid-row-gap: 120px !important;
         padding-bottom: 40px !important;
       }
@@ -652,22 +652,41 @@
       background-color: rgb(15, 5, 3) !important;
     }
 
+    /* Container do marquee 100% invisivel - apenas as faixas aparecem */
     .section.marque {
-      border-top: 1px solid rgba(255, 90, 0, 0.25) !important;
-      box-shadow: 0 -30px 60px rgba(0, 0, 0, 0.95) !important;
+      border: none !important;
+      border-top: none !important;
+      box-shadow: none !important;
+      background: transparent !important;
+      background-color: transparent !important;
+      padding: 0 !important;
+    }
+
+    .section.marque .marque-block {
+      border: none !important;
+      box-shadow: none !important;
+      background: transparent !important;
+      padding: 0 !important;
+      margin: 0 !important;
     }
 
     /* ========================================================
-       COLAGEM E ELEVACAO DAS FAIXAS MARQUEE
-       As faixas ficam POR CIMA do topo da secao e cobrem o sombreado da hero
+       COLAGEM E ELEVACAO DAS FAIXAS MARQUEE (CALIBRADO)
+       As faixas ficam POR CIMA da secao, sem invadir a hero
+       e com espaco respiravel e elegante para o titulo
        ======================================================== */
     .section.marque {
       position: relative !important;
       z-index: 50 !important;
+      border: none !important;
+      border-top: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
       padding-top: 0 !important;
       padding-bottom: 0 !important;
       margin-bottom: 0 !important;
-      margin-top: -198px !important;
+      margin-top: -140px !important;
+      background: transparent !important;
       background-color: transparent !important;
       overflow-x: clip !important;
       overflow-y: visible !important;
@@ -696,29 +715,167 @@
       position: relative !important;
       z-index: 10 !important;
       background-color: rgb(15, 5, 3) !important;
-      margin-top: -190px !important;
-      padding-top: 130px !important;
+      margin-top: -60px !important;
+      padding-top: 170px !important;
+      overflow: visible !important;
+      overflow-x: clip !important;
     }
 
     @media screen and (max-width: 991px) {
       .section.marque {
+        margin-top: -120px !important;
         padding-bottom: 0 !important;
       }
       .section-modalidades,
       .section.marque ~ .section:not(.marque):first-of-type {
-        margin-top: -180px !important;
-        padding-top: 120px !important;
+        margin-top: -55px !important;
+        padding-top: 160px !important;
       }
     }
 
     @media screen and (max-width: 767px) {
       .section.marque {
+        margin-top: -150px !important;
         padding-bottom: 0 !important;
       }
       .section-modalidades,
       .section.marque ~ .section:not(.marque):first-of-type {
-        margin-top: -178px !important;
-        padding-top: 110px !important;
+        margin-top: -50px !important;
+        padding-top: 150px !important;
+      }
+    }
+
+    /* ========================================================
+       STICKY TITLE & STACKING CARDS (MODALIDADES - ESTILO SMART FIT)
+       ======================================================== */
+    .section-modalidades .heading-title-wrap,
+    .section-modalidades .paragraph-normal-wrap {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    /* Trava o titulo "Nossas Modalidades" e mini texto no topo */
+    .section-modalidades .service-title-wrap {
+      position: -webkit-sticky !important;
+      position: sticky !important;
+      top: 95px !important;
+      z-index: 30 !important;
+      background-color: rgb(15, 5, 3) !important;
+      padding-top: 15px !important;
+      padding-bottom: 22px !important;
+    }
+
+    /* Container dos cards com espaco de saida */
+    .section-modalidades .service-co-list {
+      position: relative !important;
+      overflow: visible !important;
+    }
+
+    .section-modalidades .service-co-list::after {
+      content: "" !important;
+      display: block !important;
+      height: 420px !important;
+      width: 100% !important;
+      clear: both !important;
+    }
+
+    /* Cards empilhados: cada um trava e o proximo desliza por cima */
+    .section-modalidades .service-co-item {
+      position: -webkit-sticky !important;
+      position: sticky !important;
+      margin-bottom: 120px !important;
+    }
+
+    .section-modalidades .service-co-item:nth-child(1) {
+      top: 255px !important;
+      z-index: 10 !important;
+    }
+
+    .section-modalidades .service-co-item:nth-child(2) {
+      top: 275px !important;
+      z-index: 11 !important;
+    }
+
+    .section-modalidades .service-co-item:nth-child(3) {
+      top: 295px !important;
+      z-index: 12 !important;
+    }
+
+    .section-modalidades .service-co-item:nth-child(4) {
+      top: 315px !important;
+      z-index: 13 !important;
+      margin-bottom: 0px !important;
+    }
+
+    .section-modalidades .service-co-item .service-single-card-wrap {
+      display: block !important;
+      text-decoration: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .section-modalidades .service-co-item .service-single-card {
+      overflow: visible !important;
+    }
+
+    .section-modalidades .service-co-item .service-content-block-wrapper {
+      background: linear-gradient(135deg, #1b0a06 0%, #110503 100%) !important;
+      border: 1px solid rgba(255, 90, 0, 0.28) !important;
+      border-radius: 20px !important;
+      box-shadow: 0 -16px 36px rgba(0, 0, 0, 0.8), 0 10px 24px rgba(0, 0, 0, 0.6) !important;
+      padding: 24px 32px !important;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease !important;
+    }
+
+    .section-modalidades .service-co-item:hover .service-content-block-wrapper {
+      border-color: rgba(255, 90, 0, 0.65) !important;
+      box-shadow: 0 -16px 36px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 90, 0, 0.2) !important;
+    }
+
+    .section-modalidades .service-co-item .service-straight-line {
+      display: none !important;
+    }
+
+    /* Ajustes responsivos: Tablet (<= 991px) */
+    @media screen and (max-width: 991px) {
+      .section-modalidades .service-title-wrap {
+        top: 85px !important;
+        padding-top: 12px !important;
+        padding-bottom: 18px !important;
+      }
+      .section-modalidades .service-co-item {
+        margin-bottom: 110px !important;
+      }
+      .section-modalidades .service-co-item:nth-child(1) { top: 235px !important; }
+      .section-modalidades .service-co-item:nth-child(2) { top: 250px !important; }
+      .section-modalidades .service-co-item:nth-child(3) { top: 265px !important; }
+      .section-modalidades .service-co-item:nth-child(4) { top: 280px !important; margin-bottom: 0px !important; }
+      .section-modalidades .service-co-list::after {
+        height: 350px !important;
+      }
+    }
+
+    /* Ajustes responsivos: Mobile (<= 767px) */
+    @media screen and (max-width: 767px) {
+      .section-modalidades .service-title-wrap {
+        top: 75px !important;
+        padding-top: 10px !important;
+        padding-bottom: 14px !important;
+      }
+      .section-modalidades .service-co-item {
+        margin-bottom: 100px !important;
+      }
+      .section-modalidades .service-co-item:nth-child(1) { top: 205px !important; }
+      .section-modalidades .service-co-item:nth-child(2) { top: 220px !important; }
+      .section-modalidades .service-co-item:nth-child(3) { top: 235px !important; }
+      .section-modalidades .service-co-item:nth-child(4) { top: 250px !important; margin-bottom: 0px !important; }
+      .section-modalidades .service-co-list::after {
+        height: 320px !important;
+      }
+      .section-modalidades .service-co-item .service-content-block-wrapper {
+        padding: 18px 20px !important;
+        border-radius: 16px !important;
+        box-shadow: 0 -12px 28px rgba(0, 0, 0, 0.85), 0 8px 20px rgba(0, 0, 0, 0.5) !important;
       }
     }
 
@@ -2258,7 +2415,7 @@
         justify-content: flex-start !important;
         align-items: center !important;
         padding-top: clamp(140px, 17vh, 185px) !important;
-        padding-bottom: 42px !important;
+        padding-bottom: 0 !important;
       }
 
       .hero-editorial-wrap {
@@ -2359,7 +2516,7 @@
       position: relative !important;
       z-index: 50 !important;
       padding-top: 0 !important;
-      padding-bottom: clamp(44px, 6vw, 76px) !important;
+      padding-bottom: 0 !important;
       margin-top: clamp(-86px, -9vh, -64px) !important;
       background-color: transparent !important;
       overflow-x: clip !important;
@@ -2422,11 +2579,11 @@
     /* Desktop (>= 992px): proporção igual ao Mobile — espessura encorpada, cruzamento suave sem cortar texto e ambas visíveis sem rolar */
     @media screen and (min-width: 992px) {
       .section.marque {
-        margin-top: -198px !important;
+        margin-top: -140px !important;
         z-index: 50 !important;
         padding-bottom: 0 !important;
         padding-top: 0 !important;
-        padding-bottom: clamp(44px, 5vw, 68px) !important;
+        padding-bottom: 0 !important;
       }
 
       .section.marque .marque-single-card._01 {
@@ -2474,11 +2631,11 @@
 
     @media screen and (max-width: 991px) {
       .section.marque {
-        margin-top: -145px !important;
+        margin-top: -120px !important;
         z-index: 50 !important;
         padding-bottom: 0 !important;
         padding-top: 0 !important;
-        padding-bottom: 48px !important;
+        padding-bottom: 0 !important;
       }
     }
 
@@ -2489,11 +2646,11 @@
 
       /* No Mobile: posiciona as duas faixas mais acima na base da Hero, visíveis sem subir no Monitor */
       .section.marque {
-        margin-top: -202px !important;
+        margin-top: -150px !important;
         z-index: 50 !important;
         padding-bottom: 0 !important;
         padding-top: 0 !important;
-        padding-bottom: 42px !important;
+        padding-bottom: 0 !important;
       }
 
       .section.marque .maque-content-block {
@@ -5328,16 +5485,44 @@
       var closeBtn = document.getElementById('radial-menu-close');
       if (!navbar || !trigger || !menu) return;
 
-      // 1. Controle de Scroll da Barra de Navegação (Transparência no topo / Fundo e Botão no scroll)
+      // 1. Controle de Scroll da Barra de Navegação:
+      // Mantém a barra 100% transparente no topo da Hero.
+      // Ativa o fundo escuro com blur e o botão um pouco antes (~26% da altura da Hero / ~200px-230px),
+      // garantindo que o efeito inicie com folga bem antes de aproximar da próxima seção.
+      var hero = document.getElementById('hero') || document.querySelector('.section.home-hero');
+      var scrollThreshold = 0;
+
+      function updateScrollThreshold() {
+        if (!hero) {
+          hero = document.getElementById('hero') || document.querySelector('.section.home-hero');
+        }
+        var heroHeight = hero ? hero.offsetHeight : 0;
+        if (heroHeight > 100) {
+          scrollThreshold = Math.round(heroHeight * 0.26);
+        } else {
+          scrollThreshold = Math.round((window.innerHeight || 800) * 0.26);
+        }
+      }
+
       function updateNavbarOnScroll() {
         var scrollY = window.pageYOffset || document.documentElement.scrollTop;
-        if (scrollY > 30) {
+        if (scrollThreshold <= 0) {
+          updateScrollThreshold();
+        }
+        if (scrollY >= scrollThreshold) {
           navbar.classList.add('navbar-scrolled');
         } else {
           navbar.classList.remove('navbar-scrolled');
         }
       }
 
+      updateScrollThreshold();
+      window.addEventListener('resize', updateScrollThreshold, { passive: true });
+      window.addEventListener('orientationchange', updateScrollThreshold, { passive: true });
+      window.addEventListener('load', function () {
+        updateScrollThreshold();
+        updateNavbarOnScroll();
+      }, { passive: true });
       window.addEventListener('scroll', updateNavbarOnScroll, { passive: true });
       updateNavbarOnScroll();
 
