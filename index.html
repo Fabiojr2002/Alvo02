@@ -746,7 +746,7 @@
     }
 
     /* ========================================================
-       STICKY TITLE & STACKING CARDS (MODALIDADES - ESTILO SMART FIT)
+       MODALIDADES (DESKTOP: FLUXO NATURAL, SEM STICKY)
        ======================================================== */
     .section-modalidades .heading-title-wrap,
     .section-modalidades .paragraph-normal-wrap {
@@ -754,64 +754,37 @@
       transform: none !important;
     }
 
-    /* Trava o titulo "Nossas Modalidades" e mini texto no topo */
-    .section-modalidades .service-title-wrap {
-      position: -webkit-sticky !important;
-      position: sticky !important;
-      top: 95px !important;
-      z-index: 30 !important;
-      background-color: rgb(15, 5, 3) !important;
-      padding-top: 15px !important;
-      padding-bottom: 22px !important;
+    .section-modalidades .service-single-card-wrap {
+      display: block !important;
+      text-decoration: none !important;
+      opacity: 1 !important;
+      transform: none !important;
     }
 
-    /* Container dos cards com espaco de saida */
+    .section-modalidades .service-title-wrap {
+      position: relative !important;
+      top: auto !important;
+      z-index: 1 !important;
+      background-color: transparent !important;
+      padding-top: 0px !important;
+      padding-bottom: 0px !important;
+      margin-bottom: 35px !important;
+    }
+
     .section-modalidades .service-co-list {
       position: relative !important;
       overflow: visible !important;
     }
 
     .section-modalidades .service-co-list::after {
-      content: "" !important;
-      display: block !important;
-      height: 420px !important;
-      width: 100% !important;
-      clear: both !important;
+      display: none !important;
     }
 
-    /* Cards empilhados: cada um trava e o proximo desliza por cima */
     .section-modalidades .service-co-item {
-      position: -webkit-sticky !important;
-      position: sticky !important;
-      margin-bottom: 120px !important;
-    }
-
-    .section-modalidades .service-co-item:nth-child(1) {
-      top: 255px !important;
-      z-index: 10 !important;
-    }
-
-    .section-modalidades .service-co-item:nth-child(2) {
-      top: 275px !important;
-      z-index: 11 !important;
-    }
-
-    .section-modalidades .service-co-item:nth-child(3) {
-      top: 295px !important;
-      z-index: 12 !important;
-    }
-
-    .section-modalidades .service-co-item:nth-child(4) {
-      top: 315px !important;
-      z-index: 13 !important;
-      margin-bottom: 0px !important;
-    }
-
-    .section-modalidades .service-co-item .service-single-card-wrap {
-      display: block !important;
-      text-decoration: none !important;
-      opacity: 1 !important;
-      transform: none !important;
+      position: relative !important;
+      top: auto !important;
+      z-index: 1 !important;
+      margin-bottom: 20px !important;
     }
 
     .section-modalidades .service-co-item .service-single-card {
@@ -822,60 +795,89 @@
       background: linear-gradient(135deg, #1b0a06 0%, #110503 100%) !important;
       border: 1px solid rgba(255, 90, 0, 0.28) !important;
       border-radius: 20px !important;
-      box-shadow: 0 -16px 36px rgba(0, 0, 0, 0.8), 0 10px 24px rgba(0, 0, 0, 0.6) !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
       padding: 24px 32px !important;
       transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease !important;
     }
 
     .section-modalidades .service-co-item:hover .service-content-block-wrapper {
       border-color: rgba(255, 90, 0, 0.65) !important;
-      box-shadow: 0 -16px 36px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 90, 0, 0.2) !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 90, 0, 0.2) !important;
+      transform: translateY(-2px) !important;
     }
 
     .section-modalidades .service-co-item .service-straight-line {
       display: none !important;
     }
 
-    /* Ajustes responsivos: Tablet (<= 991px) */
-    @media screen and (max-width: 991px) {
-      .section-modalidades .service-title-wrap {
-        top: 85px !important;
-        padding-top: 12px !important;
-        padding-bottom: 18px !important;
-      }
-      .section-modalidades .service-co-item {
-        margin-bottom: 110px !important;
-      }
-      .section-modalidades .service-co-item:nth-child(1) { top: 235px !important; }
-      .section-modalidades .service-co-item:nth-child(2) { top: 250px !important; }
-      .section-modalidades .service-co-item:nth-child(3) { top: 265px !important; }
-      .section-modalidades .service-co-item:nth-child(4) { top: 280px !important; margin-bottom: 0px !important; }
-      .section-modalidades .service-co-list::after {
-        height: 350px !important;
-      }
-    }
-
-    /* Ajustes responsivos: Mobile (<= 767px) */
+    /* ========================================================
+       MODALIDADES (MOBILE APENAS: STICKY TITLE COM RESPIRO & CARDS EMPILHADOS)
+       ======================================================== */
     @media screen and (max-width: 767px) {
       .section-modalidades .service-title-wrap {
-        top: 75px !important;
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        top: 115px !important;
+        z-index: 30 !important;
+        background: transparent !important;
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
         padding-top: 10px !important;
         padding-bottom: 14px !important;
+        margin-bottom: 0px !important;
       }
+
+      .section-modalidades .service-co-list {
+        position: relative !important;
+        overflow: visible !important;
+      }
+
+      .section-modalidades .service-co-list::after {
+        content: "" !important;
+        display: block !important;
+        height: 320px !important;
+        width: 100% !important;
+        clear: both !important;
+      }
+
       .section-modalidades .service-co-item {
+        position: -webkit-sticky !important;
+        position: sticky !important;
         margin-bottom: 100px !important;
       }
-      .section-modalidades .service-co-item:nth-child(1) { top: 205px !important; }
-      .section-modalidades .service-co-item:nth-child(2) { top: 220px !important; }
-      .section-modalidades .service-co-item:nth-child(3) { top: 235px !important; }
-      .section-modalidades .service-co-item:nth-child(4) { top: 250px !important; margin-bottom: 0px !important; }
-      .section-modalidades .service-co-list::after {
-        height: 320px !important;
+
+      .section-modalidades .service-co-item:nth-child(1) {
+        top: 255px !important;
+        z-index: 10 !important;
       }
+
+      .section-modalidades .service-co-item:nth-child(2) {
+        top: 270px !important;
+        z-index: 11 !important;
+      }
+
+      .section-modalidades .service-co-item:nth-child(3) {
+        top: 285px !important;
+        z-index: 12 !important;
+      }
+
+      .section-modalidades .service-co-item:nth-child(4) {
+        top: 300px !important;
+        z-index: 13 !important;
+        margin-bottom: 0px !important;
+      }
+
       .section-modalidades .service-co-item .service-content-block-wrapper {
         padding: 18px 20px !important;
         border-radius: 16px !important;
         box-shadow: 0 -12px 28px rgba(0, 0, 0, 0.85), 0 8px 20px rgba(0, 0, 0, 0.5) !important;
+        transform: none !important;
+      }
+
+      .section-modalidades .service-co-item:hover .service-content-block-wrapper {
+        transform: none !important;
       }
     }
 
@@ -3978,7 +3980,7 @@
                   <div class="div-block-43">
                     <div class="star-text-wrapper _01">
                       <div class="star-text-wrap">
-                        <div class="counter-main-wrapper">
+                        <div data-w-id="0d46caea-c8f1-5235-1cb2-09e39ee4b4ba" class="counter-main-wrapper">
                           <div class="count-wrapper">
                             <div class="count-wrap">
                               <div class="counter-single-wrapper _04">
@@ -5486,9 +5488,8 @@
       if (!navbar || !trigger || !menu) return;
 
       // 1. Controle de Scroll da Barra de Navegação:
-      // Mantém a barra 100% transparente no topo da Hero.
-      // Ativa o fundo escuro com blur e o botão um pouco antes (~26% da altura da Hero / ~200px-230px),
-      // garantindo que o efeito inicie com folga bem antes de aproximar da próxima seção.
+      // Mantém a barra transparente na primeira metade da tela/seção Hero.
+      // Ativa o fundo escuro com blur e o botão apenas quando o scroll atinge a metade da seção Hero / metade da tela.
       var hero = document.getElementById('hero') || document.querySelector('.section.home-hero');
       var scrollThreshold = 0;
 
@@ -5744,6 +5745,51 @@
         var duration = (prefersReduced && prefersReduced.matches) ? 0 : Math.min(820, Math.max(540, 480 + dist * 0.085));
         animateTo(targetY, duration);
       }, false);
+    })();
+  </script>
+
+  <!-- Script: Desfixa o titulo e sobe junto com os cards no mobile (evita sobreposicao) -->
+  <script id="alvo-modalidades-unpin-sync">
+    (function () {
+      var ticking = false;
+
+      function updateModalidadesSync() {
+        ticking = false;
+        if (window.innerWidth > 767) {
+          var titleDesktop = document.querySelector('.section-modalidades .service-title-wrap');
+          if (titleDesktop && titleDesktop.style.transform) {
+            titleDesktop.style.transform = '';
+          }
+          return;
+        }
+
+        var title = document.querySelector('.section-modalidades .service-title-wrap');
+        var c1 = document.querySelector('.section-modalidades .service-co-item:nth-child(1)');
+        if (!title || !c1) return;
+
+        var c1Top = c1.getBoundingClientRect().top;
+        var threshold = 255; // Ponto de trava do card 01
+
+        if (c1Top < threshold) {
+          var diff = Math.round(c1Top - threshold);
+          title.style.transform = 'translate3d(0, ' + diff + 'px, 0)';
+        } else {
+          if (title.style.transform) {
+            title.style.transform = '';
+          }
+        }
+      }
+
+      function onScrollOrResize() {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(updateModalidadesSync);
+        }
+      }
+
+      window.addEventListener('scroll', onScrollOrResize, { passive: true });
+      window.addEventListener('resize', onScrollOrResize, { passive: true });
+      updateModalidadesSync();
     })();
   </script>
 </body>
