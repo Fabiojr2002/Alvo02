@@ -43,7 +43,379 @@
         visibility: hidden !important;
       }
     }
-  </style>
+  
+
+/* ========================================================
+       MODAL DE ESCOLHA: "COMEÇAR AGORA" (WHATSAPP OU AGENDAMENTO)
+       ======================================================== */
+    body.alvo-modal-locked {
+      overflow: hidden !important;
+      touch-action: none !important;
+    }
+
+    .alvo-modal {
+      position: fixed !important;
+      inset: 0 !important;
+      z-index: 999999 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 16px !important;
+      box-sizing: border-box !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      visibility: hidden !important;
+      transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  visibility 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    .alvo-modal.is-open {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      visibility: visible !important;
+    }
+
+    .alvo-modal-backdrop {
+      position: absolute !important;
+      inset: 0 !important;
+      background: rgba(6, 4, 3, 0.84) !important;
+      -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+      backdrop-filter: blur(16px) saturate(160%) !important;
+      cursor: pointer !important;
+    }
+
+    .alvo-modal-container {
+      position: relative !important;
+      z-index: 2 !important;
+      width: 100% !important;
+      max-width: 520px !important;
+      box-sizing: border-box !important;
+    }
+
+    .alvo-modal-card {
+      position: relative !important;
+      background: linear-gradient(165deg, #190f0c 0%, #0d0705 100%) !important;
+      border: 1px solid rgba(255, 90, 0, 0.32) !important;
+      border-radius: 24px !important;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95),
+                  0 0 50px rgba(255, 90, 0, 0.14),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+      padding: 34px 30px 26px !important;
+      box-sizing: border-box !important;
+      transform: scale(0.92) translateY(18px) !important;
+      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.28s ease !important;
+    }
+
+    .alvo-modal.is-open .alvo-modal-card {
+      transform: scale(1) translateY(0) !important;
+    }
+
+    .alvo-modal-close {
+      position: absolute !important;
+      top: 18px !important;
+      right: 18px !important;
+      width: 38px !important;
+      height: 38px !important;
+      border-radius: 50% !important;
+      background: rgba(255, 255, 255, 0.06) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      color: rgba(255, 255, 255, 0.8) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: pointer !important;
+      padding: 0 !important;
+      transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
+    }
+
+    .alvo-modal-close:hover {
+      background: rgba(255, 90, 0, 0.22) !important;
+      border-color: rgba(255, 90, 0, 0.55) !important;
+      color: #ff5a00 !important;
+      transform: rotate(90deg) !important;
+    }
+
+    .alvo-modal-header {
+      margin-bottom: 22px !important;
+      text-align: left !important;
+    }
+
+    .alvo-modal-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 7px !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.8px !important;
+      color: #ff5a00 !important;
+      background: rgba(255, 90, 0, 0.12) !important;
+      border: 1px solid rgba(255, 90, 0, 0.28) !important;
+      border-radius: 100px !important;
+      padding: 4px 12px !important;
+      margin-bottom: 12px !important;
+    }
+
+    .alvo-modal-badge-dot {
+      width: 6px !important;
+      height: 6px !important;
+      border-radius: 50% !important;
+      background: #ff5a00 !important;
+      box-shadow: 0 0 8px #ff5a00 !important;
+    }
+
+    .alvo-modal-title {
+      font-family: 'Anton', sans-serif !important;
+      font-size: clamp(24px, 5.5vw, 32px) !important;
+      line-height: 1.1 !important;
+      letter-spacing: 0.5px !important;
+      color: #ffffff !important;
+      margin: 0 0 8px 0 !important;
+      text-transform: uppercase !important;
+    }
+
+    .alvo-modal-subtitle {
+      font-size: 13.5px !important;
+      line-height: 1.45 !important;
+      color: rgba(255, 255, 255, 0.68) !important;
+      margin: 0 !important;
+    }
+
+    .alvo-modal-options {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 14px !important;
+      margin-bottom: 20px !important;
+    }
+
+    .alvo-modal-option-card {
+      display: flex !important;
+      align-items: center !important;
+      gap: 16px !important;
+      padding: 18px 20px !important;
+      border-radius: 18px !important;
+      background: rgba(255, 255, 255, 0.035) !important;
+      border: 1px solid rgba(255, 255, 255, 0.09) !important;
+      text-decoration: none !important;
+      color: inherit !important;
+      box-sizing: border-box !important;
+      position: relative !important;
+      overflow: hidden !important;
+      cursor: pointer !important;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.25s ease,
+                  background 0.25s ease,
+                  box-shadow 0.25s ease !important;
+    }
+
+    .alvo-modal-option-card:hover {
+      transform: translateY(-2px) !important;
+    }
+
+    /* Card WhatsApp */
+    .alvo-modal-option-card.option-whatsapp:hover {
+      background: linear-gradient(135deg, rgba(37, 211, 102, 0.12) 0%, rgba(37, 211, 102, 0.03) 100%) !important;
+      border-color: rgba(37, 211, 102, 0.55) !important;
+      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.18), inset 0 0 20px rgba(37, 211, 102, 0.06) !important;
+    }
+
+    .alvo-option-icon-box.whatsapp-box {
+      width: 52px !important;
+      height: 52px !important;
+      border-radius: 14px !important;
+      background: rgba(37, 211, 102, 0.15) !important;
+      border: 1px solid rgba(37, 211, 102, 0.32) !important;
+      color: #25D366 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-shrink: 0 !important;
+      transition: transform 0.25s ease, background 0.25s ease !important;
+    }
+
+    .alvo-modal-option-card.option-whatsapp:hover .alvo-option-icon-box.whatsapp-box {
+      transform: scale(1.06) !important;
+      background: rgba(37, 211, 102, 0.22) !important;
+    }
+
+    .alvo-option-tag.tag-whatsapp {
+      font-size: 10px !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.8px !important;
+      color: #25D366 !important;
+      margin-bottom: 2px !important;
+    }
+
+    /* Card Agendamento */
+    .alvo-modal-option-card.option-agendamento:hover {
+      background: linear-gradient(135deg, rgba(255, 90, 0, 0.14) 0%, rgba(255, 90, 0, 0.03) 100%) !important;
+      border-color: rgba(255, 90, 0, 0.6) !important;
+      box-shadow: 0 12px 30px rgba(255, 90, 0, 0.22), inset 0 0 20px rgba(255, 90, 0, 0.06) !important;
+    }
+
+    .alvo-option-icon-box.agendamento-box {
+      width: 52px !important;
+      height: 52px !important;
+      border-radius: 14px !important;
+      background: rgba(255, 90, 0, 0.15) !important;
+      border: 1px solid rgba(255, 90, 0, 0.35) !important;
+      color: #ff5a00 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-shrink: 0 !important;
+      transition: transform 0.25s ease, background 0.25s ease !important;
+    }
+
+    .alvo-modal-option-card.option-agendamento:hover .alvo-option-icon-box.agendamento-box {
+      transform: scale(1.06) !important;
+      background: rgba(255, 90, 0, 0.24) !important;
+    }
+
+    .alvo-option-tag.tag-agendamento {
+      font-size: 10px !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.8px !important;
+      color: #ff7e36 !important;
+      margin-bottom: 2px !important;
+    }
+
+    .alvo-option-info {
+      flex: 1 !important;
+      min-width: 0 !important;
+      text-align: left !important;
+    }
+
+    .alvo-option-title {
+      font-family: 'Anton', sans-serif !important;
+      font-size: 19px !important;
+      letter-spacing: 0.4px !important;
+      color: #ffffff !important;
+      margin: 0 0 3px 0 !important;
+      line-height: 1.2 !important;
+      text-transform: uppercase !important;
+    }
+
+    .alvo-option-desc {
+      font-size: 12.5px !important;
+      line-height: 1.38 !important;
+      color: rgba(255, 255, 255, 0.65) !important;
+      margin: 0 !important;
+    }
+
+    .alvo-option-arrow {
+      width: 36px !important;
+      height: 36px !important;
+      border-radius: 50% !important;
+      background: rgba(255, 255, 255, 0.05) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      color: rgba(255, 255, 255, 0.8) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-shrink: 0 !important;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
+    }
+
+    .alvo-modal-option-card:hover .alvo-option-arrow {
+      transform: translateX(3px) !important;
+      background: #ffffff !important;
+      border-color: #ffffff !important;
+      color: #0d0705 !important;
+    }
+
+    .alvo-modal-footer {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 7px !important;
+      font-size: 11.5px !important;
+      color: rgba(255, 255, 255, 0.42) !important;
+      text-align: center !important;
+    }
+
+    .alvo-modal-footer svg {
+      opacity: 0.7 !important;
+    }
+
+    @media screen and (max-width: 480px) {
+      .alvo-modal-card {
+        padding: 24px 18px 20px !important;
+        border-radius: 20px !important;
+      }
+      .alvo-modal-option-card {
+        padding: 14px 14px !important;
+        gap: 12px !important;
+      }
+      .alvo-option-icon-box.whatsapp-box,
+      .alvo-option-icon-box.agendamento-box {
+        width: 44px !important;
+        height: 44px !important;
+      }
+      .alvo-option-title {
+        font-size: 17px !important;
+      }
+      .alvo-option-desc {
+        font-size: 11.5px !important;
+      }
+      .alvo-option-arrow {
+        width: 30px !important;
+        height: 30px !important;
+      }
+    }
+
+
+    /* ========================================================
+       CENTRALIZACAO DAS DESCRICOES DOS PLANOS NO ENCAIXE (NOTCH)
+       ======================================================== */
+    .pricing-single-card .save-text-wrap {
+      position: absolute !important;
+      top: 0 !important;
+      right: 0 !important;
+      width: 31% !important;
+      height: 52px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      padding: 0 6px !important;
+      box-sizing: border-box !important;
+      pointer-events: none !important;
+      z-index: 5 !important;
+      inset: auto !important;
+    }
+
+    .pricing-single-card .save-text-wrap .paragraph-small.price {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100% !important;
+      text-align: center !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      white-space: nowrap !important;
+      line-height: 1 !important;
+      letter-spacing: normal !important;
+    }
+
+    @media screen and (max-width: 991px) {
+      .pricing-single-card .save-text-wrap {
+        height: 48px !important;
+        width: 31% !important;
+      }
+    }
+
+    @media screen and (max-width: 479px) {
+      .pricing-single-card .save-text-wrap {
+        height: 46px !important;
+        width: 32% !important;
+      }
+    }
+
+</style>
   <link href="https://fonts.googleapis.com" rel="preconnect" />
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous" />
   <script src="./js/webfont.js" type="text/javascript"></script>
@@ -888,7 +1260,7 @@
 
       .section-modalidades .service-co-list {
         display: grid !important;
-        grid-template-columns: repeat(4, 1fr) !important;
+        grid-template-columns: repeat(3, 1fr) !important;
         gap: 20px !important;
         position: relative !important;
         overflow: visible !important;
@@ -969,7 +1341,7 @@
       .section-modalidades .service-co-list::after {
         content: "" !important;
         display: block !important;
-        height: 320px !important;
+        height: 380px !important;
         width: 100% !important;
         clear: both !important;
       }
@@ -981,26 +1353,37 @@
         max-width: 420px !important;
         margin-left: auto !important;
         margin-right: auto !important;
+        will-change: opacity, transform !important;
       }
 
       .section-modalidades .service-co-item:nth-child(1) {
-        top: 255px !important;
+        top: 250px !important;
         z-index: 10 !important;
       }
 
       .section-modalidades .service-co-item:nth-child(2) {
-        top: 270px !important;
+        top: 262px !important;
         z-index: 11 !important;
       }
 
       .section-modalidades .service-co-item:nth-child(3) {
-        top: 285px !important;
+        top: 274px !important;
         z-index: 12 !important;
       }
 
       .section-modalidades .service-co-item:nth-child(4) {
-        top: 300px !important;
+        top: 286px !important;
         z-index: 13 !important;
+      }
+
+      .section-modalidades .service-co-item:nth-child(5) {
+        top: 298px !important;
+        z-index: 14 !important;
+      }
+
+      .section-modalidades .service-co-item:nth-child(6) {
+        top: 310px !important;
+        z-index: 15 !important;
         margin-bottom: 0px !important;
       }
 
@@ -1022,6 +1405,36 @@
         width: 42px !important;
         height: 42px !important;
         min-width: 42px !important;
+      }
+
+      /* ========================================================
+         ESTRUTURA - CARROSSEL 3D: AJUSTES MOBILE
+         (Oculta setas laterais e botão de zoom flutuante no mobile)
+         ======================================================== */
+      .carousel-3d-nav-btn,
+      #carousel-prev,
+      #carousel-next,
+      .design-card-zoom-btn {
+        display: none !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        visibility: hidden !important;
+      }
+
+      .carousel-3d-wrapper,
+      .inner-design-image-block {
+        touch-action: pan-y !important;
+        user-select: none !important;
+        -webkit-user-select: none !important;
+      }
+
+      .design-card {
+        cursor: pointer !important;
+        -webkit-tap-highlight-color: transparent !important;
+      }
+
+      .design-card-caption {
+        pointer-events: none !important;
       }
     }
 
@@ -2302,329 +2715,6 @@
         height: 42px !important;
       }
     }
-
-    /* ========================================================
-       MODAL DE ESCOLHA: "COMEÇAR AGORA" (WHATSAPP OU AGENDAMENTO)
-       ======================================================== */
-    body.alvo-modal-locked {
-      overflow: hidden !important;
-      touch-action: none !important;
-    }
-
-    .alvo-modal {
-      position: fixed !important;
-      inset: 0 !important;
-      z-index: 999999 !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      padding: 16px !important;
-      box-sizing: border-box !important;
-      opacity: 0 !important;
-      pointer-events: none !important;
-      visibility: hidden !important;
-      transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-                  visibility 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-
-    .alvo-modal.is-open {
-      opacity: 1 !important;
-      pointer-events: auto !important;
-      visibility: visible !important;
-    }
-
-    .alvo-modal-backdrop {
-      position: absolute !important;
-      inset: 0 !important;
-      background: rgba(6, 4, 3, 0.84) !important;
-      -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
-      backdrop-filter: blur(16px) saturate(160%) !important;
-      cursor: pointer !important;
-    }
-
-    .alvo-modal-container {
-      position: relative !important;
-      z-index: 2 !important;
-      width: 100% !important;
-      max-width: 520px !important;
-      box-sizing: border-box !important;
-    }
-
-    .alvo-modal-card {
-      position: relative !important;
-      background: linear-gradient(165deg, #190f0c 0%, #0d0705 100%) !important;
-      border: 1px solid rgba(255, 90, 0, 0.32) !important;
-      border-radius: 24px !important;
-      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95),
-                  0 0 50px rgba(255, 90, 0, 0.14),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
-      padding: 34px 30px 26px !important;
-      box-sizing: border-box !important;
-      transform: scale(0.92) translateY(18px) !important;
-      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-                  opacity 0.28s ease !important;
-    }
-
-    .alvo-modal.is-open .alvo-modal-card {
-      transform: scale(1) translateY(0) !important;
-    }
-
-    .alvo-modal-close {
-      position: absolute !important;
-      top: 18px !important;
-      right: 18px !important;
-      width: 38px !important;
-      height: 38px !important;
-      border-radius: 50% !important;
-      background: rgba(255, 255, 255, 0.06) !important;
-      border: 1px solid rgba(255, 255, 255, 0.12) !important;
-      color: rgba(255, 255, 255, 0.8) !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      cursor: pointer !important;
-      padding: 0 !important;
-      transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
-    }
-
-    .alvo-modal-close:hover {
-      background: rgba(255, 90, 0, 0.22) !important;
-      border-color: rgba(255, 90, 0, 0.55) !important;
-      color: #ff5a00 !important;
-      transform: rotate(90deg) !important;
-    }
-
-    .alvo-modal-header {
-      margin-bottom: 22px !important;
-      text-align: left !important;
-    }
-
-    .alvo-modal-badge {
-      display: inline-flex !important;
-      align-items: center !important;
-      gap: 7px !important;
-      font-size: 11px !important;
-      font-weight: 700 !important;
-      text-transform: uppercase !important;
-      letter-spacing: 0.8px !important;
-      color: #ff5a00 !important;
-      background: rgba(255, 90, 0, 0.12) !important;
-      border: 1px solid rgba(255, 90, 0, 0.28) !important;
-      border-radius: 100px !important;
-      padding: 4px 12px !important;
-      margin-bottom: 12px !important;
-    }
-
-    .alvo-modal-badge-dot {
-      width: 6px !important;
-      height: 6px !important;
-      border-radius: 50% !important;
-      background: #ff5a00 !important;
-      box-shadow: 0 0 8px #ff5a00 !important;
-    }
-
-    .alvo-modal-title {
-      font-family: 'Anton', sans-serif !important;
-      font-size: clamp(24px, 5.5vw, 32px) !important;
-      line-height: 1.1 !important;
-      letter-spacing: 0.5px !important;
-      color: #ffffff !important;
-      margin: 0 0 8px 0 !important;
-      text-transform: uppercase !important;
-    }
-
-    .alvo-modal-subtitle {
-      font-size: 13.5px !important;
-      line-height: 1.45 !important;
-      color: rgba(255, 255, 255, 0.68) !important;
-      margin: 0 !important;
-    }
-
-    .alvo-modal-options {
-      display: flex !important;
-      flex-direction: column !important;
-      gap: 14px !important;
-      margin-bottom: 20px !important;
-    }
-
-    .alvo-modal-option-card {
-      display: flex !important;
-      align-items: center !important;
-      gap: 16px !important;
-      padding: 18px 20px !important;
-      border-radius: 18px !important;
-      background: rgba(255, 255, 255, 0.035) !important;
-      border: 1px solid rgba(255, 255, 255, 0.09) !important;
-      text-decoration: none !important;
-      color: inherit !important;
-      box-sizing: border-box !important;
-      position: relative !important;
-      overflow: hidden !important;
-      cursor: pointer !important;
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                  border-color 0.25s ease,
-                  background 0.25s ease,
-                  box-shadow 0.25s ease !important;
-    }
-
-    .alvo-modal-option-card:hover {
-      transform: translateY(-2px) !important;
-    }
-
-    /* Card WhatsApp */
-    .alvo-modal-option-card.option-whatsapp:hover {
-      background: linear-gradient(135deg, rgba(37, 211, 102, 0.12) 0%, rgba(37, 211, 102, 0.03) 100%) !important;
-      border-color: rgba(37, 211, 102, 0.55) !important;
-      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.18), inset 0 0 20px rgba(37, 211, 102, 0.06) !important;
-    }
-
-    .alvo-option-icon-box.whatsapp-box {
-      width: 52px !important;
-      height: 52px !important;
-      border-radius: 14px !important;
-      background: rgba(37, 211, 102, 0.15) !important;
-      border: 1px solid rgba(37, 211, 102, 0.32) !important;
-      color: #25D366 !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      flex-shrink: 0 !important;
-      transition: transform 0.25s ease, background 0.25s ease !important;
-    }
-
-    .alvo-modal-option-card.option-whatsapp:hover .alvo-option-icon-box.whatsapp-box {
-      transform: scale(1.06) !important;
-      background: rgba(37, 211, 102, 0.22) !important;
-    }
-
-    .alvo-option-tag.tag-whatsapp {
-      font-size: 10px !important;
-      font-weight: 700 !important;
-      text-transform: uppercase !important;
-      letter-spacing: 0.8px !important;
-      color: #25D366 !important;
-      margin-bottom: 2px !important;
-    }
-
-    /* Card Agendamento */
-    .alvo-modal-option-card.option-agendamento:hover {
-      background: linear-gradient(135deg, rgba(255, 90, 0, 0.14) 0%, rgba(255, 90, 0, 0.03) 100%) !important;
-      border-color: rgba(255, 90, 0, 0.6) !important;
-      box-shadow: 0 12px 30px rgba(255, 90, 0, 0.22), inset 0 0 20px rgba(255, 90, 0, 0.06) !important;
-    }
-
-    .alvo-option-icon-box.agendamento-box {
-      width: 52px !important;
-      height: 52px !important;
-      border-radius: 14px !important;
-      background: rgba(255, 90, 0, 0.15) !important;
-      border: 1px solid rgba(255, 90, 0, 0.35) !important;
-      color: #ff5a00 !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      flex-shrink: 0 !important;
-      transition: transform 0.25s ease, background 0.25s ease !important;
-    }
-
-    .alvo-modal-option-card.option-agendamento:hover .alvo-option-icon-box.agendamento-box {
-      transform: scale(1.06) !important;
-      background: rgba(255, 90, 0, 0.24) !important;
-    }
-
-    .alvo-option-tag.tag-agendamento {
-      font-size: 10px !important;
-      font-weight: 700 !important;
-      text-transform: uppercase !important;
-      letter-spacing: 0.8px !important;
-      color: #ff7e36 !important;
-      margin-bottom: 2px !important;
-    }
-
-    .alvo-option-info {
-      flex: 1 !important;
-      min-width: 0 !important;
-      text-align: left !important;
-    }
-
-    .alvo-option-title {
-      font-family: 'Anton', sans-serif !important;
-      font-size: 19px !important;
-      letter-spacing: 0.4px !important;
-      color: #ffffff !important;
-      margin: 0 0 3px 0 !important;
-      line-height: 1.2 !important;
-      text-transform: uppercase !important;
-    }
-
-    .alvo-option-desc {
-      font-size: 12.5px !important;
-      line-height: 1.38 !important;
-      color: rgba(255, 255, 255, 0.65) !important;
-      margin: 0 !important;
-    }
-
-    .alvo-option-arrow {
-      width: 36px !important;
-      height: 36px !important;
-      border-radius: 50% !important;
-      background: rgba(255, 255, 255, 0.05) !important;
-      border: 1px solid rgba(255, 255, 255, 0.1) !important;
-      color: rgba(255, 255, 255, 0.8) !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      flex-shrink: 0 !important;
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
-    }
-
-    .alvo-modal-option-card:hover .alvo-option-arrow {
-      transform: translateX(3px) !important;
-      background: #ffffff !important;
-      border-color: #ffffff !important;
-      color: #0d0705 !important;
-    }
-
-    .alvo-modal-footer {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      gap: 7px !important;
-      font-size: 11.5px !important;
-      color: rgba(255, 255, 255, 0.42) !important;
-      text-align: center !important;
-    }
-
-    .alvo-modal-footer svg {
-      opacity: 0.7 !important;
-    }
-
-    @media screen and (max-width: 480px) {
-      .alvo-modal-card {
-        padding: 24px 18px 20px !important;
-        border-radius: 20px !important;
-      }
-      .alvo-modal-option-card {
-        padding: 14px 14px !important;
-        gap: 12px !important;
-      }
-      .alvo-option-icon-box.whatsapp-box,
-      .alvo-option-icon-box.agendamento-box {
-        width: 44px !important;
-        height: 44px !important;
-      }
-      .alvo-option-title {
-        font-size: 17px !important;
-      }
-      .alvo-option-desc {
-        font-size: 11.5px !important;
-      }
-      .alvo-option-arrow {
-        width: 30px !important;
-        height: 30px !important;
-      }
-    }
-
   </style>
   <!-- Estilo Hero Editorial High-Impact Alvo02Fit -->
   <style id="alvo-hero-editorial-style">
@@ -3667,15 +3757,55 @@
                   </a>
                 </div>
                 <div role="listitem" class="service-co-item w-dyn-item">
-                  <a href="agendamento.html?modalidade=FitDance" class="service-single-card-wrap w-inline-block" title="Agendar aula experimental de FitDance, Ritbox e Zumba">
+                  <a href="agendamento.html?modalidade=Ritbox" class="service-single-card-wrap w-inline-block" title="Agendar aula experimental de Ritbox">
                     <div class="service-single-card sf-modalidade-card">
-                      <img src="./images/modalidade-fitdance.jpg" alt="FitDance, Ritbox e Zumba - Academia Alvo02Fit" class="sf-card-bg-img" loading="lazy" />
+                      <img src="./images/modalidade-ritbox.jpg" alt="Ritbox - Academia Alvo02Fit" class="sf-card-bg-img" loading="lazy" />
                       <div class="sf-card-overlay"></div>
                       <div class="sf-card-content">
                         <div class="sf-card-info">
                           <span class="sf-card-badge">04 • MODALIDADE</span>
-                          <h3 class="sf-card-title">FitDance, Ritbox &amp; Zumba</h3>
-                          <p class="sf-card-desc">Queima Calórica • Ritmo &amp; Energia</p>
+                          <h3 class="sf-card-title">Ritbox</h3>
+                          <p class="sf-card-desc">Treino Rítmico • Queima &amp; Força</p>
+                        </div>
+                        <div class="sf-card-btn" aria-label="Agendar">
+                          <svg viewBox="0 0 16 14" fill="none" class="sf-card-btn-icon" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 1L14 7M14 7L8 13M14 7H1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div role="listitem" class="service-co-item w-dyn-item">
+                  <a href="agendamento.html?modalidade=FitDance" class="service-single-card-wrap w-inline-block" title="Agendar aula experimental de FitDance">
+                    <div class="service-single-card sf-modalidade-card">
+                      <img src="./images/modalidade-fitdance.jpg" alt="FitDance - Academia Alvo02Fit" class="sf-card-bg-img" loading="lazy" />
+                      <div class="sf-card-overlay"></div>
+                      <div class="sf-card-content">
+                        <div class="sf-card-info">
+                          <span class="sf-card-badge">05 • MODALIDADE</span>
+                          <h3 class="sf-card-title">FitDance</h3>
+                          <p class="sf-card-desc">Coreografia • Diversão &amp; Ritmo</p>
+                        </div>
+                        <div class="sf-card-btn" aria-label="Agendar">
+                          <svg viewBox="0 0 16 14" fill="none" class="sf-card-btn-icon" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 1L14 7M14 7L8 13M14 7H1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div role="listitem" class="service-co-item w-dyn-item">
+                  <a href="agendamento.html?modalidade=Zumba" class="service-single-card-wrap w-inline-block" title="Agendar aula experimental de Zumba">
+                    <div class="service-single-card sf-modalidade-card">
+                      <img src="./images/modalidade-zumba.jpg" alt="Zumba - Academia Alvo02Fit" class="sf-card-bg-img" loading="lazy" />
+                      <div class="sf-card-overlay"></div>
+                      <div class="sf-card-content">
+                        <div class="sf-card-info">
+                          <span class="sf-card-badge">06 • MODALIDADE</span>
+                          <h3 class="sf-card-title">Zumba</h3>
+                          <p class="sf-card-desc">Dança Latina • Energia &amp; Cardio</p>
                         </div>
                         <div class="sf-card-btn" aria-label="Agendar">
                           <svg viewBox="0 0 16 14" fill="none" class="sf-card-btn-icon" xmlns="http://www.w3.org/2000/svg">
@@ -4294,7 +4424,7 @@
                   <div class="div-block-43">
                     <div class="star-text-wrapper _01">
                       <div class="star-text-wrap">
-                        <div class="counter-main-wrapper">
+                        <div data-w-id="0d46caea-c8f1-5235-1cb2-09e39ee4b4ba" class="counter-main-wrapper">
                           <div class="count-wrapper">
                             <div class="count-wrap">
                               <div class="counter-single-wrapper _04">
@@ -5124,25 +5254,15 @@
                 <img loading="lazy" src="./images/alvo02fit-logo.png" alt="Alvo02Fit - Academia" class="footer-logo-image" />
               </a>
               <div data-w-id="9ceb58aa-afd9-3ed3-d683-4313c017b123" class="social-media-link-holder">
-                <a href="https://www.facebook.com/" target="_blank" class="social-media-link-cover w-inline-block">
+                <a href="https://www.facebook.com/" target="_blank" class="social-media-link-cover w-inline-block" aria-label="Facebook">
                   <img loading="lazy"
                     src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ccc0dd75cc2d406089689a_SVG.svg"
                     alt="" class="social-link" />
                 </a>
                 <a href="https://www.instagram.com/alvo02fit/" target="_blank"
-                  class="social-media-link-cover w-inline-block">
+                  class="social-media-link-cover w-inline-block" aria-label="Instagram">
                   <img loading="lazy"
                     src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ccc0ddd196de209851550d_SVG%20(1).svg"
-                    alt="" class="social-link" />
-                </a>
-                <a href="https://x.com/" target="_blank" class="social-media-link-cover w-inline-block">
-                  <img loading="lazy"
-                    src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ccc0dd9812da8a08df0ffc_twitter%20(1)%201.svg"
-                    alt="" class="social-link" />
-                </a>
-                <a href="https://www.linkedin.com/" target="_blank" class="social-media-link-cover w-inline-block">
-                  <img loading="lazy"
-                    src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ccc0dd57e933df6e32d766_linkedin%201.svg"
                     alt="" class="social-link" />
                 </a>
               </div>
@@ -5294,6 +5414,90 @@
       </div>
     </div>
   </div>
+
+<!-- ========================================================
+       MODAL DE ESCOLHA: "COMEÇAR AGORA" (WhatsApp ou Agendamento)
+       ======================================================== -->
+  <div id="alvo-choice-modal" class="alvo-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="alvo-modal-title">
+    <div class="alvo-modal-backdrop" id="alvo-modal-backdrop"></div>
+    <div class="alvo-modal-container">
+      <div class="alvo-modal-card">
+        <!-- Botão Fechar -->
+        <button type="button" class="alvo-modal-close" id="alvo-modal-close" aria-label="Fechar janela">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <!-- Cabeçalho -->
+        <div class="alvo-modal-header">
+          <div class="alvo-modal-badge">
+            <span class="alvo-modal-badge-dot"></span>
+            ALVO 02 FIT • COMEÇAR AGORA
+          </div>
+          <h2 id="alvo-modal-title" class="alvo-modal-title">COMO PREFERE INICIAR?</h2>
+          <p class="alvo-modal-subtitle">Escolha o canal de sua preferência para dar o primeiro passo na sua melhor versão:</p>
+        </div>
+
+        <!-- Opções de Escolha -->
+        <div class="alvo-modal-options">
+          <!-- Opção 1: Agendamento de Aula Experimental (Prioridade) -->
+          <a href="agendamento.html" class="alvo-modal-option-card option-agendamento">
+            <div class="alvo-option-icon-box agendamento-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+                <circle cx="12" cy="15" r="1.5" fill="currentColor"></circle>
+              </svg>
+            </div>
+            <div class="alvo-option-info">
+              <div class="alvo-option-tag tag-agendamento">AULA EXPERIMENTAL GRÁTIS</div>
+              <h3 class="alvo-option-title">Agendar Aula Experimental</h3>
+              <p class="alvo-option-desc">Escolha sua modalidade (Musculação, Funcional, Pilates ou FitDance) e horário 100% online.</p>
+            </div>
+            <div class="alvo-option-arrow">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </div>
+          </a>
+
+          <!-- Opção 2: WhatsApp da Academia -->
+          <a href="https://wa.me/5511930025829?text=Ol%C3%A1,%20gostaria%20de%20me%20matricular%20na%20Alvo02Fit" 
+             target="_blank" rel="noopener noreferrer" class="alvo-modal-option-card option-whatsapp">
+            <div class="alvo-option-icon-box whatsapp-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+              </svg>
+            </div>
+            <div class="alvo-option-info">
+              <div class="alvo-option-tag tag-whatsapp">ATENDIMENTO RÁPIDO</div>
+              <h3 class="alvo-option-title">Falar no WhatsApp</h3>
+              <p class="alvo-option-desc">Tire dúvidas sobre planos, matrículas e horários direto com nossa recepção.</p>
+            </div>
+            <div class="alvo-option-arrow">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </div>
+          </a>
+        </div>
+
+        <!-- Rodapé do Modal -->
+        <div class="alvo-modal-footer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <span>Ambiente seguro • Alvo02Fit Academia</span>
+        </div>
+      </div>
+    </div>
 
   <!-- ========================================================
      14. SCRIPTS DE ANIMACAO & FUNCIONALIDADES
@@ -5585,7 +5789,7 @@
 
       // Clique direto em qualquer card
       cards.forEach(function (card, i) {
-        card.addEventListener('click', function () {
+        card.addEventListener('click', function (e) {
           if (isDragging) return;
           if (i === currentIndex) {
             // Card ativo clicado -> abre imagem ampliada
@@ -5598,55 +5802,82 @@
         });
       });
 
-      // Gesto de Swipe e Arraste no Carrossel
+      // Gesto de Swipe e Arraste no Carrossel (Touch e Mouse)
       var startX = 0;
+      var startY = 0;
       var currentX = 0;
+      var currentY = 0;
       var isPointerDown = false;
       var isDragging = false;
+      var isHorizontalSwipe = false;
       var threshold = 35;
+
+      var swipeSurface = container || track;
 
       function onPointerStart(e) {
         if (isLightboxOpen) return;
+        var pt = (e.touches && e.touches[0]) ? e.touches[0] : e;
         isPointerDown = true;
         isDragging = false;
-        startX = (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
+        isHorizontalSwipe = false;
+        startX = pt.clientX;
+        startY = pt.clientY;
         currentX = startX;
+        currentY = startY;
         stopAutoPlay();
       }
 
       function onPointerMove(e) {
         if (!isPointerDown) return;
-        currentX = (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
-        var delta = currentX - startX;
-        if (Math.abs(delta) > 8) {
-          isDragging = true;
+        var pt = (e.touches && e.touches[0]) ? e.touches[0] : e;
+        currentX = pt.clientX;
+        currentY = pt.clientY;
+
+        var deltaX = currentX - startX;
+        var deltaY = currentY - startY;
+
+        if (!isDragging) {
+          if (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) {
+            isDragging = true;
+            if (Math.abs(deltaX) > Math.abs(deltaY) * 1.1) {
+              isHorizontalSwipe = true;
+            } else {
+              isHorizontalSwipe = false;
+            }
+          }
         }
       }
 
       function onPointerEnd(e) {
         if (!isPointerDown) return;
         isPointerDown = false;
-        var delta = currentX - startX;
 
-        if (Math.abs(delta) >= threshold) {
-          if (delta < 0) {
+        var deltaX = currentX - startX;
+        var deltaY = currentY - startY;
+
+        if (isHorizontalSwipe && Math.abs(deltaX) >= threshold) {
+          if (deltaX < 0) {
             nextSlide();
           } else {
             prevSlide();
           }
         }
+
         restartAutoPlay();
 
         setTimeout(function () {
           isDragging = false;
-        }, 60);
+          isHorizontalSwipe = false;
+        }, 80);
       }
 
-      track.addEventListener('touchstart', onPointerStart, { passive: true });
-      track.addEventListener('touchmove', onPointerMove, { passive: true });
-      track.addEventListener('touchend', onPointerEnd, { passive: true });
-
-      track.addEventListener('mousedown', onPointerStart);
+      if (swipeSurface) {
+        swipeSurface.addEventListener('touchstart', onPointerStart, { passive: true });
+        swipeSurface.addEventListener('touchmove', onPointerMove, { passive: true });
+        swipeSurface.addEventListener('touchend', onPointerEnd, { passive: true });
+        swipeSurface.addEventListener('touchcancel', onPointerEnd, { passive: true });
+        swipeSurface.addEventListener('mousedown', onPointerStart);
+      }
       window.addEventListener('mousemove', onPointerMove);
       window.addEventListener('mouseup', onPointerEnd);
 
@@ -5787,92 +6018,6 @@
             </svg>
             <span>WhatsApp</span>
           </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ========================================================
-       MODAL DE ESCOLHA: "COMEÇAR AGORA" (WhatsApp ou Agendamento)
-       ======================================================== -->
-  <div id="alvo-choice-modal" class="alvo-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="alvo-modal-title">
-    <div class="alvo-modal-backdrop" id="alvo-modal-backdrop"></div>
-    <div class="alvo-modal-container">
-      <div class="alvo-modal-card">
-        <!-- Botão Fechar -->
-        <button type="button" class="alvo-modal-close" id="alvo-modal-close" aria-label="Fechar janela">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-
-        <!-- Cabeçalho -->
-        <div class="alvo-modal-header">
-          <div class="alvo-modal-badge">
-            <span class="alvo-modal-badge-dot"></span>
-            ALVO 02 FIT • COMEÇAR AGORA
-          </div>
-          <h2 id="alvo-modal-title" class="alvo-modal-title">COMO PREFERE INICIAR?</h2>
-          <p class="alvo-modal-subtitle">Escolha o canal de sua preferência para dar o primeiro passo na sua melhor versão:</p>
-        </div>
-
-        <!-- Opções de Escolha -->
-        <div class="alvo-modal-options">
-          <!-- Opção 1: Agendamento de Aula Experimental (Prioridade) -->
-          <a href="agendamento.html" class="alvo-modal-option-card option-agendamento">
-            <div class="alvo-option-icon-box agendamento-box">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" y1="2" x2="16" y2="6"></line>
-                <line x1="8" y1="2" x2="8" y2="6"></line>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-                <circle cx="12" cy="15" r="1.5" fill="currentColor"></circle>
-              </svg>
-            </div>
-            <div class="alvo-option-info">
-              <div class="alvo-option-tag tag-agendamento">AULA EXPERIMENTAL GRÁTIS</div>
-              <h3 class="alvo-option-title">Agendar Aula Experimental</h3>
-              <p class="alvo-option-desc">Escolha sua modalidade (Musculação, Funcional, Pilates ou FitDance) e horário 100% online.</p>
-            </div>
-            <div class="alvo-option-arrow">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </div>
-          </a>
-
-          <!-- Opção 2: WhatsApp da Academia -->
-          <a href="https://wa.me/5511930025829?text=Ol%C3%A1,%20gostaria%20de%20me%20matricular%20na%20Alvo02Fit" 
-             target="_blank" rel="noopener noreferrer" class="alvo-modal-option-card option-whatsapp">
-            <div class="alvo-option-icon-box whatsapp-box">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
-              </svg>
-            </div>
-            <div class="alvo-option-info">
-              <div class="alvo-option-tag tag-whatsapp">ATENDIMENTO RÁPIDO</div>
-              <h3 class="alvo-option-title">Falar no WhatsApp</h3>
-              <p class="alvo-option-desc">Tire dúvidas sobre planos, matrículas e horários direto com nossa recepção.</p>
-            </div>
-            <div class="alvo-option-arrow">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </div>
-          </a>
-        </div>
-
-        <!-- Rodapé do Modal -->
-        <div class="alvo-modal-footer">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-          </svg>
-          <span>Ambiente seguro • Alvo02Fit Academia</span>
         </div>
       </div>
     </div>
@@ -6148,7 +6293,7 @@
     })();
   </script>
 
-  <!-- Script: Desfixa o titulo e sobe junto com os cards no mobile (evita sobreposicao) -->
+  <!-- Script: Sincronização Mobile: Desfixa o titulo e aplica efeito Smart Fit de transparência nos cards conforme sobem -->
   <script id="alvo-modalidades-unpin-sync">
     (function () {
       var ticking = false;
@@ -6160,6 +6305,12 @@
           if (titleDesktop && titleDesktop.style.transform) {
             titleDesktop.style.transform = '';
           }
+          var cardsDesktop = document.querySelectorAll('.section-modalidades .service-co-item');
+          for (var d = 0; d < cardsDesktop.length; d++) {
+            if (cardsDesktop[d].style.opacity) {
+              cardsDesktop[d].style.opacity = '';
+            }
+          }
           return;
         }
 
@@ -6167,8 +6318,9 @@
         var c1 = document.querySelector('.section-modalidades .service-co-item:nth-child(1)');
         if (!title || !c1) return;
 
+        // 1. Desfixa e sobe o título de forma sincronizada com o Card 01 no final da seção
         var c1Top = c1.getBoundingClientRect().top;
-        var threshold = 255; // Ponto de trava do card 01
+        var threshold = 250; // Ponto de trava do card 01
 
         if (c1Top < threshold) {
           var diff = Math.round(c1Top - threshold);
@@ -6177,6 +6329,28 @@
           if (title.style.transform) {
             title.style.transform = '';
           }
+        }
+
+        // 2. Efeito Smart Fit: Conforme o próximo card sobe e sobrepõe, o card debaixo vai ganhando transparência
+        var cards = document.querySelectorAll('.section-modalidades .service-co-item');
+        var numCards = cards.length;
+        for (var i = 0; i < numCards; i++) {
+          if (i === numCards - 1) {
+            // O último card nunca é coberto por outro card abaixo dele
+            cards[i].style.opacity = '1';
+            continue;
+          }
+
+          var cur = cards[i].getBoundingClientRect();
+          var next = cards[i + 1].getBoundingClientRect();
+          var cardHeight = cur.height || 350;
+
+          // Overlap: 0 quando o próximo card ainda está abaixo da base; 1 quando cobriu completamente
+          var overlap = Math.max(0, Math.min(1, (cur.bottom - next.top) / cardHeight));
+          
+          // Transparência suave: começa em 1.0 (100% opaco) e diminui até ~0.18 (translúcido/desaparecendo)
+          var opacity = (1 - (overlap * 0.82)).toFixed(3);
+          cards[i].style.opacity = opacity;
         }
       }
 
@@ -6189,6 +6363,8 @@
 
       window.addEventListener('scroll', onScrollOrResize, { passive: true });
       window.addEventListener('resize', onScrollOrResize, { passive: true });
+      window.addEventListener('orientationchange', onScrollOrResize, { passive: true });
+      window.addEventListener('load', onScrollOrResize, { passive: true });
       updateModalidadesSync();
     })();
   </script>
@@ -6240,6 +6416,7 @@
       // Interceptar cliques em todos os botões "COMEÇAR AGORA" do site
       function bindTriggers() {
         var selectors = [
+          '.nav-button',
           '.nav-button-wrap .nav-button',
           '.hamburg-btn-wrap .nav-button',
           '.radial-menu-cta-button',
@@ -6262,7 +6439,6 @@
       window.closeChoiceModal = closeChoiceModal;
     })();
   </script>
-
 </body>
 
 </html>

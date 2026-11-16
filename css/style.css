@@ -8046,18 +8046,30 @@ p {
     font-size: 12px;
   }
 
-  .carousel-3d-nav-btn {
-    width: 36px;
-    height: 36px;
-    top: 48%;
+  .carousel-3d-nav-btn,
+  #carousel-prev,
+  #carousel-next,
+  .design-card-zoom-btn {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
   }
 
-  .carousel-3d-prev-btn {
-    left: 2px;
+  .carousel-3d-wrapper,
+  .inner-design-image-block {
+    touch-action: pan-y !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
   }
 
-  .carousel-3d-next-btn {
-    right: 2px;
+  .design-card {
+    cursor: pointer !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+
+  .design-card-caption {
+    pointer-events: none !important;
   }
 
   .service-block-home {
