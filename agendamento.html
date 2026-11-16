@@ -7,16 +7,36 @@
   <title>Agendar Aula Experimental Gratuita | Alvo02Fit - Academia em São Mateus</title>
   <meta name="description"
     content="Agende sua aula experimental 100% gratuita na Alvo02Fit. Escolha a modalidade, dia e horário ideal para o seu treino em São Mateus, SP." />
+  <link rel="preload" href="./fonts/anton.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="./fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="./css/style.css" rel="stylesheet" type="text/css" />
-  <script src="./js/webfont.js" type="text/javascript"></script>
   <script type="text/javascript">
-    WebFont.load({ google: { families: ["Anton:300,400,500,600,700", "Inter Tight:300,400,500,600,700", "Onest:300,400,500,600,700"] } });
+    window.WebFontConfig = {
+      google: { families: ["Anton:300,400,500,600,700", "Inter Tight:300,400,500,600,700", "Onest:300,400,500,600,700"] }
+    };
   </script>
+  <script src="./js/webfont.js" type="text/javascript" async></script>
   <link rel="shortcut icon" href="./images/alvo02fit-logo.png" type="image/x-icon" />
 
   <style>
+    @font-face {
+      font-family: 'Anton';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('./fonts/anton.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: 'Inter Tight';
+      font-style: normal;
+      font-weight: 300 800;
+      font-display: swap;
+      src: url('./fonts/inter-tight.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
     :root {
       --primary: #f96a24;
       --primary-hover: #ff4d00;
@@ -51,14 +71,29 @@
 
     /* Navbar específica de agendamento */
     .schedule-nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(15, 5, 3, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 16px 0;
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      z-index: 1000 !important;
+      background: rgba(15, 5, 3, 0.94) !important;
+      backdrop-filter: blur(14px) !important;
+      -webkit-backdrop-filter: blur(14px) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+      padding: 16px 0 !important;
+      box-sizing: border-box !important;
+      transition: background 0.3s ease, box-shadow 0.3s ease !important;
+    }
+
+    body {
+      padding-top: 78px !important;
+    }
+
+    @media screen and (max-width: 767px) {
+      body {
+        padding-top: 80px !important;
+      }
     }
 
     .schedule-nav-inner {
@@ -187,7 +222,7 @@
       display: grid;
       grid-template-columns: minmax(0, 1fr) 370px;
       gap: 28px;
-      align-items: start;
+      align-items: stretch;
       margin-bottom: 80px;
       min-width: 0;
     }
@@ -617,25 +652,193 @@
       color: #ffffff;
     }
 
-    /* Coluna Direita: Resumo Fixo (Summary Voucher) */
+    /* Coluna Direita: Resumo Estendido (Desktop Full Height) */
     .schedule-summary-sticky {
-      position: sticky;
-      top: 86px;
+      position: relative;
       width: 100%;
       min-width: 0;
       box-sizing: border-box;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
     }
 
     .summary-card {
       background: linear-gradient(145deg, #180a06 0%, #120704 100%);
       border: 1.5px solid rgba(249, 106, 36, 0.4);
       border-radius: 22px;
-      padding: 22px;
+      padding: 24px;
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 40px rgba(249, 106, 36, 0.1);
       position: relative;
       overflow: hidden;
       box-sizing: border-box;
       min-width: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .summary-card-top {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .summary-card-middle {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 18px 16px;
+      margin-top: 18px;
+      margin-bottom: 22px;
+    }
+
+    .summary-card-bottom {
+      margin-top: auto;
+      padding-top: 8px;
+    }
+
+    /* Passaporte VIP */
+    .summary-vip-pass {
+      background: linear-gradient(135deg, rgba(249, 106, 36, 0.12) 0%, rgba(20, 8, 4, 0.6) 100%);
+      border: 1px solid rgba(249, 106, 36, 0.35);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .summary-vip-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .summary-vip-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #f96a24;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      white-space: nowrap;
+    }
+
+    .vip-pill-free {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: #26d07c;
+      background: rgba(38, 208, 124, 0.15);
+      border: 1px solid rgba(38, 208, 124, 0.3);
+      border-radius: 100px;
+      padding: 3px 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      white-space: nowrap;
+    }
+
+    .summary-vip-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+      color: #dcd3cb;
+    }
+
+    .summary-vip-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .summary-vip-item svg {
+      flex-shrink: 0;
+    }
+
+    /* Social Card (Google 4.9) */
+    .summary-social-card {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
+    .summary-social-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .social-score-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .social-score {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .social-stars {
+      display: flex;
+      gap: 2px;
+    }
+
+    .social-count {
+      font-size: 11px;
+      color: #a89f97;
+    }
+
+    .summary-quote {
+      font-size: 12px;
+      font-style: italic;
+      color: #b8aba2;
+      margin: 0 0 10px 0;
+      line-height: 1.45;
+    }
+
+    .summary-quote-author {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+    }
+
+    .author-name {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .verified-tag {
+      color: #26d07c;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10.5px;
+    }
+
+    .verified-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #26d07c;
+      box-shadow: 0 0 6px rgba(38, 208, 124, 0.6);
+      display: inline-block;
     }
 
     .summary-card::before {
@@ -963,12 +1166,17 @@
       .schedule-main-layout {
         grid-template-columns: 1fr;
         gap: 28px;
+        align-items: start !important;
       }
       .schedule-summary-sticky {
         position: static;
         max-width: 480px;
         margin: 0 auto;
         width: 100%;
+        height: auto !important;
+      }
+      .summary-card {
+        height: auto !important;
       }
       .faq-accordion-grid {
         grid-template-columns: 1fr;
@@ -1369,87 +1577,182 @@
 
         </div>
 
-        <!-- Coluna Direita: Resumo Fixo (Summary Card) -->
+        <!-- Coluna Direita: Resumo Estendido (Summary Card) -->
         <div class="schedule-summary-sticky">
           <div class="summary-card">
-            <div class="summary-badge-free">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-              </svg>
-              <span>Vaga 100% Gratuita</span>
+            <div class="summary-card-top">
+              <div class="summary-badge-free">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                </svg>
+                <span>Vaga 100% Gratuita</span>
+              </div>
+
+              <h3 class="summary-header-title">Resumo do Agendamento</h3>
+              <p class="summary-header-sub">Confira os detalhes da sua aula experimental na Alvo02Fit</p>
+
+              <div class="voucher-details-box">
+                <div class="voucher-row">
+                  <span class="voucher-row-label">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5v14M18 5v14M2 9v6M22 9v6M6 12h12"></path></svg>
+                    Modalidade:
+                  </span>
+                  <span class="voucher-row-val highlight" id="sum-modality">Musculação</span>
+                </div>
+
+                <div class="voucher-row">
+                  <span class="voucher-row-label">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    Data:
+                  </span>
+                  <span class="voucher-row-val" id="sum-date">Carregando...</span>
+                </div>
+
+                <div class="voucher-row">
+                  <span class="voucher-row-label">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    Horário:
+                  </span>
+                  <span class="voucher-row-val highlight" id="sum-time">19:00</span>
+                </div>
+
+                <div class="voucher-row">
+                  <span class="voucher-row-label">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Unidade:
+                  </span>
+                  <span class="voucher-row-val">Alvo02Fit - São Mateus</span>
+                </div>
+
+                <div class="voucher-row" style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 10px;">
+                  <span class="voucher-row-label">Investimento:</span>
+                  <span class="voucher-row-val price">R$ 0,00 (Grátis)</span>
+                </div>
+              </div>
+
+              <ul class="summary-benefits-list">
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Acesso total à estrutura no horário marcado</span>
+                </li>
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Acompanhamento com instrutor da equipe</span>
+                </li>
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Sem taxa de matrícula ou cobrança oculta</span>
+                </li>
+              </ul>
             </div>
 
-            <h3 class="summary-header-title">Resumo do Agendamento</h3>
-            <p class="summary-header-sub">Confira os detalhes da sua aula experimental na Alvo02Fit</p>
-
-            <div class="voucher-details-box">
-              <div class="voucher-row">
-                <span class="voucher-row-label">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5v14M18 5v14M2 9v6M22 9v6M6 12h12"></path></svg>
-                  Modalidade:
-                </span>
-                <span class="voucher-row-val highlight" id="sum-modality">Musculação</span>
+            <!-- Bloco Intermediário: Experiência da Aula -->
+            <div class="summary-card-middle">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f96a24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span style="font-size: 13.5px; font-weight: 700; color: #ffffff; text-transform: uppercase; letter-spacing: 0.5px;">Como funciona a sua aula</span>
+              </div>
+              
+              <div style="display: flex; flex-direction: column; gap: 12px; font-size: 12.5px; color: #b8aba2; line-height: 1.42;">
+                <div style="display: flex; gap: 10px;">
+                  <span style="background: rgba(249, 106, 36, 0.2); color: #f96a24; font-weight: 700; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 11px;">1</span>
+                  <span><strong>Chegada na recepção:</strong> Apresente seu comprovante recebido via WhatsApp na entrada da academia.</span>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                  <span style="background: rgba(249, 106, 36, 0.2); color: #f96a24; font-weight: 700; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 11px;">2</span>
+                  <span><strong>Conheça o espaço:</strong> Nosso time te apresenta a área de musculação, aparelhos modernos e vestiários.</span>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                  <span style="background: rgba(249, 106, 36, 0.2); color: #f96a24; font-weight: 700; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 11px;">3</span>
+                  <span><strong>Treino com suporte:</strong> Um instrutor estará à disposição para tirar dúvidas e demonstrar aparelhos.</span>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                  <span style="background: rgba(249, 106, 36, 0.2); color: #f96a24; font-weight: 700; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 11px;">4</span>
+                  <span><strong>Total liberdade:</strong> Treine sem pressão. Se gostar, você escolhe seu plano no seu tempo.</span>
+                </div>
               </div>
 
-              <div class="voucher-row">
-                <span class="voucher-row-label">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                  Data:
-                </span>
-                <span class="voucher-row-val" id="sum-date">Carregando...</span>
-              </div>
-
-              <div class="voucher-row">
-                <span class="voucher-row-label">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                  Horário:
-                </span>
-                <span class="voucher-row-val highlight" id="sum-time">19:00</span>
-              </div>
-
-              <div class="voucher-row">
-                <span class="voucher-row-label">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                  Unidade:
-                </span>
-                <span class="voucher-row-val">Alvo02Fit - São Mateus</span>
-              </div>
-
-              <div class="voucher-row" style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 10px;">
-                <span class="voucher-row-label">Investimento:</span>
-                <span class="voucher-row-val price">R$ 0,00 (Grátis)</span>
+              <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: #26d07c;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Vestiários climatizados & armários gratuitos inclusos</span>
               </div>
             </div>
 
-            <ul class="summary-benefits-list">
-              <li>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Acesso total à estrutura no horário marcado</span>
-              </li>
-              <li>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Acompanhamento com instrutor da equipe</span>
-              </li>
-              <li>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Sem taxa de matrícula ou cobrança oculta</span>
-              </li>
-            </ul>
+            <!-- Bloco 2: Passaporte VIP (Bônus Exclusivos de Boas-Vindas) -->
+            <div class="summary-vip-pass">
+              <div class="summary-vip-header">
+                <div class="summary-vip-badge">
+                  <span class="vip-icon">🎟️</span>
+                  <span>Passaporte Experimental VIP</span>
+                </div>
+                <span class="vip-pill-free">100% Grátis</span>
+              </div>
+              
+              <div class="summary-vip-list">
+                <div class="summary-vip-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#26d07c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span><strong>Bioimpedância Gratuita:</strong> Análise de gordura e massa magra no dia.</span>
+                </div>
+                <div class="summary-vip-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#26d07c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span><strong>Ficha de Treino Personalizada:</strong> Criada na hora com o professor.</span>
+                </div>
+                <div class="summary-vip-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#26d07c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span><strong>Acesso Total:</strong> Musculação, peso livre e área de cardio.</span>
+                </div>
+              </div>
+            </div>
 
-            <button type="submit" class="confirm-booking-btn">
-              <span>Confirmar Agendamento</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </button>
+            <!-- Bloco 3: Prova Social & Avaliação Google 4.9 ★★★★★ -->
+            <div class="summary-social-card">
+              <div class="summary-social-header">
+                <div class="social-score-wrap">
+                  <span class="social-score">4.9</span>
+                  <div class="social-stars">
+                    <img src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg" width="13" height="13" alt="estrela" />
+                    <img src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg" width="13" height="13" alt="estrela" />
+                    <img src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg" width="13" height="13" alt="estrela" />
+                    <img src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg" width="13" height="13" alt="estrela" />
+                    <img src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg" width="13" height="13" alt="estrela" />
+                  </div>
+                </div>
+                <span class="social-count">+280 no Google</span>
+              </div>
 
-            <div class="summary-safe-note">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-              </svg>
-              <span>Confirmação instantânea via WhatsApp</span>
+              <p class="summary-quote">
+                &ldquo;Ambiente excelente, equipamentos novos e professores que realmente acompanham a postura. Primeira academia onde mantive a const&acirc;ncia!&rdquo;
+              </p>
+
+              <div class="summary-quote-author">
+                <span class="author-name">&mdash; Rodrigo Santos</span>
+                <span class="verified-tag">
+                  <span class="verified-dot"></span>
+                  Aluno Verificado
+                </span>
+              </div>
+            </div>
+
+            <div class="summary-card-bottom">
+              <button type="submit" class="confirm-booking-btn">
+                <span>Confirmar Agendamento</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+
+              <div class="summary-safe-note">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <span>Confirmação instantânea via WhatsApp</span>
+              </div>
             </div>
           </div>
         </div>

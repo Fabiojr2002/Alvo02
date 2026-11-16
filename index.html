@@ -40,15 +40,48 @@
   <meta content="Webflow" name="generator" />
   <link href="./css/style.css" rel="stylesheet" type="text/css" />
 
+  <!-- Fontes Locais & Otimizacao de Performance -->
+  <link rel="preload" href="./fonts/anton.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="./fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" as="image" href="./images/hero-poster-mobile.jpg" media="(max-width: 768px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="./images/hero-poster.jpg" media="(min-width: 769px)" fetchpriority="high" />
+
   <style>
-    html.w-mod-js:not(.w-mod-ix3) :is(.marque-block, .animated-text-wrap) {
-      visibility: hidden !important;
+    /* ==========================================================================
+       CARREGAMENTO INSTANTANEO & ZERO FOUC / ATRASO INICIAL
+       Elimina ocultacao artificial do Webflow IX3. Hero, cards, botoes e marquee
+       renderizam imediatamente e com estabilidade desde o primeiro frame.
+       ========================================================================== */
+    html.w-mod-js:not(.w-mod-ix3) :is(.marque-block, .animated-text-wrap),
+    html.w-mod-js:not(.w-mod-ix3) :is(.hero-title, .paragraph-extra-large, .home-hero-left-card, .home-hero-right-card) {
+      visibility: visible !important;
     }
 
-    @media not all and (max-width: 479px) and (min-width: 0px) {
-      html.w-mod-js:not(.w-mod-ix3) :is(.hero-title, .paragraph-extra-large, .home-hero-left-card, .home-hero-right-card) {
-        visibility: hidden !important;
-      }
+    @font-face {
+      font-family: 'Anton';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('./fonts/anton.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    @font-face {
+      font-family: 'Inter Tight';
+      font-style: normal;
+      font-weight: 300 800;
+      font-display: swap;
+      src: url('./fonts/inter-tight.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    @font-face {
+      font-family: 'Onest';
+      font-style: normal;
+      font-weight: 300 800;
+      font-display: swap;
+      src: url('./fonts/onest.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
     }
   
 
@@ -435,11 +468,14 @@
 </style>
   <link href="https://fonts.googleapis.com" rel="preconnect" />
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous" />
-  <script src="./js/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    window.WebFontConfig = {
+      google: { families: ["Anton:300,400,500,600,700", "Inter Tight:300,400,500,600,700", "Onest:300,400,500,600,700"] }
+    };
+  </script>
+  <script src="./js/webfont.js" type="text/javascript" async></script>
   <script
-    type="text/javascript">WebFont.load({ google: { families: ["Anton:300,400,500,600,700", "Inter Tight:300,400,500,600,700", "Onest:300,400,500,600,700"] } });</script>
-  <script
-    type="text/javascript">!function (o, c) { var n = c.documentElement, t = " w-mod-"; n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch") }(window, document);</script>
+    type="text/javascript">!function (o, c) { var n = c.documentElement, t = " w-mod-"; n.className += t + "js" + t + "ix3", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch") }(window, document);</script>
   <link
     href="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69df0a0e5d7ad6341cf87a2f_Frame%201249187580.webp"
     rel="shortcut icon" type="image/x-icon" />
@@ -2201,6 +2237,8 @@
        ======================================================== */
     .navbar {
       visibility: visible !important;
+      opacity: 1 !important;
+      transform: none !important;
       position: fixed !important;
       top: 0 !important;
       left: 0 !important;
@@ -2789,7 +2827,7 @@
 
     .hero-ed-white {
       color: #ffffff !important;
-      animation: heroEdFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both !important;
+      opacity: 1 !important;
     }
 
     .hero-ed-orange {
@@ -2799,7 +2837,7 @@
       -webkit-text-fill-color: #f96a24 !important;
       filter: none !important;
       text-shadow: 0 6px 28px rgba(0, 0, 0, 0.88), 0 0 28px rgba(249, 106, 36, 0.22) !important;
-      animation: heroEdFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.16s both !important;
+      opacity: 1 !important;
     }
 
     /* Subtítulo Editorial */
@@ -2810,7 +2848,7 @@
       margin: 0 !important;
       line-height: 1.45 !important;
       text-shadow: 0 2px 14px rgba(0, 0, 0, 0.88) !important;
-      animation: heroEdFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both !important;
+      opacity: 1 !important;
     }
 
     /* Botões CTA na Hero */
@@ -2820,7 +2858,7 @@
       align-items: center !important;
       gap: 12px !important;
       margin-top: 6px !important;
-      animation: heroEdFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both !important;
+      opacity: 1 !important;
     }
 
     .hero-cta-primary {
@@ -3360,14 +3398,22 @@
     </div>
     <div id="hero" class="home-hero-bg-block">
       <div class="home-hero-bg-wrap">
-        <video id="hero-bg-video" class="home-hero-image home-hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hero-bg.jpg">
+        <video id="hero-bg-video" class="home-hero-image home-hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hero-poster.jpg">
           <!-- Video Vertical para Dispositivo Movel (<= 768px) -->
           <source src="./images/hero_cll.mp4" type="video/mp4" media="(max-width: 768px)" />
           <!-- Video Horizontal para Computador / Desktop (> 768px) -->
           <source src="./images/hero.mp4" type="video/mp4" />
           <source src="./hero.mp4" type="video/mp4" />
-          <img src="./images/hero-bg.jpg" loading="eager" fetchpriority="high" alt="Alvo02Fit - Treino e Performance" class="home-hero-image" />
+          <img src="./images/hero-poster.jpg" loading="eager" fetchpriority="high" alt="Alvo02Fit - Treino e Performance" class="home-hero-image" />
         </video>
+        <script>
+          (function() {
+            var v = document.getElementById('hero-bg-video');
+            if (v && window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
+              v.setAttribute('poster', './images/hero-poster-mobile.jpg');
+            }
+          })();
+        </script>
         <div class="hero-editorial-scrim" aria-hidden="true"></div>
       </div>
 
@@ -3406,7 +3452,7 @@
               style="box-sizing: border-box !important;">
               <div class="home-hero-left-card">
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ccf9e3fcf95f9e2bbb3d63_Subtract.webp"
+                  src="./images/69ccf9e3fcf95f9e2bbb3d63_Subtract.webp"
                   loading="lazy" alt="" class="hero-card-bg-image" />
                 <div class="home-hero-card-content">
                   <div class="card-content-top"
@@ -3425,10 +3471,10 @@
                   </div>
                   <div class="card-content-bottom">
                     <img
-                      src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ccff1c36640a2e7960be3b_ac51cc667e0cae0445129cce11a0559d_Ellipse%202.webp"
+                      src="./images/69ccff1c36640a2e7960be3b_ac51cc667e0cae0445129cce11a0559d_Ellipse 2.webp"
                       loading="lazy" alt="" class="card-circle-image" />
                     <img
-                      src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ccff1c99fe03e62ab1c3e2_fc2b58642a8b53e145c4f6144758ab92_Ellipse%204.webp"
+                      src="./images/69ccff1c99fe03e62ab1c3e2_fc2b58642a8b53e145c4f6144758ab92_Ellipse 4.webp"
                       loading="lazy" alt="" class="card-circle-image _01" />
                     <img
                       src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ccff6fb6bdacb33cfff003_Ellipse%204%20(2).webp"
@@ -3436,7 +3482,7 @@
                     <a href="#modalidades" class="card-circle-image _01 hero-modalidades-btn"
                       title="Ver Modalidades" aria-label="Ir para a seção de modalidades">
                       <img
-                        src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ccff1c899f2421383fdee2_Group%2096.svg"
+                        src="./images/69ccff1c899f2421383fdee2_Group 96.svg"
                         loading="lazy" alt="Ver Modalidades" style="width: 100%; height: 100%; display: block;" />
                     </a>
                   </div>
@@ -3474,7 +3520,7 @@
                   <div class="star-text-wrap">
                     <h2 class="_4-8-text">4.8</h2>
                     <img
-                      src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg"
+                      src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
                       loading="lazy" alt="Nota 4.8 estrelas" class="star-logo" />
                   </div>
                   <p class="paragraph" style="margin-bottom:0;">Avalia&ccedil;&atilde;o dos alunos</p>
@@ -3501,7 +3547,7 @@
                   <h3 class="marque-text">Muscula&ccedil;&atilde;o</h3>
                 </div>
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3509,7 +3555,7 @@
                   <h3 class="marque-text">Treino Funcional</h3>
                 </div>
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3517,7 +3563,7 @@
                   <h3 class="marque-text">Pilates</h3>
                 </div>
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3525,7 +3571,7 @@
                   <h3 class="marque-text">FitDance</h3>
                 </div>
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3533,7 +3579,7 @@
                   <h3 class="marque-text">Ritbox</h3>
                 </div>
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3541,7 +3587,7 @@
                   <h3 class="marque-text">Zumba</h3>
                 </div>
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3549,7 +3595,7 @@
                   <h3 class="marque-text">Cardio</h3>
                 </div>
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3557,7 +3603,7 @@
                   <h3 class="marque-text">Aulas Coletivas</h3>
                 </div>
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3565,7 +3611,7 @@
                   <h3 class="marque-text">Alongamento</h3>
                 </div>
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
             </div>
@@ -3579,7 +3625,7 @@
                   <h3 class="marque-text">FitDance</h3>
                 </div>
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3587,7 +3633,7 @@
                   <h3 class="marque-text">Muscula&ccedil;&atilde;o</h3>
                 </div>
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3595,7 +3641,7 @@
                   <h3 class="marque-text">Ritbox</h3>
                 </div>
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3603,7 +3649,7 @@
                   <h3 class="marque-text">Treino Funcional</h3>
                 </div>
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3611,7 +3657,7 @@
                   <h3 class="marque-text">Zumba</h3>
                 </div>
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3619,7 +3665,7 @@
                   <h3 class="marque-text">Pilates</h3>
                 </div>
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3627,7 +3673,7 @@
                   <h3 class="marque-text">Cardio</h3>
                 </div>
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3635,7 +3681,7 @@
                   <h3 class="marque-text">Aulas Coletivas</h3>
                 </div>
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3643,7 +3689,7 @@
                   <h3 class="marque-text">Alongamento</h3>
                 </div>
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3651,7 +3697,7 @@
                   <h3 class="marque-text">FitDance</h3>
                 </div>
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3659,7 +3705,7 @@
                   <h3 class="marque-text">Muscula&ccedil;&atilde;o</h3>
                 </div>
                 <img
-                  src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
             </div>
@@ -4347,7 +4393,7 @@
                           </div>
                         </div>
                         <img loading="lazy"
-                          src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg"
+                          src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
                           alt="" class="star-image" />
                       </div>
                       <p class="counter-sub-text">Avalia&ccedil;&otilde;es</p>
@@ -4381,7 +4427,7 @@
                           </div>
                         </div>
                         <img loading="lazy"
-                          src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg"
+                          src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
                           alt="" class="star-image" />
                       </div>
                       <p class="counter-sub-text">Seguidores no Instagram</p>
@@ -4428,7 +4474,7 @@
                           </div>
                         </div>
                         <img loading="lazy"
-                          src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg"
+                          src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
                           alt="" class="star-image" />
                       </div>
                       <p class="counter-sub-text">Modalidades</p>
@@ -4475,7 +4521,7 @@
                           </div>
                         </div>
                         <img loading="lazy"
-                          src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg"
+                          src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
                           alt="" class="star-image" />
                       </div>
                       <p class="counter-sub-text">Aulas por semana</p>
@@ -4827,19 +4873,19 @@
                     <h3 class="_4-8-text">5.0</h3>
                     <div class="star-image-wrap">
                       <img loading="lazy"
-                        src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
                         alt="" class="star-image" />
                     </div>
                   </div>
@@ -4856,19 +4902,19 @@
                     <h3 class="_4-8-text">5.0</h3>
                     <div class="star-image-wrap">
                       <img loading="lazy"
-                        src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
                         alt="" class="star-image" />
                     </div>
                   </div>
@@ -4885,19 +4931,19 @@
                     <h3 class="_4-8-text">5.0</h3>
                     <div class="star-image-wrap">
                       <img loading="lazy"
-                        src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
                         alt="" class="star-image" />
                     </div>
                   </div>
