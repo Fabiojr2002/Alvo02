@@ -2212,6 +2212,31 @@
 
       const randomCode = "#ALVO-" + Math.floor(1000 + Math.random() * 9000);
 
+      // Salva no armazenamento local para o Painel da Equipe
+      try {
+        const newBooking = {
+          id: "alvo_" + Date.now() + "_" + Math.floor(Math.random() * 1000),
+          code: randomCode,
+          name: name,
+          phone: phone,
+          modality: state.modality,
+          dateIso: state.selectedDate ? state.selectedDate.iso : new Date().toISOString().split("T")[0],
+          dateDisplay: state.selectedDate ? state.selectedDate.display : "Data a definir",
+          time: state.selectedTime,
+          experience: state.experience,
+          goal: state.goal || "Condicionamento físico e saúde",
+          status: "Pendente",
+          createdAt: new Date().toISOString(),
+          notes: ""
+        };
+
+        const existing = JSON.parse(localStorage.getItem("alvo_agendamentos") || "[]");
+        existing.unshift(newBooking);
+        localStorage.setItem("alvo_agendamentos", JSON.stringify(existing));
+      } catch (err) {
+        console.warn("Erro ao salvar agendamento no localStorage:", err);
+      }
+
       // Preenche os dados no modal
       document.getElementById("modal-code").innerText = randomCode;
       document.getElementById("modal-name").innerText = name;

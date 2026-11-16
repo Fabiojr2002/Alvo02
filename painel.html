@@ -1,0 +1,2114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Painel de Controle | Alvo02Fit - Gestão de Alunos Agendados</title>
+  <meta name="description" content="Painel administrativo da equipe Alvo02Fit. Visualize, confirme e gerencie os alunos agendados para aulas experimentais." />
+  <link rel="shortcut icon" href="./images/alvo02fit-logo.png" type="image/x-icon" />
+
+  <!-- Fontes Locais com Preload -->
+  <link rel="preload" href="./fonts/anton.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="./fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin />
+
+  <style>
+    @font-face {
+      font-family: 'Anton';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('./fonts/anton.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    @font-face {
+      font-family: 'Inter Tight';
+      font-style: normal;
+      font-weight: 300 800;
+      font-display: swap;
+      src: url('./fonts/inter-tight.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    :root {
+      --bg-dark: #0a0604;
+      --bg-surface: #140805;
+      --bg-card: #190c08;
+      --bg-card-hover: #22110b;
+      --border: rgba(255, 90, 0, 0.18);
+      --border-focus: rgba(255, 90, 0, 0.55);
+      --primary: #f96a24;
+      --primary-hover: #ff5a00;
+      --primary-glow: rgba(249, 106, 36, 0.35);
+      --text-main: #f5f0eb;
+      --text-muted: #a69a91;
+      --text-dim: #756860;
+      
+      --status-pending-bg: rgba(234, 179, 8, 0.14);
+      --status-pending-border: rgba(234, 179, 8, 0.38);
+      --status-pending-text: #facc15;
+      
+      --status-confirmed-bg: rgba(34, 197, 94, 0.14);
+      --status-confirmed-border: rgba(34, 197, 94, 0.38);
+      --status-confirmed-text: #4ade80;
+
+      --status-done-bg: rgba(56, 189, 248, 0.14);
+      --status-done-border: rgba(56, 189, 248, 0.38);
+      --status-done-text: #38bdf8;
+
+      --status-cancelled-bg: rgba(239, 68, 68, 0.14);
+      --status-cancelled-border: rgba(239, 68, 68, 0.38);
+      --status-cancelled-text: #f87171;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 15% 10%, rgba(249, 106, 36, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(249, 106, 36, 0.05) 0%, transparent 40%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0d0705;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2a1610;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
+    }
+
+    /* Container Principal */
+    .app-container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px 20px 48px;
+      flex: 1;
+    }
+
+    /* HEADER DO PAINEL */
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-logo-link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .header-logo-img {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .header-badge-team {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(249, 106, 36, 0.12);
+      border: 1px solid rgba(249, 106, 36, 0.35);
+      border-radius: 100px;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .header-badge-team .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 8px #22c55e;
+      animation: pulseGreen 2s infinite;
+    }
+
+    @keyframes pulseGreen {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .header-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .live-clock-time {
+      font-family: 'Anton', sans-serif;
+      font-size: 26px;
+      letter-spacing: 1px;
+      color: #ffffff;
+      line-height: 1;
+    }
+
+    .live-clock-date {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: capitalize;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 100px;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ff7e36 0%, #f15a24 60%, #d63f09 100%);
+      color: #ffffff;
+      border-color: rgba(255, 90, 0, 0.5);
+      box-shadow: 0 6px 20px rgba(241, 90, 36, 0.35);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(241, 90, 36, 0.5);
+      color: #ffffff;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline-primary {
+      background: rgba(249, 106, 36, 0.08);
+      color: var(--primary);
+      border-color: rgba(249, 106, 36, 0.35);
+    }
+    .btn-outline-primary:hover {
+      background: rgba(249, 106, 36, 0.2);
+      border-color: var(--primary);
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: 8px;
+    }
+
+    /* CARDS DE KPIS */
+    .kpis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .kpi-card {
+      background: linear-gradient(160deg, #180c08 0%, #110704 100%);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px 22px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+    .kpi-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(249, 106, 36, 0.4);
+    }
+
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--kpi-accent, var(--primary));
+    }
+
+    .kpi-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .kpi-title {
+      font-size: 12.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-muted);
+    }
+
+    .kpi-icon-wrap {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--kpi-accent, var(--primary));
+    }
+
+    .kpi-number {
+      font-family: 'Anton', sans-serif;
+      font-size: 38px;
+      line-height: 1;
+      color: #ffffff;
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .kpi-sub {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    /* BARRA DE FERRAMENTAS & FILTROS */
+    .toolbar-card {
+      background: linear-gradient(165deg, #160a06 0%, #100604 100%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .toolbar-row-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 260px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 16px 12px 44px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      color: #ffffff;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 13.5px;
+      transition: all 0.2s ease;
+    }
+    .search-input:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.07);
+      border-color: var(--primary);
+      box-shadow: 0 0 15px rgba(249, 106, 36, 0.25);
+    }
+    .search-input::placeholder {
+      color: var(--text-dim);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+
+    .toolbar-row-filters {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .filters-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .filter-label {
+      font-size: 11.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-muted);
+    }
+
+    .filter-select {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 8px 32px 8px 12px;
+      color: #ffffff;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 12.5px;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23f96a24' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      transition: all 0.2s ease;
+    }
+    .filter-select:focus {
+      outline: none;
+      border-color: var(--primary);
+      background-color: #1a0e09;
+    }
+    .filter-select option {
+      background-color: #140805;
+      color: #ffffff;
+    }
+
+    .results-count {
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+    .results-count strong {
+      color: var(--primary);
+    }
+
+    /* TABELA DE AGENDAMENTOS */
+    .table-container {
+      background: linear-gradient(165deg, #150906 0%, #0f0503 100%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .students-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13.5px;
+    }
+
+    .students-table th {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 16px 20px;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    .students-table td {
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      vertical-align: middle;
+      color: var(--text-main);
+    }
+
+    .students-table tbody tr {
+      transition: background-color 0.18s ease;
+    }
+    .students-table tbody tr:hover {
+      background-color: rgba(249, 106, 36, 0.04);
+    }
+
+    /* Célula: Horário & Data */
+    .cell-datetime {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .time-badge {
+      font-family: 'Anton', sans-serif;
+      font-size: 18px;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .time-period-tag {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.07);
+      color: var(--text-muted);
+    }
+    .date-display {
+      font-size: 12px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* Célula: Aluno */
+    .cell-student {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .student-name {
+      font-weight: 700;
+      color: #ffffff;
+      font-size: 14.5px;
+    }
+    .student-code {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
+
+    /* Célula: Modalidade */
+    .modality-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      white-space: nowrap;
+    }
+
+    .modality-musculacao {
+      background: rgba(249, 106, 36, 0.15);
+      border: 1px solid rgba(249, 106, 36, 0.35);
+      color: #ff7e36;
+    }
+    .modality-funcional {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #34d399;
+    }
+    .modality-pilates {
+      background: rgba(168, 85, 247, 0.15);
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      color: #c084fc;
+    }
+    .modality-fitdance {
+      background: rgba(236, 72, 153, 0.15);
+      border: 1px solid rgba(236, 72, 153, 0.35);
+      color: #f472b6;
+    }
+    .modality-ritbox {
+      background: rgba(14, 165, 233, 0.15);
+      border: 1px solid rgba(14, 165, 233, 0.35);
+      color: #38bdf8;
+    }
+    .modality-zumba {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #fbbf24;
+    }
+
+    /* Célula: WhatsApp */
+    .whatsapp-cell-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      background: rgba(37, 211, 102, 0.12);
+      border: 1px solid rgba(37, 211, 102, 0.3);
+      border-radius: 100px;
+      color: #25d366;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .whatsapp-cell-btn:hover {
+      background: #25d366;
+      color: #0d0705;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+    }
+
+    /* Célula: Status Dropdown */
+    .status-select-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .status-pill.status-pendente {
+      background: var(--status-pending-bg);
+      border-color: var(--status-pending-border);
+      color: var(--status-pending-text);
+    }
+    .status-pill.status-confirmado {
+      background: var(--status-confirmed-bg);
+      border-color: var(--status-confirmed-border);
+      color: var(--status-confirmed-text);
+    }
+    .status-pill.status-concluido {
+      background: var(--status-done-bg);
+      border-color: var(--status-done-border);
+      color: var(--status-done-text);
+    }
+    .status-pill.status-cancelado {
+      background: var(--status-cancelled-bg);
+      border-color: var(--status-cancelled-border);
+      color: var(--status-cancelled-text);
+    }
+
+    .status-pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    /* Ações na Tabela */
+    .actions-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .action-icon-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .action-icon-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+    .action-icon-btn.btn-checkin:hover {
+      background: rgba(34, 197, 94, 0.2);
+      border-color: #22c55e;
+      color: #4ade80;
+    }
+    .action-icon-btn.btn-delete:hover {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: #ef4444;
+      color: #f87171;
+    }
+
+    /* EMPTY STATE */
+    .empty-state {
+      padding: 60px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .empty-state-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(249, 106, 36, 0.1);
+      border: 1px solid rgba(249, 106, 36, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .empty-state-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .empty-state-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      max-width: 400px;
+    }
+
+    /* MODAIS */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 4, 3, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .modal-backdrop.is-open {
+      opacity: 1;
+      pointer-events: auto;
+      visibility: visible;
+    }
+
+    .modal-box {
+      background: linear-gradient(165deg, #1b0d09 0%, #100604 100%);
+      border: 1.5px solid rgba(255, 90, 0, 0.35);
+      border-radius: 22px;
+      width: 100%;
+      max-width: 560px;
+      padding: 30px;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.85), 0 0 40px rgba(249, 106, 36, 0.15);
+      position: relative;
+      transform: scale(0.92) translateY(14px);
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal-backdrop.is-open .modal-box {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .modal-close-btn:hover {
+      background: rgba(249, 106, 36, 0.2);
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: rotate(90deg);
+    }
+
+    .modal-header {
+      margin-bottom: 24px;
+    }
+    .modal-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 26px;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+    .modal-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .form-input, .form-textarea, .form-select {
+      width: 100%;
+      padding: 12px 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      color: #ffffff;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 13.5px;
+      transition: all 0.2s ease;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(255, 255, 255, 0.07);
+      box-shadow: 0 0 14px rgba(249, 106, 36, 0.2);
+    }
+    .form-select option {
+      background: #140805;
+      color: #ffffff;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    /* TOAST DE FEEDBACK */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 100000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+    .toast {
+      background: #190c08;
+      border: 1px solid var(--primary);
+      border-radius: 12px;
+      padding: 14px 20px;
+      color: #ffffff;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(249, 106, 36, 0.25);
+      transform: translateX(120%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: auto;
+    }
+    .toast.show {
+      transform: translateX(0);
+    }
+
+    /* FOOTER DO PAINEL */
+    .panel-footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+    .panel-footer-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .panel-footer-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .panel-footer-link:hover {
+      color: var(--primary);
+    }
+
+    /* RESPONSIVIDADE */
+    @media screen and (max-width: 900px) {
+      .header-center {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .app-container {
+        padding: 16px 12px 36px;
+      }
+      .panel-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .header-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .kpis-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ESTILO PARA IMPRESSÃO */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      .panel-header, .toolbar-card, .btn, .actions-group, .panel-footer, .header-actions {
+        display: none !important;
+      }
+      .app-container {
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+      .table-container {
+        border: 1px solid #000000 !important;
+        box-shadow: none !important;
+        background: transparent !important;
+      }
+      .students-table th {
+        background: #f0f0f0 !important;
+        color: #000000 !important;
+        border-bottom: 2px solid #000000 !important;
+      }
+      .students-table td {
+        color: #000000 !important;
+        border-bottom: 1px solid #cccccc !important;
+      }
+      .print-header {
+        display: block !important;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+    }
+    .print-header {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app-container">
+
+    <!-- Cabeçalho Exclusivo para Impressão -->
+    <div class="print-header">
+      <h1 style="font-size: 24px; margin-bottom: 4px;">Academia Alvo02Fit - Lista de Presença de Aulas Experimentais</h1>
+      <p style="font-size: 13px; color: #555;">Documento gerado para controle na recepção • <span id="print-date"></span></p>
+    </div>
+
+    <!-- 01. CABEÇALHO DO PAINEL -->
+    <header class="panel-header">
+      <div class="header-left">
+        <a href="./index.html" class="header-logo-link" title="Voltar ao site da Alvo02Fit">
+          <img src="./images/alvo02fit-logo.png" alt="Alvo02Fit Logo" class="header-logo-img" />
+        </a>
+        <div class="header-badge-team">
+          <span class="pulse-dot"></span>
+          Painel da Equipe
+        </div>
+      </div>
+
+      <div class="header-center">
+        <div class="live-clock-time" id="clock-time">--:--:--</div>
+        <div class="live-clock-date" id="clock-date">Carregando data...</div>
+      </div>
+
+      <div class="header-actions">
+        <button class="btn btn-primary" onclick="openNewBookingModal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Novo Agendamento
+        </button>
+
+        <button class="btn btn-secondary" onclick="exportToCSV()" title="Exportar lista de alunos para o Excel / CSV">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Exportar CSV
+        </button>
+
+        <button class="btn btn-secondary" onclick="printDailySheet()" title="Imprimir lista formatada do dia">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          Imprimir
+        </button>
+
+        <a href="./index.html" class="btn btn-outline-primary" target="_blank" title="Abrir o site público">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+          Ver Site
+        </a>
+      </div>
+    </header>
+
+    <!-- 02. CARDS DE KPIS / RESUMO GERAL -->
+    <section class="kpis-grid">
+      <!-- Total -->
+      <div class="kpi-card" style="--kpi-accent: #f96a24;">
+        <div class="kpi-top">
+          <span class="kpi-title">Total Agendados</span>
+          <div class="kpi-icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="kpi-number" id="kpi-total">0</div>
+        <div class="kpi-sub">Alunos registrados no sistema</div>
+      </div>
+
+      <!-- Aulas de Hoje -->
+      <div class="kpi-card" style="--kpi-accent: #ff5a00;">
+        <div class="kpi-top">
+          <span class="kpi-title">Aulas de Hoje</span>
+          <div class="kpi-icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+        </div>
+        <div class="kpi-number" id="kpi-today">0</div>
+        <div class="kpi-sub" id="kpi-today-sub">Agendamentos para a data de hoje</div>
+      </div>
+
+      <!-- Pendentes (Chamar WhatsApp) -->
+      <div class="kpi-card" style="--kpi-accent: #facc15;">
+        <div class="kpi-top">
+          <span class="kpi-title">Aguardando Contato</span>
+          <div class="kpi-icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>
+        </div>
+        <div class="kpi-number" id="kpi-pending" style="color: #facc15;">0</div>
+        <div class="kpi-sub">Precisam de confirmação no WhatsApp</div>
+      </div>
+
+      <!-- Confirmados -->
+      <div class="kpi-card" style="--kpi-accent: #4ade80;">
+        <div class="kpi-top">
+          <span class="kpi-title">Confirmados</span>
+          <div class="kpi-icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+        </div>
+        <div class="kpi-number" id="kpi-confirmed" style="color: #4ade80;">0</div>
+        <div class="kpi-sub">Presença confirmada pelo aluno</div>
+      </div>
+
+      <!-- Concluídos (Presença registrada) -->
+      <div class="kpi-card" style="--kpi-accent: #38bdf8;">
+        <div class="kpi-top">
+          <span class="kpi-title">Aulas Concluídas</span>
+          <div class="kpi-icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </div>
+        </div>
+        <div class="kpi-number" id="kpi-done" style="color: #38bdf8;">0</div>
+        <div class="kpi-sub">Check-in realizado na academia</div>
+      </div>
+    </section>
+
+    <!-- 03. BARRA DE PESQUISA & FILTROS INTELIGENTES -->
+    <section class="toolbar-card">
+      <div class="toolbar-row-top">
+        <div class="search-box">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="filter-search" class="search-input" placeholder="Buscar por nome do aluno, WhatsApp ou código (#ALVO-)..." oninput="applyFilters()" />
+        </div>
+      </div>
+
+      <div class="toolbar-row-filters">
+        <div class="filters-group">
+          <!-- Filtro de Data -->
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span class="filter-label">Período:</span>
+            <select id="filter-date" class="filter-select" onchange="applyFilters()">
+              <option value="all">Todas as Datas</option>
+              <option value="today" selected>Hoje</option>
+              <option value="tomorrow">Amanhã</option>
+              <option value="week">Próximos 7 dias</option>
+            </select>
+          </div>
+
+          <!-- Filtro de Modalidade -->
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span class="filter-label">Modalidade:</span>
+            <select id="filter-modality" class="filter-select" onchange="applyFilters()">
+              <option value="all">Todas</option>
+              <option value="Musculação">Musculação</option>
+              <option value="Treino Funcional">Treino Funcional</option>
+              <option value="Pilates">Pilates</option>
+              <option value="FitDance">FitDance</option>
+              <option value="Ritbox">Ritbox</option>
+              <option value="Zumba">Zumba</option>
+            </select>
+          </div>
+
+          <!-- Filtro de Status -->
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span class="filter-label">Status:</span>
+            <select id="filter-status" class="filter-select" onchange="applyFilters()">
+              <option value="all">Todos os Status</option>
+              <option value="Pendente">🟡 Pendente (Aguardando)</option>
+              <option value="Confirmado">🟢 Confirmado</option>
+              <option value="Concluído">🔵 Concluído (Check-in)</option>
+              <option value="Cancelado">🔴 Cancelado / Faltou</option>
+            </select>
+          </div>
+
+          <!-- Botão Reset -->
+          <button class="btn btn-secondary btn-sm" onclick="resetFilters()" title="Limpar todos os filtros">
+            Limpar Filtros
+          </button>
+        </div>
+
+        <div class="results-count" id="results-count">
+          Carregando...
+        </div>
+      </div>
+    </section>
+
+    <!-- 04. TABELA DE ALUNOS AGENDADOS -->
+    <section class="table-container">
+      <div class="table-responsive">
+        <table class="students-table">
+          <thead>
+            <tr>
+              <th>Horário & Data</th>
+              <th>Aluno(a)</th>
+              <th>Modalidade</th>
+              <th>Contato WhatsApp</th>
+              <th>Experiência & Foco</th>
+              <th>Status do Agendamento</th>
+              <th style="text-align: right;">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="students-tbody">
+            <!-- Renderizado dinamicamente via JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Estado Vazio -->
+      <div id="empty-state" class="empty-state" style="display: none;">
+        <div class="empty-state-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </div>
+        <div class="empty-state-title">Nenhum agendamento encontrado</div>
+        <div class="empty-state-desc">Nenhum aluno corresponde aos filtros selecionados. Tente alterar o período, modalidade ou termo de busca.</div>
+        <button class="btn btn-secondary btn-sm" onclick="resetFilters()" style="margin-top: 8px;">
+          Ver Todos os Agendamentos
+        </button>
+      </div>
+    </section>
+
+    <!-- 05. RODAPÉ DO PAINEL -->
+    <footer class="panel-footer">
+      <div>
+        Academia Alvo02Fit &bull; Painel de Gestão da Equipe &bull; São Mateus, SP
+      </div>
+      <div class="panel-footer-links">
+        <button class="panel-footer-link" style="background:none; border:none; cursor:pointer;" onclick="restoreDemoData()">
+          Restaurar Dados de Teste
+        </button>
+        <span>&bull;</span>
+        <button class="panel-footer-link" style="background:none; border:none; cursor:pointer; color: #ef4444;" onclick="clearAllData()">
+          Limpar Todos os Registros
+        </button>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ========================================================
+       MODAL: NOVO AGENDAMENTO MANUAL (RECEPÇÃO / INSTRUTOR)
+       ======================================================== -->
+  <div class="modal-backdrop" id="new-booking-modal">
+    <div class="modal-box">
+      <button class="modal-close-btn" onclick="closeNewBookingModal()" aria-label="Fechar modal">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="modal-header">
+        <h2 class="modal-title">Novo Agendamento</h2>
+        <p class="modal-subtitle">Cadastre uma aula experimental manual para um aluno presencial ou via telefone.</p>
+      </div>
+
+      <form id="new-booking-form" onsubmit="handleManualBooking(event)">
+        <div class="form-group">
+          <label class="form-label" for="manual-name">Nome Completo do Aluno *</label>
+          <input type="text" id="manual-name" class="form-input" placeholder="Ex: Lucas Henrique Oliveira" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="manual-phone">WhatsApp / Telefone *</label>
+            <input type="text" id="manual-phone" class="form-input" placeholder="(11) 98765-4321" maxlength="15" oninput="formatPhoneInput(this)" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="manual-modality">Modalidade *</label>
+            <select id="manual-modality" class="form-select" required>
+              <option value="Musculação">Musculação</option>
+              <option value="Treino Funcional">Treino Funcional</option>
+              <option value="Pilates">Pilates</option>
+              <option value="FitDance">FitDance</option>
+              <option value="Ritbox">Ritbox</option>
+              <option value="Zumba">Zumba</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="manual-date">Data da Aula *</label>
+            <input type="date" id="manual-date" class="form-input" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="manual-time">Horário *</label>
+            <select id="manual-time" class="form-select" required>
+              <option value="06:00">06:00 (Manhã)</option>
+              <option value="07:00">07:00 (Manhã)</option>
+              <option value="08:00">08:00 (Manhã)</option>
+              <option value="09:00">09:00 (Manhã)</option>
+              <option value="10:00">10:00 (Manhã)</option>
+              <option value="11:00">11:00 (Manhã)</option>
+              <option value="14:00">14:00 (Tarde)</option>
+              <option value="15:00">15:00 (Tarde)</option>
+              <option value="16:00">16:00 (Tarde)</option>
+              <option value="17:00">17:00 (Tarde)</option>
+              <option value="18:00">18:00 (Noite)</option>
+              <option value="19:00" selected>19:00 (Noite)</option>
+              <option value="20:00">20:00 (Noite)</option>
+              <option value="21:00">21:00 (Noite)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="manual-experience">Nível de Experiência</label>
+            <select id="manual-experience" class="form-select">
+              <option value="Iniciante (Primeira vez)">Iniciante (Primeira vez)</option>
+              <option value="Já treinei antes (Parado)">Já treinei antes (Parado)</option>
+              <option value="Ativo / Já treino regularmente">Ativo / Já treino regularmente</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="manual-status">Status Inicial</label>
+            <select id="manual-status" class="form-select">
+              <option value="Pendente">🟡 Pendente</option>
+              <option value="Confirmado" selected>🟢 Confirmado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="manual-goal">Objetivo / Foco do Aluno</label>
+          <input type="text" id="manual-goal" class="form-input" placeholder="Ex: Emagrecimento, hipertrofia, postura..." />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="manual-notes">Observações Internas (Equipe)</label>
+          <textarea id="manual-notes" class="form-textarea" rows="2" placeholder="Ex: Aluno quer conhecer os professores da manhã..."></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px;">
+          <button type="button" class="btn btn-secondary" onclick="closeNewBookingModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar Agendamento</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL: DETALHES DO ALUNO E NOTAS INTERNAS
+       ======================================================== -->
+  <div class="modal-backdrop" id="details-modal">
+    <div class="modal-box">
+      <button class="modal-close-btn" onclick="closeDetailsModal()" aria-label="Fechar modal">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 6px;">
+          <h2 class="modal-title" id="det-name">Nome do Aluno</h2>
+          <span id="det-status-pill"></span>
+        </div>
+        <p class="modal-subtitle" id="det-code">Código do Voucher: #ALVO-0000</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 16px; margin-bottom: 20px;">
+        <div>
+          <span style="font-size: 11px; text-transform: uppercase; color: var(--text-dim); display: block; margin-bottom: 2px;">Modalidade:</span>
+          <strong id="det-modality" style="font-size: 14px; color: var(--primary);">--</strong>
+        </div>
+        <div>
+          <span style="font-size: 11px; text-transform: uppercase; color: var(--text-dim); display: block; margin-bottom: 2px;">Horário da Aula:</span>
+          <strong id="det-datetime" style="font-size: 14px; color: #ffffff;">--</strong>
+        </div>
+        <div>
+          <span style="font-size: 11px; text-transform: uppercase; color: var(--text-dim); display: block; margin-bottom: 2px;">WhatsApp:</span>
+          <strong id="det-phone" style="font-size: 14px; color: #ffffff;">--</strong>
+        </div>
+        <div>
+          <span style="font-size: 11px; text-transform: uppercase; color: var(--text-dim); display: block; margin-bottom: 2px;">Nível Declarado:</span>
+          <strong id="det-experience" style="font-size: 14px; color: #ffffff;">--</strong>
+        </div>
+        <div style="grid-column: 1 / -1;">
+          <span style="font-size: 11px; text-transform: uppercase; color: var(--text-dim); display: block; margin-bottom: 2px;">Objetivo Pessoal:</span>
+          <span id="det-goal" style="font-size: 13px; color: var(--text-main);">--</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="det-notes">Anotações da Recepção / Instrutor</label>
+        <textarea id="det-notes" class="form-textarea" rows="3" placeholder="Insira observações relevantes (ex: lesões, preferência de professor, interesse em fechar plano mensal/anual)..."></textarea>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-top: 24px;">
+        <a id="det-whatsapp-btn" href="#" target="_blank" class="btn btn-secondary btn-sm" style="color: #25d366; border-color: rgba(37, 211, 102, 0.4);">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.301-.15-1.781-.879-2.057-.98-.276-.1-.477-.15-.678.15-.2.301-.778.98-.954 1.18-.176.2-.351.226-.653.075-.301-.15-1.272-.469-2.423-1.496-.897-.799-1.503-1.786-1.68-2.087-.175-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.176.2-.301.301-.502.101-.2.05-.376-.025-.526-.075-.15-.678-1.634-.929-2.237-.245-.588-.493-.508-.678-.518-.175-.01-.376-.01-.577-.01-.2 0-.527.075-.803.376s-1.054 1.03-1.054 2.515c0 1.485 1.08 2.921 1.23 3.122.151.2 2.126 3.246 5.15 4.553.72.31 1.282.495 1.72.634.724.23 1.382.197 1.902.12.58-.087 1.781-.728 2.032-1.431.251-.703.251-1.305.176-1.431-.076-.126-.277-.201-.578-.352z"/>
+          </svg>
+          Chamar no WhatsApp
+        </a>
+
+        <div style="display: flex; gap: 8px;">
+          <button type="button" class="btn btn-secondary" onclick="closeDetailsModal()">Fechar</button>
+          <button type="button" class="btn btn-primary" onclick="saveStudentNotes()">Salvar Anotações</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Container de Notificações Toast -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ========================================================
+       SCRIPTS DE CONTROLE & GESTÃO DO PAINEL
+       ======================================================== -->
+  <script>
+    const STORAGE_KEY = "alvo_agendamentos";
+    let allBookings = [];
+    let currentSelectedStudentId = null;
+
+    // Inicialização ao carregar a página
+    document.addEventListener("DOMContentLoaded", function () {
+      initClock();
+      loadBookings();
+      renderDashboard();
+    });
+
+    // Sincronização em tempo real entre abas (quando um novo agendamento entra)
+    window.addEventListener("storage", function (e) {
+      if (e.key === STORAGE_KEY) {
+        loadBookings();
+        renderDashboard();
+      }
+    });
+
+    // 01. Relógio em tempo real
+    function initClock() {
+      function update() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        document.getElementById('clock-time').innerText = `${hours}:${minutes}:${seconds}`;
+
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const dateStr = now.toLocaleDateString('pt-BR', options);
+        document.getElementById('clock-date').innerText = dateStr;
+        document.getElementById('print-date').innerText = dateStr;
+      }
+      update();
+      setInterval(update, 1000);
+    }
+
+    // 02. Carregamento dos Agendamentos do localStorage ou Inicialização com Dados Realistas
+    function loadBookings() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          allBookings = JSON.parse(raw);
+        } else {
+          // Primeira vez abrindo o painel: popula com dados de demonstração realistas
+          allBookings = generateSeedData();
+          saveBookings();
+        }
+      } catch (e) {
+        console.error("Erro ao carregar do localStorage:", e);
+        allBookings = generateSeedData();
+      }
+    }
+
+    function saveBookings() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(allBookings));
+      } catch (e) {
+        console.error("Erro ao salvar no localStorage:", e);
+      }
+    }
+
+    // Gerador de Dados de Demonstração Inteligentes (relativos à data de hoje)
+    function generateSeedData() {
+      const today = new Date();
+      const formatIso = d => d.toISOString().split("T")[0];
+      const weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+      const months = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+
+      const formatDisplay = d => {
+        return `${weekdays[d.getDay()]}, ${d.getDate()} de ${months[d.getMonth()]}`;
+      };
+
+      const d0 = new Date(today); // Hoje
+      const d1 = new Date(today); d1.setDate(today.getDate() + 1); // Amanhã
+      const d2 = new Date(today); d2.setDate(today.getDate() + 2); // Depois de amanhã
+      const d3 = new Date(today); d3.setDate(today.getDate() + 3);
+
+      return [
+        {
+          id: "alvo_seed_1",
+          code: "#ALVO-4821",
+          name: "Lucas Henrique Oliveira",
+          phone: "(11) 98452-1920",
+          modality: "Musculação",
+          dateIso: formatIso(d0),
+          dateDisplay: `Hoje, ${formatDisplay(d0)}`,
+          time: "19:00",
+          experience: "Iniciante (Primeira vez)",
+          goal: "Perda de peso e fortalecimento da coluna",
+          status: "Confirmado",
+          createdAt: new Date().toISOString(),
+          notes: "Aluno informou que tem disponibilidade preferencial no período da noite."
+        },
+        {
+          id: "alvo_seed_2",
+          code: "#ALVO-3912",
+          name: "Mariana Costa Santos",
+          phone: "(11) 99123-4567",
+          modality: "Pilates",
+          dateIso: formatIso(d0),
+          dateDisplay: `Hoje, ${formatDisplay(d0)}`,
+          time: "18:00",
+          experience: "Já treinei antes (Parada)",
+          goal: "Flexibilidade, alívio de estresse e postura",
+          status: "Pendente",
+          createdAt: new Date().toISOString(),
+          notes: ""
+        },
+        {
+          id: "alvo_seed_3",
+          code: "#ALVO-7734",
+          name: "Rafael Barbosa Mendes",
+          phone: "(11) 97654-3210",
+          modality: "Treino Funcional",
+          dateIso: formatIso(d0),
+          dateDisplay: `Hoje, ${formatDisplay(d0)}`,
+          time: "07:00",
+          experience: "Ativo / Já treino regularmente",
+          goal: "Resistência cardiovascular e agilidade",
+          status: "Concluído",
+          createdAt: new Date().toISOString(),
+          notes: "Compareceu no horário. Gostou muito da aula com o prof. Marcos e solicitou os valores do Plano Gold."
+        },
+        {
+          id: "alvo_seed_4",
+          code: "#ALVO-8819",
+          name: "Camila Rodrigues Silva",
+          phone: "(11) 98834-5512",
+          modality: "FitDance",
+          dateIso: formatIso(d0),
+          dateDisplay: `Hoje, ${formatDisplay(d0)}`,
+          time: "20:00",
+          experience: "Iniciante (Primeira vez)",
+          goal: "Queima calórica e condicionamento com dança",
+          status: "Confirmado",
+          createdAt: new Date().toISOString(),
+          notes: "Vem com uma amiga para a aula."
+        },
+        {
+          id: "alvo_seed_5",
+          code: "#ALVO-1204",
+          name: "Bruno Pereira de Castro",
+          phone: "(11) 97234-9081",
+          modality: "Ritbox",
+          dateIso: formatIso(d1),
+          dateDisplay: `Amanhã, ${formatDisplay(d1)}`,
+          time: "19:00",
+          experience: "Iniciante (Primeira vez)",
+          goal: "Definição muscular e perda de peso",
+          status: "Pendente",
+          createdAt: new Date().toISOString(),
+          notes: ""
+        },
+        {
+          id: "alvo_seed_6",
+          code: "#ALVO-5591",
+          name: "Juliana Albuquerque Lima",
+          phone: "(11) 96541-2289",
+          modality: "Musculação",
+          dateIso: formatIso(d1),
+          dateDisplay: `Amanhã, ${formatDisplay(d1)}`,
+          time: "08:00",
+          experience: "Já treinei antes (Parada)",
+          goal: "Hipertrofia e saúde geral",
+          status: "Confirmado",
+          createdAt: new Date().toISOString(),
+          notes: "Já treinou há 2 anos, quer retomar com acompanhamento."
+        },
+        {
+          id: "alvo_seed_7",
+          code: "#ALVO-6642",
+          name: "Thiago Ramos Ferreira",
+          phone: "(11) 99876-1122",
+          modality: "Zumba",
+          dateIso: formatIso(d1),
+          dateDisplay: `Amanhã, ${formatDisplay(d1)}`,
+          time: "18:00",
+          experience: "Iniciante (Primeira vez)",
+          goal: "Condicionamento físico e diversão",
+          status: "Pendente",
+          createdAt: new Date().toISOString(),
+          notes: ""
+        },
+        {
+          id: "alvo_seed_8",
+          code: "#ALVO-9103",
+          name: "Beatriz Nogueira Soares",
+          phone: "(11) 98112-7744",
+          modality: "Pilates",
+          dateIso: formatIso(d2),
+          dateDisplay: formatDisplay(d2),
+          time: "10:00",
+          experience: "Iniciante (Primeira vez)",
+          goal: "Dores lombares e fortalecimento do core",
+          status: "Confirmado",
+          createdAt: new Date().toISOString(),
+          notes: "Possui recomendação médica para prática de Pilates."
+        },
+        {
+          id: "alvo_seed_9",
+          code: "#ALVO-3488",
+          name: "Rodrigo Almeida Campos",
+          phone: "(11) 97455-8899",
+          modality: "Treino Funcional",
+          dateIso: formatIso(d3),
+          dateDisplay: formatDisplay(d3),
+          time: "17:00",
+          experience: "Ativo / Já treino regularmente",
+          goal: "Ganho de força e condicionamento",
+          status: "Pendente",
+          createdAt: new Date().toISOString(),
+          notes: ""
+        }
+      ];
+    }
+
+    // 03. Renderização Principal do Painel
+    function renderDashboard() {
+      updateKPIs();
+      applyFilters();
+    }
+
+    // Atualiza os cartões de indicadores
+    function updateKPIs() {
+      const todayIso = new Date().toISOString().split("T")[0];
+
+      const total = allBookings.length;
+      const todayCount = allBookings.filter(b => b.dateIso === todayIso).length;
+      const pendingCount = allBookings.filter(b => b.status === "Pendente").length;
+      const confirmedCount = allBookings.filter(b => b.status === "Confirmado").length;
+      const doneCount = allBookings.filter(b => b.status === "Concluído").length;
+
+      document.getElementById("kpi-total").innerText = total;
+      document.getElementById("kpi-today").innerText = todayCount;
+      document.getElementById("kpi-pending").innerText = pendingCount;
+      document.getElementById("kpi-confirmed").innerText = confirmedCount;
+      document.getElementById("kpi-done").innerText = doneCount;
+    }
+
+    // Aplica os filtros e monta a tabela
+    function applyFilters() {
+      const searchVal = document.getElementById("filter-search").value.trim().toLowerCase();
+      const dateFilter = document.getElementById("filter-date").value;
+      const modalityFilter = document.getElementById("filter-modality").value;
+      const statusFilter = document.getElementById("filter-status").value;
+
+      const today = new Date();
+      const todayIso = today.toISOString().split("T")[0];
+
+      const tomorrow = new Date(today);
+      tomorrow.setDate(today.getDate() + 1);
+      const tomorrowIso = tomorrow.toISOString().split("T")[0];
+
+      const nextWeek = new Date(today);
+      nextWeek.setDate(today.getDate() + 7);
+      const nextWeekIso = nextWeek.toISOString().split("T")[0];
+
+      const filtered = allBookings.filter(b => {
+        // Busca textual
+        if (searchVal) {
+          const matchName = (b.name || "").toLowerCase().includes(searchVal);
+          const matchPhone = (b.phone || "").toLowerCase().includes(searchVal);
+          const matchCode = (b.code || "").toLowerCase().includes(searchVal);
+          const matchMod = (b.modality || "").toLowerCase().includes(searchVal);
+          if (!matchName && !matchPhone && !matchCode && !matchMod) return false;
+        }
+
+        // Filtro de Data
+        if (dateFilter === "today") {
+          if (b.dateIso !== todayIso) return false;
+        } else if (dateFilter === "tomorrow") {
+          if (b.dateIso !== tomorrowIso) return false;
+        } else if (dateFilter === "week") {
+          if (b.dateIso < todayIso || b.dateIso > nextWeekIso) return false;
+        }
+
+        // Filtro de Modalidade
+        if (modalityFilter !== "all") {
+          if (b.modality !== modalityFilter) return false;
+        }
+
+        // Filtro de Status
+        if (statusFilter !== "all") {
+          if (b.status !== statusFilter) return false;
+        }
+
+        return true;
+      });
+
+      renderTable(filtered);
+    }
+
+    // Monta o corpo da tabela com os agendamentos filtrados
+    function renderTable(bookings) {
+      const tbody = document.getElementById("students-tbody");
+      const emptyState = document.getElementById("empty-state");
+      const resultsCount = document.getElementById("results-count");
+
+      resultsCount.innerHTML = `Mostrando <strong>${bookings.length}</strong> de <strong>${allBookings.length}</strong> agendamentos`;
+
+      if (bookings.length === 0) {
+        tbody.innerHTML = "";
+        emptyState.style.display = "flex";
+        return;
+      }
+
+      emptyState.style.display = "none";
+
+      let html = "";
+      bookings.forEach(b => {
+        const modClass = getModalityClass(b.modality);
+        const statusClass = getStatusClass(b.status);
+        const zapLink = buildStaffWhatsAppLink(b);
+
+        html += `
+          <tr data-id="${b.id}">
+            <!-- Horário & Data -->
+            <td>
+              <div class="cell-datetime">
+                <div class="time-badge">
+                  ${b.time}
+                  <span class="time-period-tag">${getTimePeriod(b.time)}</span>
+                </div>
+                <div class="date-display">${b.dateDisplay || b.dateIso}</div>
+              </div>
+            </td>
+
+            <!-- Aluno(a) -->
+            <td>
+              <div class="cell-student">
+                <span class="student-name">${escapeHtml(b.name)}</span>
+                <span class="student-code">${b.code}</span>
+              </div>
+            </td>
+
+            <!-- Modalidade -->
+            <td>
+              <span class="modality-badge ${modClass}">
+                ${escapeHtml(b.modality)}
+              </span>
+            </td>
+
+            <!-- WhatsApp -->
+            <td>
+              <a href="${zapLink}" target="_blank" class="whatsapp-cell-btn" title="Abrir conversa no WhatsApp com o aluno">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.472 14.382c-.301-.15-1.781-.879-2.057-.98-.276-.1-.477-.15-.678.15-.2.301-.778.98-.954 1.18-.176.2-.351.226-.653.075-.301-.15-1.272-.469-2.423-1.496-.897-.799-1.503-1.786-1.68-2.087-.175-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.176.2-.301.301-.502.101-.2.05-.376-.025-.526-.075-.15-.678-1.634-.929-2.237-.245-.588-.493-.508-.678-.518-.175-.01-.376-.01-.577-.01-.2 0-.527.075-.803.376s-1.054 1.03-1.054 2.515c0 1.485 1.08 2.921 1.23 3.122.151.2 2.126 3.246 5.15 4.553.72.31 1.282.495 1.72.634.724.23 1.382.197 1.902.12.58-.087 1.781-.728 2.032-1.431.251-.703.251-1.305.176-1.431-.076-.126-.277-.201-.578-.352z"/>
+                </svg>
+                ${escapeHtml(b.phone)}
+              </a>
+            </td>
+
+            <!-- Nível / Foco -->
+            <td>
+              <div style="display: flex; flex-direction: column; gap: 3px; max-width: 220px;">
+                <span style="font-size: 11px; font-weight: 700; color: #ffffff;">${escapeHtml(b.experience || "Iniciante")}</span>
+                <span style="font-size: 11.5px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${escapeHtml(b.goal || '')}">
+                  ${escapeHtml(b.goal || "Condicionamento e saúde")}
+                </span>
+              </div>
+            </td>
+
+            <!-- Status (Dropdown interativo) -->
+            <td>
+              <select class="filter-select" style="font-size: 11px; font-weight: 700; padding: 6px 26px 6px 10px;" onchange="changeStatus('${b.id}', this.value)">
+                <option value="Pendente" ${b.status === "Pendente" ? "selected" : ""}>🟡 Pendente</option>
+                <option value="Confirmado" ${b.status === "Confirmado" ? "selected" : ""}>🟢 Confirmado</option>
+                <option value="Concluído" ${b.status === "Concluído" ? "selected" : ""}>🔵 Concluído</option>
+                <option value="Cancelado" ${b.status === "Cancelado" ? "selected" : ""}>🔴 Cancelado</option>
+              </select>
+            </td>
+
+            <!-- Ações -->
+            <td>
+              <div class="actions-group" style="justify-content: flex-end;">
+                <!-- Check-in Rápido -->
+                <button class="action-icon-btn btn-checkin" onclick="quickCheckIn('${b.id}')" title="Registrar Presença do Aluno (Check-in)">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </button>
+
+                <!-- Ver Detalhes / Anotações -->
+                <button class="action-icon-btn" onclick="openDetailsModal('${b.id}')" title="Ver detalhes e anotações do aluno">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+
+                <!-- Excluir -->
+                <button class="action-icon-btn btn-delete" onclick="deleteBooking('${b.id}')" title="Excluir este agendamento">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                  </svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      });
+
+      tbody.innerHTML = html;
+    }
+
+    // 04. Utilitários de Estilo e Dados
+    function getModalityClass(mod) {
+      if (!mod) return "modality-musculacao";
+      const m = mod.toLowerCase();
+      if (m.includes("muscul")) return "modality-musculacao";
+      if (m.includes("func")) return "modality-funcional";
+      if (m.includes("pila")) return "modality-pilates";
+      if (m.includes("dan")) return "modality-fitdance";
+      if (m.includes("rit")) return "modality-ritbox";
+      if (m.includes("zum")) return "modality-zumba";
+      return "modality-musculacao";
+    }
+
+    function getStatusClass(status) {
+      if (status === "Confirmado") return "status-confirmado";
+      if (status === "Concluído") return "status-concluido";
+      if (status === "Cancelado") return "status-cancelado";
+      return "status-pendente";
+    }
+
+    function getTimePeriod(time) {
+      if (!time) return "Tarde";
+      const hour = parseInt(time.split(":")[0], 10);
+      if (hour < 12) return "Manhã";
+      if (hour < 18) return "Tarde";
+      return "Noite";
+    }
+
+    function buildStaffWhatsAppLink(b) {
+      const cleanPhone = (b.phone || "").replace(/\D/g, "");
+      const fullPhone = cleanPhone.startsWith("55") ? cleanPhone : "55" + cleanPhone;
+
+      const msg = `Olá ${b.name}! 👋
+Aqui é da equipe da *Academia Alvo02Fit*.
+
+Estamos entrando em contato para confirmar sua *Aula Experimental Gratuita* de *${b.modality}*:
+📅 Data: ${b.dateDisplay || b.dateIso}
+⏰ Horário: ${b.time}
+🎟️ Código: ${b.code}
+
+Você confirma sua presença? Caso precise de alguma orientação especial ou tenha dúvidas sobre o que trazer para a aula, estamos à disposição! Te esperamos! 💪🏋️`;
+
+      return `https://wa.me/${fullPhone}?text=${encodeURIComponent(msg)}`;
+    }
+
+    function escapeHtml(str) {
+      if (!str) return "";
+      return str.replace(/[&<>"']/g, function (m) {
+        return ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;'
+        })[m];
+      });
+    }
+
+    // 05. Ações Rápidas (Alterar Status, Check-in, Excluir)
+    function changeStatus(id, newStatus) {
+      const item = allBookings.find(b => b.id === id);
+      if (!item) return;
+      item.status = newStatus;
+      saveBookings();
+      updateKPIs();
+      showToast(`Status de ${item.name} atualizado para ${newStatus}!`);
+    }
+
+    function quickCheckIn(id) {
+      const item = allBookings.find(b => b.id === id);
+      if (!item) return;
+      item.status = "Concluído";
+      saveBookings();
+      renderDashboard();
+      showToast(`✅ Presença de ${item.name} confirmada com sucesso!`);
+    }
+
+    function deleteBooking(id) {
+      const item = allBookings.find(b => b.id === id);
+      if (!item) return;
+
+      if (confirm(`Tem certeza que deseja excluir o agendamento de "${item.name}"?`)) {
+        allBookings = allBookings.filter(b => b.id !== id);
+        saveBookings();
+        renderDashboard();
+        showToast(`Agendamento de ${item.name} removido.`);
+      }
+    }
+
+    function resetFilters() {
+      document.getElementById("filter-search").value = "";
+      document.getElementById("filter-date").value = "all";
+      document.getElementById("filter-modality").value = "all";
+      document.getElementById("filter-status").value = "all";
+      applyFilters();
+      showToast("Filtros redefinidos.");
+    }
+
+    // 06. Modal de Novo Agendamento Manual
+    function openNewBookingModal() {
+      const modal = document.getElementById("new-booking-modal");
+      modal.classList.add("is-open");
+      // Define a data padrão para hoje
+      document.getElementById("manual-date").value = new Date().toISOString().split("T")[0];
+      document.getElementById("manual-name").focus();
+    }
+
+    function closeNewBookingModal() {
+      document.getElementById("new-booking-modal").classList.remove("is-open");
+    }
+
+    function formatPhoneInput(input) {
+      let v = input.value.replace(/\D/g, "");
+      if (v.length > 11) v = v.slice(0, 11);
+      if (v.length > 6) {
+        input.value = `(${v.slice(0, 2)}) ${v.slice(2, 7)}-${v.slice(7)}`;
+      } else if (v.length > 2) {
+        input.value = `(${v.slice(0, 2)}) ${v.slice(2)}`;
+      } else {
+        input.value = v;
+      }
+    }
+
+    function handleManualBooking(e) {
+      e.preventDefault();
+      const name = document.getElementById("manual-name").value.trim();
+      const phone = document.getElementById("manual-phone").value.trim();
+      const modality = document.getElementById("manual-modality").value;
+      const dateVal = document.getElementById("manual-date").value;
+      const time = document.getElementById("manual-time").value;
+      const experience = document.getElementById("manual-experience").value;
+      const status = document.getElementById("manual-status").value;
+      const goal = document.getElementById("manual-goal").value.trim() || "Condicionamento físico e saúde";
+      const notes = document.getElementById("manual-notes").value.trim();
+
+      if (!name || !phone || !dateVal || !time) {
+        alert("Preencha todos os campos obrigatórios.");
+        return;
+      }
+
+      // Formatação da data para exibição
+      const parts = dateVal.split("-");
+      const d = new Date(parts[0], parts[1] - 1, parts[2]);
+      const weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+      const months = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+      const dateDisplay = `${weekdays[d.getDay()]}, ${d.getDate()} de ${months[d.getMonth()]}`;
+
+      const randomCode = "#ALVO-" + Math.floor(1000 + Math.random() * 9000);
+
+      const newBooking = {
+        id: "alvo_" + Date.now() + "_" + Math.floor(Math.random() * 1000),
+        code: randomCode,
+        name: name,
+        phone: phone,
+        modality: modality,
+        dateIso: dateVal,
+        dateDisplay: dateDisplay,
+        time: time,
+        experience: experience,
+        goal: goal,
+        status: status,
+        createdAt: new Date().toISOString(),
+        notes: notes
+      };
+
+      allBookings.unshift(newBooking);
+      saveBookings();
+      renderDashboard();
+      closeNewBookingModal();
+      document.getElementById("new-booking-form").reset();
+      showToast(`✅ Agendamento de ${name} cadastrado com sucesso!`);
+    }
+
+    // 07. Modal de Detalhes do Aluno & Anotações
+    function openDetailsModal(id) {
+      const item = allBookings.find(b => b.id === id);
+      if (!item) return;
+
+      currentSelectedStudentId = id;
+      document.getElementById("det-name").innerText = item.name;
+      document.getElementById("det-code").innerText = `Código do Voucher: ${item.code}`;
+      document.getElementById("det-modality").innerText = item.modality;
+      document.getElementById("det-datetime").innerText = `${item.dateDisplay || item.dateIso} às ${item.time}`;
+      document.getElementById("det-phone").innerText = item.phone;
+      document.getElementById("det-experience").innerText = item.experience || "Iniciante";
+      document.getElementById("det-goal").innerText = item.goal || "Não informado";
+      document.getElementById("det-notes").value = item.notes || "";
+
+      // Badge de status
+      const statusPill = document.getElementById("det-status-pill");
+      statusPill.className = `status-pill ${getStatusClass(item.status)}`;
+      statusPill.innerHTML = `<span class="status-pill-dot"></span> ${item.status}`;
+
+      // Botão WhatsApp
+      document.getElementById("det-whatsapp-btn").href = buildStaffWhatsAppLink(item);
+
+      document.getElementById("details-modal").classList.add("is-open");
+    }
+
+    function closeDetailsModal() {
+      document.getElementById("details-modal").classList.remove("is-open");
+      currentSelectedStudentId = null;
+    }
+
+    function saveStudentNotes() {
+      if (!currentSelectedStudentId) return;
+      const item = allBookings.find(b => b.id === currentSelectedStudentId);
+      if (!item) return;
+
+      const notes = document.getElementById("det-notes").value.trim();
+      item.notes = notes;
+      saveBookings();
+      closeDetailsModal();
+      showToast(`Anotações de ${item.name} salvas com sucesso!`);
+    }
+
+    // 08. Exportação CSV (Excel UTF-8 BOM)
+    function exportToCSV() {
+      if (allBookings.length === 0) {
+        alert("Nenhum agendamento para exportar.");
+        return;
+      }
+
+      let csv = "\uFEFF"; // BOM para o Excel ler caracteres acentuados corretamente em pt-BR
+      csv += "Código,Nome do Aluno,Telefone,Modalidade,Data da Aula,Horário,Experiência,Objetivo,Status,Observações\r\n";
+
+      allBookings.forEach(b => {
+        const row = [
+          `"${(b.code || '').replace(/"/g, '""')}"`,
+          `"${(b.name || '').replace(/"/g, '""')}"`,
+          `"${(b.phone || '').replace(/"/g, '""')}"`,
+          `"${(b.modality || '').replace(/"/g, '""')}"`,
+          `"${(b.dateDisplay || b.dateIso || '').replace(/"/g, '""')}"`,
+          `"${(b.time || '').replace(/"/g, '""')}"`,
+          `"${(b.experience || '').replace(/"/g, '""')}"`,
+          `"${(b.goal || '').replace(/"/g, '""')}"`,
+          `"${(b.status || '').replace(/"/g, '""')}"`,
+          `"${(b.notes || '').replace(/"/g, '""')}"`,
+        ];
+        csv += row.join(",") + "\r\n";
+      });
+
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const link = document.createElement("a");
+      const url = URL.createObjectURL(blob);
+      link.setAttribute("href", url);
+      link.setAttribute("download", `Alvo02Fit_Agendamentos_${new Date().toISOString().split("T")[0]}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      showToast("📥 Planilha CSV exportada com sucesso!");
+    }
+
+    // 09. Impressão da Folha Diária
+    function printDailySheet() {
+      window.print();
+    }
+
+    // 10. Restaurar Demonstração e Limpar Dados
+    function restoreDemoData() {
+      if (confirm("Deseja restaurar os agendamentos de teste de demonstração?")) {
+        allBookings = generateSeedData();
+        saveBookings();
+        renderDashboard();
+        showToast("Dados de demonstração restaurados.");
+      }
+    }
+
+    function clearAllData() {
+      if (confirm("ATENÇÃO: Deseja apagar TODOS os agendamentos salvos? Esta ação não pode ser desfeita.")) {
+        allBookings = [];
+        saveBookings();
+        renderDashboard();
+        showToast("Todos os registros foram excluídos.");
+      }
+    }
+
+    // 11. Toast de Feedback Flutuante
+    function showToast(message) {
+      const container = document.getElementById("toast-container");
+      const toast = document.createElement("div");
+      toast.className = "toast";
+      toast.innerHTML = `
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f96a24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        <span>${escapeHtml(message)}</span>
+      `;
+      container.appendChild(toast);
+
+      // Animação de entrada
+      setTimeout(() => toast.classList.add("show"), 10);
+
+      // Remoção automática após 3.5s
+      setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 350);
+      }, 3500);
+    }
+  </script>
+</body>
+
+</html>
