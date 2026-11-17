@@ -60,6 +60,10 @@
       --status-cancelled-bg: rgba(239, 68, 68, 0.14);
       --status-cancelled-border: rgba(239, 68, 68, 0.38);
       --status-cancelled-text: #f87171;
+
+      --status-noshow-bg: rgba(249, 115, 22, 0.16);
+      --status-noshow-border: rgba(249, 115, 22, 0.42);
+      --status-noshow-text: #fb923c;
     }
 
     * {
@@ -805,6 +809,11 @@
       border-color: var(--status-cancelled-border);
       color: var(--status-cancelled-text);
     }
+    .status-pill.status-faltou {
+      background: var(--status-noshow-bg);
+      border-color: var(--status-noshow-border);
+      color: var(--status-noshow-text);
+    }
 
     .status-pill-dot {
       width: 6px;
@@ -1344,7 +1353,8 @@
               <option value="Pendente">🟡 Pendente (Aguardando)</option>
               <option value="Confirmado">🟢 Confirmado</option>
               <option value="Concluído">🔵 Concluído (Check-in)</option>
-              <option value="Cancelado">🔴 Cancelado / Faltou</option>
+              <option value="Não Compareceu">🟠 Não Compareceu</option>
+              <option value="Cancelado">🔴 Cancelado</option>
             </select>
           </div>
 
@@ -1534,7 +1544,7 @@
       </button>
 
       <div class="modal-header">
-        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 6px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 6px; padding-right: 48px;">
           <h2 class="modal-title" id="det-name">Nome do Aluno</h2>
           <span id="det-status-pill"></span>
         </div>
@@ -2105,6 +2115,7 @@
                 <option value="Pendente" ${b.status === "Pendente" ? "selected" : ""}>🟡 Pendente</option>
                 <option value="Confirmado" ${b.status === "Confirmado" ? "selected" : ""}>🟢 Confirmado</option>
                 <option value="Concluído" ${b.status === "Concluído" ? "selected" : ""}>🔵 Concluído</option>
+                <option value="Não Compareceu" ${b.status === "Não Compareceu" ? "selected" : ""}>🟠 Não Compareceu</option>
                 <option value="Cancelado" ${b.status === "Cancelado" ? "selected" : ""}>🔴 Cancelado</option>
               </select>
             </td>
@@ -2159,6 +2170,7 @@
     function getStatusClass(status) {
       if (status === "Confirmado") return "status-confirmado";
       if (status === "Concluído") return "status-concluido";
+      if (status === "Não Compareceu") return "status-faltou";
       if (status === "Cancelado") return "status-cancelado";
       return "status-pendente";
     }
