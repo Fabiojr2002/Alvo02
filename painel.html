@@ -1402,11 +1402,260 @@
       transform: translateY(-1px);
     }
 
+    /* ABAS DE NAVEGAÇÃO DO PAINEL */
+    .panel-tabs-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .panel-tabs {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 5px;
+    }
+
+    .panel-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border-radius: 10px;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+    .panel-tab-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .panel-tab-btn.is-active {
+      background: linear-gradient(135deg, rgba(255, 126, 54, 0.22) 0%, rgba(241, 90, 36, 0.14) 100%);
+      border-color: rgba(249, 106, 36, 0.45);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(249, 106, 36, 0.18);
+    }
+    .panel-tab-btn.is-active svg {
+      color: var(--primary);
+    }
+
+    .tab-count-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+    }
+    .panel-tab-btn.is-active .tab-count-badge {
+      background: rgba(249, 106, 36, 0.28);
+      color: #ffb085;
+    }
+
+    .logged-user-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .logged-user-pill strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .logged-user-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 8px rgba(74, 222, 128, 0.65);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+    .tab-panel.is-active {
+      display: block;
+    }
+
+    /* SEÇÃO DE GESTÃO DE USUÁRIOS (ABA ADM) */
+    .users-layout {
+      display: grid;
+      grid-template-columns: 360px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .users-card {
+      background: linear-gradient(165deg, #170b07 0%, #100604 100%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
+      position: relative;
+      overflow: hidden;
+    }
+    .users-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #ff7e36 0%, #f96a24 100%);
+    }
+
+    .users-card-header {
+      margin-bottom: 20px;
+    }
+    .users-card-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.6px;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+    .users-card-sub {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .user-login-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 9px;
+      border-radius: 99px;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .role-badge.role-admin {
+      background: rgba(249, 106, 36, 0.16);
+      border: 1px solid rgba(249, 106, 36, 0.4);
+      color: #ff9457;
+    }
+    .role-badge.role-staff {
+      background: rgba(56, 189, 248, 0.14);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #38bdf8;
+    }
+    .role-you-tag {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 99px;
+      background: rgba(34, 197, 94, 0.16);
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      color: #4ade80;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .password-cell {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 10px;
+      padding: 5px 8px 5px 12px;
+    }
+    .password-value {
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 13px;
+      color: #f5f0eb;
+      letter-spacing: 0.6px;
+      min-width: 78px;
+    }
+    .password-value.is-masked {
+      color: var(--text-dim);
+      letter-spacing: 2px;
+    }
+    .pw-eye-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .pw-eye-btn:hover {
+      background: rgba(249, 106, 36, 0.18);
+      border-color: rgba(249, 106, 36, 0.45);
+      color: #ffffff;
+    }
+    .pw-eye-btn.is-visible {
+      background: rgba(249, 106, 36, 0.22);
+      border-color: var(--primary);
+      color: #ffb085;
+    }
+
+    @media screen and (max-width: 980px) {
+      .users-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      .panel-tabs {
+        width: 100%;
+      }
+      .panel-tab-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 9px 10px;
+        font-size: 12px;
+      }
+      .users-card {
+        padding: 18px 14px;
+      }
+    }
+
     /* ESTILO PARA IMPRESSÃO */
     @media print {
       body:not(.is-authenticated) .app-container,
       body:not(.is-authenticated) .print-header,
-      .auth-screen {
+      .auth-screen,
+      .panel-tabs-bar,
+      #tab-usuarios {
         display: none !important;
       }
       body {
@@ -1604,6 +1853,38 @@
         </button>
       </div>
     </header>
+
+    <!-- BARRA DE ABAS DO PAINEL -->
+    <nav class="panel-tabs-bar" aria-label="Navegação do Painel">
+      <div class="panel-tabs" role="tablist">
+        <button type="button" class="panel-tab-btn is-active" id="tab-btn-agendamentos" role="tab" aria-selected="true" onclick="switchPanelTab('agendamentos')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          Agendamentos
+          <span class="tab-count-badge" id="tab-count-bookings">0</span>
+        </button>
+
+        <button type="button" class="panel-tab-btn" id="tab-btn-usuarios" role="tab" aria-selected="false" onclick="switchPanelTab('usuarios')" style="display: none;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          Usuários &amp; Senhas
+          <span class="tab-count-badge" id="tab-count-users">1</span>
+        </button>
+      </div>
+
+      <div class="logged-user-pill" id="logged-user-pill">
+        <span class="logged-user-dot"></span>
+        <span>Logado como <strong id="logged-user-label">adm</strong></span>
+      </div>
+    </nav>
+
+    <!-- ABA 01: AGENDAMENTOS -->
+    <div id="tab-agendamentos" class="tab-panel is-active">
 
     <!-- 02. CARDS DE KPIS / RESUMO GERAL -->
     <section class="kpis-grid">
@@ -1814,6 +2095,96 @@
         </button>
       </div>
     </section>
+    </div><!-- /#tab-agendamentos -->
+
+    <!-- ABA 02: GESTÃO DE USUÁRIOS & SENHAS (EXCLUSIVO ADMINISTRADOR) -->
+    <div id="tab-usuarios" class="tab-panel">
+      <div class="users-layout">
+        <!-- Card Esquerdo: Adicionar Novo Usuário -->
+        <section class="users-card">
+          <div class="users-card-header">
+            <h2 class="users-card-title">Novo Usuário</h2>
+            <p class="users-card-sub">Cadastre funcionários da recepção ou novos administradores para acessar o painel.</p>
+          </div>
+
+          <form id="create-user-form" onsubmit="handleCreateUser(event)">
+            <div class="form-group">
+              <label class="form-label" for="new-user-name">Nome Completo *</label>
+              <input type="text" id="new-user-name" class="form-input" placeholder="Ex: Carla Silva (Recepção)" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="new-user-login">Login de Acesso *</label>
+              <input type="text" id="new-user-login" class="form-input" placeholder="Ex: carla" autocomplete="off" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="new-user-pass">Senha *</label>
+              <div class="auth-input-wrap">
+                <input type="password" id="new-user-pass" class="form-input" style="padding-right: 42px;" placeholder="Defina uma senha de acesso" autocomplete="new-password" required />
+                <button type="button" class="auth-toggle-pw" onclick="toggleFieldPassword('new-user-pass', this)" aria-label="Mostrar ou ocultar senha">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="new-user-role">Nível de Permissão</label>
+              <select id="new-user-role" class="form-select">
+                <option value="Funcionário" selected>Funcionário (Apenas Agendamentos)</option>
+                <option value="Administrador">Administrador (Acesso Total + Usuários)</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="8.5" cy="7" r="4"></circle>
+                <line x1="20" y1="8" x2="20" y2="14"></line>
+                <line x1="23" y1="11" x2="17" y2="11"></line>
+              </svg>
+              Adicionar Usuário
+            </button>
+          </form>
+        </section>
+
+        <!-- Card Direito: Lista de Usuários, Senhas e Edição -->
+        <section class="users-card" style="padding: 0; overflow: hidden;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding: 22px 24px 16px; border-bottom: 1px solid rgba(255,255,255,0.06);">
+            <div>
+              <h2 class="users-card-title" style="margin-bottom: 2px;">Usuários Cadastrados</h2>
+              <p class="users-card-sub">Visualize senhas, altere credenciais ou remova acessos da equipe.</p>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-toggle-all-pw" onclick="toggleAllPasswordsVisibility()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <span id="toggle-all-pw-label">Mostrar Todas as Senhas</span>
+            </button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="students-table" style="min-width: 620px;">
+              <thead>
+                <tr>
+                  <th>Usuário &amp; Permissão</th>
+                  <th>Login</th>
+                  <th>Senha</th>
+                  <th style="text-align: right;">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="users-tbody">
+                <!-- Preenchido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div><!-- /#tab-usuarios -->
 
     <!-- 05. RODAPÉ DO PAINEL -->
     <footer class="panel-footer">
@@ -2003,6 +2374,65 @@
     </div>
   </div>
 
+  <!-- ========================================================
+       MODAL: ALTERAR SENHA / EDITAR USUÁRIO DO PAINEL
+       ======================================================== -->
+  <div class="modal-backdrop" id="edit-user-modal">
+    <div class="modal-box" style="max-width: 460px;">
+      <button class="modal-close-btn" onclick="closeEditUserModal()" aria-label="Fechar modal">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="modal-header">
+        <h2 class="modal-title">Editar Usuário &amp; Senha</h2>
+        <p class="modal-subtitle" id="edit-user-subtitle">Atualize o nome, permissão ou senha de acesso deste usuário.</p>
+      </div>
+
+      <form id="edit-user-form" onsubmit="handleUpdateUser(event)">
+        <input type="hidden" id="edit-user-id" />
+
+        <div class="form-group">
+          <label class="form-label" for="edit-user-name">Nome Completo *</label>
+          <input type="text" id="edit-user-name" class="form-input" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="edit-user-login">Login de Acesso *</label>
+          <input type="text" id="edit-user-login" class="form-input" autocomplete="off" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="edit-user-pass">Senha *</label>
+          <div class="auth-input-wrap">
+            <input type="password" id="edit-user-pass" class="form-input" style="padding-right: 42px;" autocomplete="new-password" required />
+            <button type="button" class="auth-toggle-pw" id="edit-user-pass-eye" onclick="toggleFieldPassword('edit-user-pass', this)" aria-label="Mostrar ou ocultar senha">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="edit-user-role">Nível de Permissão</label>
+          <select id="edit-user-role" class="form-select">
+            <option value="Funcionário">Funcionário (Apenas Agendamentos)</option>
+            <option value="Administrador">Administrador (Acesso Total + Usuários)</option>
+          </select>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px;">
+          <button type="button" class="btn btn-secondary" onclick="closeEditUserModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Container de Notificações Toast -->
   <div class="toast-container" id="toast-container"></div>
 
@@ -2011,44 +2441,171 @@
        ======================================================== -->
   <script>
     const STORAGE_KEY = "alvo_agendamentos";
+    const USERS_STORAGE_KEY = "alvo_painel_usuarios";
     const AUTH_SESSION_KEY = "alvo_painel_auth";
-    const PANEL_CREDENTIALS = { user: "adm", pass: "adm12" };
+    const AUTH_USER_SESSION_KEY = "alvo_painel_auth_user";
     let allBookings = [];
+    let panelUsers = [];
+    let revealedPasswordIds = new Set();
     let currentSelectedStudentId = null;
     let selectedKpiPeriod = "day"; // "day" | "week" | "month"
     let dashboardInitialized = false;
+
+    const EYE_OPEN_SVG = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+    const EYE_CLOSED_SVG = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
+
+    function getDefaultAdminUser() {
+      return {
+        id: "user_adm_master",
+        name: "Administrador Principal",
+        username: "adm",
+        password: "adm12",
+        role: "Administrador",
+        isMaster: true,
+        createdAt: new Date().toISOString()
+      };
+    }
+
+    function loadPanelUsers() {
+      try {
+        const raw = localStorage.getItem(USERS_STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            panelUsers = parsed;
+            return;
+          }
+        }
+      } catch (e) {
+        console.error("Erro ao carregar usuários do painel:", e);
+      }
+      panelUsers = [getDefaultAdminUser()];
+      savePanelUsers();
+    }
+
+    function savePanelUsers() {
+      try {
+        localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(panelUsers));
+      } catch (e) {
+        console.error("Erro ao salvar usuários do painel:", e);
+      }
+    }
+
+    function getCurrentLoggedUser() {
+      try {
+        const raw = sessionStorage.getItem(AUTH_USER_SESSION_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          // Sincroniza com a versão mais recente salva no localStorage
+          const fresh = panelUsers.find(u => u.id === parsed.id);
+          return fresh || parsed;
+        }
+      } catch (e) {}
+      if (isPanelAuthenticated()) {
+        return panelUsers.find(u => u.isMaster) || panelUsers[0] || getDefaultAdminUser();
+      }
+      return null;
+    }
+
+    function isCurrentUserAdmin() {
+      const user = getCurrentLoggedUser();
+      if (!user) return false;
+      return user.role === "Administrador" || user.isMaster === true || (user.username || "").toLowerCase() === "adm";
+    }
 
     function isPanelAuthenticated() {
       return sessionStorage.getItem(AUTH_SESSION_KEY) === "true";
     }
 
+    function applyUserPermissionsUI() {
+      const user = getCurrentLoggedUser();
+      const labelEl = document.getElementById("logged-user-label");
+      const usersTabBtn = document.getElementById("tab-btn-usuarios");
+      const usersCountEl = document.getElementById("tab-count-users");
+
+      if (labelEl && user) {
+        labelEl.innerText = `${user.username} (${user.role})`;
+      }
+      if (usersCountEl) {
+        usersCountEl.innerText = panelUsers.length;
+      }
+
+      if (isCurrentUserAdmin()) {
+        if (usersTabBtn) usersTabBtn.style.display = "inline-flex";
+        renderUsersTable();
+      } else {
+        if (usersTabBtn) usersTabBtn.style.display = "none";
+        switchPanelTab("agendamentos");
+      }
+    }
+
+    function switchPanelTab(tabName) {
+      if (tabName === "usuarios" && !isCurrentUserAdmin()) {
+        showToast("Acesso restrito a administradores.");
+        return;
+      }
+
+      const tabs = ["agendamentos", "usuarios"];
+      tabs.forEach(t => {
+        const panelEl = document.getElementById(`tab-${t}`);
+        const btnEl = document.getElementById(`tab-btn-${t}`);
+        const active = t === tabName;
+        if (panelEl) panelEl.classList.toggle("is-active", active);
+        if (btnEl) {
+          btnEl.classList.toggle("is-active", active);
+          btnEl.setAttribute("aria-selected", active ? "true" : "false");
+        }
+      });
+
+      if (tabName === "usuarios") {
+        loadPanelUsers();
+        renderUsersTable();
+      }
+    }
+
     function initDashboardOnce() {
+      loadPanelUsers();
       if (!dashboardInitialized) {
         dashboardInitialized = true;
         initClock();
       }
       loadBookings();
       renderDashboard();
+      applyUserPermissionsUI();
     }
 
     function handlePanelLogin(event) {
       if (event) event.preventDefault();
+      loadPanelUsers();
+
       const userInput = document.getElementById("auth-user");
       const passInput = document.getElementById("auth-pass");
       const errorEl = document.getElementById("auth-error");
       const cardEl = document.getElementById("auth-card");
 
-      const login = (userInput.value || "").trim();
+      const login = (userInput.value || "").trim().toLowerCase();
       const password = passInput.value || "";
 
-      if (login === PANEL_CREDENTIALS.user && password === PANEL_CREDENTIALS.pass) {
+      const matchedUser = panelUsers.find(
+        u => (u.username || "").trim().toLowerCase() === login && u.password === password
+      );
+
+      if (matchedUser) {
         errorEl.classList.remove("visible");
         sessionStorage.setItem(AUTH_SESSION_KEY, "true");
+        sessionStorage.setItem(AUTH_USER_SESSION_KEY, JSON.stringify({
+          id: matchedUser.id,
+          name: matchedUser.name,
+          username: matchedUser.username,
+          role: matchedUser.role,
+          isMaster: !!matchedUser.isMaster
+        }));
         document.body.classList.add("is-authenticated");
         userInput.value = "";
         passInput.value = "";
         initDashboardOnce();
-        showToast("Bem-vindo ao Painel da Equipe Alvo02Fit!");
+        switchPanelTab("agendamentos");
+        showToast(`Bem-vindo(a), ${matchedUser.name}!`);
       } else {
         errorEl.classList.add("visible");
         cardEl.classList.remove("shake");
@@ -2064,17 +2621,28 @@
       const eyeIcon = document.getElementById("auth-eye-icon");
       const isPassword = passInput.type === "password";
       passInput.type = isPassword ? "text" : "password";
-      eyeIcon.innerHTML = isPassword
-        ? '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>'
-        : '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+      eyeIcon.innerHTML = isPassword ? EYE_CLOSED_SVG : EYE_OPEN_SVG;
+    }
+
+    function toggleFieldPassword(inputId, btnEl) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      const isPassword = input.type === "password";
+      input.type = isPassword ? "text" : "password";
+      const svg = btnEl ? btnEl.querySelector("svg") : null;
+      if (svg) svg.innerHTML = isPassword ? EYE_CLOSED_SVG : EYE_OPEN_SVG;
     }
 
     function logoutPanel() {
       sessionStorage.removeItem(AUTH_SESSION_KEY);
+      sessionStorage.removeItem(AUTH_USER_SESSION_KEY);
+      revealedPasswordIds.clear();
       document.body.classList.remove("is-authenticated");
       closePeriodDropdown();
       closeNewBookingModal();
       closeDetailsModal();
+      closeEditUserModal();
+      switchPanelTab("agendamentos");
       const errorEl = document.getElementById("auth-error");
       if (errorEl) errorEl.classList.remove("visible");
       const userInput = document.getElementById("auth-user");
@@ -2084,7 +2652,273 @@
         passInput.value = "";
         passInput.type = "password";
       }
+      const eyeIcon = document.getElementById("auth-eye-icon");
+      if (eyeIcon) eyeIcon.innerHTML = EYE_OPEN_SVG;
       if (userInput) userInput.focus();
+    }
+
+    // GESTÃO DE USUÁRIOS & SENHAS (ABA ADMINISTRADOR)
+    function renderUsersTable() {
+      const tbody = document.getElementById("users-tbody");
+      const usersCountEl = document.getElementById("tab-count-users");
+      if (usersCountEl) usersCountEl.innerText = panelUsers.length;
+      if (!tbody) return;
+
+      const currentUser = getCurrentLoggedUser();
+      const allRevealed = panelUsers.length > 0 && panelUsers.every(u => revealedPasswordIds.has(u.id));
+      const toggleAllLabel = document.getElementById("toggle-all-pw-label");
+      if (toggleAllLabel) {
+        toggleAllLabel.innerText = allRevealed ? "Ocultar Todas as Senhas" : "Mostrar Todas as Senhas";
+      }
+
+      let html = "";
+      panelUsers.forEach(u => {
+        const isMe = currentUser && currentUser.id === u.id;
+        const isAdmin = u.role === "Administrador" || u.isMaster;
+        const isVisible = revealedPasswordIds.has(u.id);
+        const canDelete = !u.isMaster && !isMe;
+
+        html += `
+          <tr>
+            <td>
+              <div class="cell-student" style="gap: 5px;">
+                <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                  <span class="student-name">${escapeHtml(u.name)}</span>
+                  ${isMe ? '<span class="role-you-tag">Você</span>' : ''}
+                </div>
+                <div>
+                  <span class="role-badge ${isAdmin ? 'role-admin' : 'role-staff'}">
+                    ${isAdmin ? 'Administrador' : 'Funcionário'}
+                  </span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="user-login-chip">${escapeHtml(u.username)}</span>
+            </td>
+            <td>
+              <div class="password-cell">
+                <span class="password-value ${isVisible ? '' : 'is-masked'}">${isVisible ? escapeHtml(u.password) : '••••••••'}</span>
+                <button type="button" class="pw-eye-btn ${isVisible ? 'is-visible' : ''}" onclick="toggleRowPassword('${u.id}')" title="${isVisible ? 'Ocultar senha' : 'Ver senha'}">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    ${isVisible ? EYE_CLOSED_SVG : EYE_OPEN_SVG}
+                  </svg>
+                </button>
+              </div>
+            </td>
+            <td>
+              <div class="actions-group" style="justify-content: flex-end;">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="openEditUserModal('${u.id}')" title="Alterar senha ou dados deste usuário" style="padding: 6px 11px;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
+                  </svg>
+                  Alterar Senha
+                </button>
+                ${canDelete ? `
+                  <button type="button" class="action-icon-btn btn-delete" onclick="deletePanelUser('${u.id}')" title="Excluir este usuário">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="3 6 5 6 21 6"></polyline>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                  </button>
+                ` : `
+                  <button type="button" class="action-icon-btn" disabled style="opacity: 0.28; cursor: not-allowed;" title="${u.isMaster ? 'Administrador principal não pode ser excluído' : 'Você não pode excluir seu próprio usuário logado'}">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  </button>
+                `}
+              </div>
+            </td>
+          </tr>
+        `;
+      });
+
+      tbody.innerHTML = html;
+    }
+
+    function toggleRowPassword(userId) {
+      if (revealedPasswordIds.has(userId)) {
+        revealedPasswordIds.delete(userId);
+      } else {
+        revealedPasswordIds.add(userId);
+      }
+      renderUsersTable();
+    }
+
+    function toggleAllPasswordsVisibility() {
+      const allRevealed = panelUsers.length > 0 && panelUsers.every(u => revealedPasswordIds.has(u.id));
+      if (allRevealed) {
+        revealedPasswordIds.clear();
+      } else {
+        panelUsers.forEach(u => revealedPasswordIds.add(u.id));
+      }
+      renderUsersTable();
+    }
+
+    function handleCreateUser(event) {
+      event.preventDefault();
+      if (!isCurrentUserAdmin()) return;
+
+      const name = document.getElementById("new-user-name").value.trim();
+      const username = document.getElementById("new-user-login").value.trim();
+      const password = document.getElementById("new-user-pass").value;
+      const role = document.getElementById("new-user-role").value;
+
+      if (!name || !username || !password) {
+        alert("Preencha o nome, login e senha do usuário.");
+        return;
+      }
+      if (/\s/.test(username)) {
+        alert("O login não pode conter espaços. Ex: carla ou recepcao01");
+        document.getElementById("new-user-login").focus();
+        return;
+      }
+      if (password.length < 3) {
+        alert("A senha deve ter pelo menos 3 caracteres.");
+        document.getElementById("new-user-pass").focus();
+        return;
+      }
+
+      const exists = panelUsers.some(u => u.username.toLowerCase() === username.toLowerCase());
+      if (exists) {
+        alert(`O login "${username}" já está em uso. Escolha outro login.`);
+        document.getElementById("new-user-login").focus();
+        return;
+      }
+
+      const newUser = {
+        id: "user_" + Date.now() + "_" + Math.floor(Math.random() * 1000),
+        name: name,
+        username: username,
+        password: password,
+        role: role,
+        isMaster: false,
+        createdAt: new Date().toISOString()
+      };
+
+      panelUsers.push(newUser);
+      savePanelUsers();
+      renderUsersTable();
+
+      document.getElementById("create-user-form").reset();
+      const passField = document.getElementById("new-user-pass");
+      if (passField) passField.type = "password";
+      showToast(`Usuário "${username}" criado com sucesso!`);
+    }
+
+    function openEditUserModal(userId) {
+      if (!isCurrentUserAdmin()) return;
+      const user = panelUsers.find(u => u.id === userId);
+      if (!user) return;
+
+      document.getElementById("edit-user-id").value = user.id;
+      document.getElementById("edit-user-name").value = user.name;
+      const loginInput = document.getElementById("edit-user-login");
+      loginInput.value = user.username;
+      loginInput.readOnly = !!user.isMaster;
+      loginInput.style.opacity = user.isMaster ? "0.65" : "1";
+
+      const passInput = document.getElementById("edit-user-pass");
+      passInput.value = user.password;
+      passInput.type = "text"; // já mostra a senha para facilitar conferência e edição
+      const eyeBtn = document.getElementById("edit-user-pass-eye");
+      if (eyeBtn && eyeBtn.querySelector("svg")) {
+        eyeBtn.querySelector("svg").innerHTML = EYE_CLOSED_SVG;
+      }
+
+      const roleSelect = document.getElementById("edit-user-role");
+      roleSelect.value = user.role;
+      roleSelect.disabled = !!user.isMaster;
+
+      document.getElementById("edit-user-subtitle").innerText = user.isMaster
+        ? "Administrador principal: você pode alterar o nome e a senha de acesso."
+        : `Atualize o nome, login, permissão ou senha de "${user.username}".`;
+
+      document.getElementById("edit-user-modal").classList.add("is-open");
+      passInput.focus();
+      passInput.select();
+    }
+
+    function closeEditUserModal() {
+      const modal = document.getElementById("edit-user-modal");
+      if (modal) modal.classList.remove("is-open");
+    }
+
+    function handleUpdateUser(event) {
+      event.preventDefault();
+      if (!isCurrentUserAdmin()) return;
+
+      const userId = document.getElementById("edit-user-id").value;
+      const user = panelUsers.find(u => u.id === userId);
+      if (!user) return;
+
+      const name = document.getElementById("edit-user-name").value.trim();
+      const username = user.isMaster ? user.username : document.getElementById("edit-user-login").value.trim();
+      const password = document.getElementById("edit-user-pass").value;
+      const role = user.isMaster ? "Administrador" : document.getElementById("edit-user-role").value;
+
+      if (!name || !username || !password) {
+        alert("Preencha todos os campos obrigatórios.");
+        return;
+      }
+      if (/\s/.test(username)) {
+        alert("O login não pode conter espaços.");
+        return;
+      }
+      if (password.length < 3) {
+        alert("A senha deve ter pelo menos 3 caracteres.");
+        return;
+      }
+
+      const duplicate = panelUsers.some(u => u.id !== userId && u.username.toLowerCase() === username.toLowerCase());
+      if (duplicate) {
+        alert(`O login "${username}" já está em uso por outro usuário.`);
+        return;
+      }
+
+      user.name = name;
+      user.username = username;
+      user.password = password;
+      user.role = role;
+      savePanelUsers();
+
+      // Atualiza sessão se for o usuário logado
+      const current = getCurrentLoggedUser();
+      if (current && current.id === user.id) {
+        sessionStorage.setItem(AUTH_USER_SESSION_KEY, JSON.stringify({
+          id: user.id,
+          name: user.name,
+          username: user.username,
+          role: user.role,
+          isMaster: !!user.isMaster
+        }));
+      }
+
+      applyUserPermissionsUI();
+      closeEditUserModal();
+      showToast(`Dados e senha de "${user.username}" atualizados!`);
+    }
+
+    function deletePanelUser(userId) {
+      if (!isCurrentUserAdmin()) return;
+      const user = panelUsers.find(u => u.id === userId);
+      if (!user || user.isMaster) return;
+
+      const current = getCurrentLoggedUser();
+      if (current && current.id === user.id) {
+        alert("Você não pode excluir o usuário que está logado no momento.");
+        return;
+      }
+
+      if (confirm(`Tem certeza que deseja excluir o acesso de "${user.name}" (login: ${user.username})?`)) {
+        panelUsers = panelUsers.filter(u => u.id !== userId);
+        revealedPasswordIds.delete(userId);
+        savePanelUsers();
+        renderUsersTable();
+        showToast(`Usuário "${user.username}" removido.`);
+      }
     }
 
     // Utilitário: data local em formato YYYY-MM-DD (evita erro de fuso horário UTC)
@@ -2112,6 +2946,7 @@
 
     // Inicialização ao carregar a página
     document.addEventListener("DOMContentLoaded", function () {
+      loadPanelUsers();
       if (isPanelAuthenticated()) {
         document.body.classList.add("is-authenticated");
         initDashboardOnce();
@@ -2131,7 +2966,7 @@
         }
       });
 
-      // Fecha a box de seleção de período ao clicar fora ou pressionar ESC
+      // Fecha a box de seleção de período ou modais ao clicar fora ou pressionar ESC
       document.addEventListener("click", function (e) {
         const card = document.getElementById("kpi-period-card");
         if (card && card.classList.contains("dropdown-open") && !card.contains(e.target)) {
@@ -2142,15 +2977,20 @@
       document.addEventListener("keydown", function (e) {
         if (e.key === "Escape") {
           closePeriodDropdown();
+          closeEditUserModal();
         }
       });
     });
 
-    // Sincronização em tempo real entre abas (quando um novo agendamento entra)
+    // Sincronização em tempo real entre abas (quando um novo agendamento ou usuário entra)
     window.addEventListener("storage", function (e) {
       if (e.key === STORAGE_KEY && isPanelAuthenticated()) {
         loadBookings();
         renderDashboard();
+      }
+      if (e.key === USERS_STORAGE_KEY && isPanelAuthenticated()) {
+        loadPanelUsers();
+        applyUserPermissionsUI();
       }
     });
 
@@ -2476,6 +3316,8 @@
       });
 
       document.getElementById("kpi-total").innerText = total;
+      const tabBookingsBadge = document.getElementById("tab-count-bookings");
+      if (tabBookingsBadge) tabBookingsBadge.innerText = total;
       document.getElementById("kpi-pending").innerText = pendingCount;
       document.getElementById("kpi-confirmed").innerText = confirmedCount;
       document.getElementById("kpi-done").innerText = doneCount;
