@@ -74,6 +74,11 @@
       padding: 0;
     }
 
+    html {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
     body {
       background-color: var(--bg-dark);
       background-image: 
@@ -83,6 +88,8 @@
       color: var(--text-main);
       font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       min-height: 100vh;
+      max-width: 100%;
+      overflow-x: hidden;
       display: flex;
       flex-direction: column;
       -webkit-font-smoothing: antialiased;
@@ -108,6 +115,7 @@
     .app-container {
       width: 100%;
       max-width: 1400px;
+      min-width: 0;
       margin: 0 auto;
       padding: 24px 20px 48px;
       flex: 1;
@@ -1069,9 +1077,23 @@
     }
 
     /* RESPONSIVIDADE */
-    @media screen and (max-width: 900px) {
+    @media screen and (max-width: 960px) {
+      .panel-header {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px 12px;
+      }
       .header-center {
-        display: none;
+        display: flex;
+        align-items: flex-end;
+        text-align: right;
+        margin-left: auto;
+      }
+      .header-actions {
+        flex-basis: 100%;
+        width: 100%;
       }
     }
 
@@ -1080,18 +1102,89 @@
         padding: 16px 12px 36px;
       }
       .panel-header {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px 10px;
+        padding-bottom: 18px;
+        margin-bottom: 20px;
+      }
+      .header-left {
+        gap: 10px;
+        min-width: 0;
+      }
+      .header-logo-img {
+        height: 32px;
+      }
+      .header-badge-team {
+        padding: 3px 9px;
+        font-size: 9.5px;
+        letter-spacing: 0.5px;
+      }
+      .header-center {
+        align-items: flex-end;
+        text-align: right;
+        gap: 2px;
+      }
+      .live-clock-time {
+        font-size: 21px;
+        letter-spacing: 0.8px;
+      }
+      .live-clock-date {
+        font-size: 11px;
+        white-space: nowrap;
       }
       .header-actions {
         width: 100%;
-        justify-content: space-between;
+        justify-content: flex-start;
+        gap: 8px;
+      }
+      .header-actions .btn {
+        padding: 9px 14px;
+        font-size: 12px;
+      }
+      .search-box {
+        min-width: 0;
+        width: 100%;
       }
       .kpis-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .kpi-card {
+        min-width: 0;
+        padding: 15px 14px;
+      }
+      .kpi-title {
+        font-size: 11px;
+      }
+      .kpi-number {
+        font-size: 32px;
+      }
+      .table-container {
+        min-width: 0;
+        max-width: 100%;
       }
       .form-row {
         grid-template-columns: 1fr;
+      }
+    }
+
+    @media screen and (max-width: 520px) {
+      .header-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+      .header-logo-img {
+        height: 28px;
+      }
+      .live-clock-time {
+        font-size: 20px;
+      }
+      .live-clock-date {
+        font-size: 10.5px;
       }
     }
 
@@ -1671,12 +1764,16 @@
         document.getElementById('clock-time').innerText = `${hours}:${minutes}:${seconds}`;
 
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        const dateStr = now.toLocaleDateString('pt-BR', options);
-        document.getElementById('clock-date').innerText = dateStr;
-        document.getElementById('print-date').innerText = dateStr;
+        const fullDateStr = now.toLocaleDateString('pt-BR', options);
+        const isCompact = window.innerWidth <= 768;
+        document.getElementById('clock-date').innerText = isCompact
+          ? formatWeekdayDate(getLocalIsoDate(now))
+          : fullDateStr;
+        document.getElementById('print-date').innerText = fullDateStr;
       }
       update();
       setInterval(update, 1000);
+      window.addEventListener('resize', update);
     }
 
     // 02. Carregamento dos Agendamentos do localStorage ou Inicialização com Dados Realistas
