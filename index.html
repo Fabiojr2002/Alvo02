@@ -43,8 +43,8 @@
   <!-- Fontes Locais & Otimizacao de Performance -->
   <link rel="preload" href="./fonts/anton.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="./fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" as="image" href="./images/hero-poster-mobile.jpg" media="(max-width: 768px)" fetchpriority="high" />
-  <link rel="preload" as="image" href="./images/hero-poster.jpg" media="(min-width: 769px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="./images/hero/hero-poster-mobile.jpg" media="(max-width: 768px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="./images/hero/hero-poster-desktop.jpg" media="(min-width: 769px)" fetchpriority="high" />
 
   <style>
     /* ==========================================================================
@@ -476,9 +476,9 @@
   <script src="./js/webfont.js" type="text/javascript" async></script>
   <script
     type="text/javascript">!function (o, c) { var n = c.documentElement, t = " w-mod-"; n.className += t + "js" + t + "ix3", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch") }(window, document);</script>
-  <link rel="icon" type="image/png" sizes="512x512" href="./images/favicon-alvo02fit.png?v=2" />
-  <link rel="shortcut icon" href="./images/favicon-alvo02fit.ico?v=2" type="image/x-icon" />
-  <link rel="apple-touch-icon" href="./images/favicon-alvo02fit.png?v=2" />
+  <link rel="icon" type="image/png" sizes="512x512" href="./images/brand/favicon-alvo02fit.png?v=2" />
+  <link rel="shortcut icon" href="./images/brand/favicon-alvo02fit.ico?v=2" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="./images/brand/favicon-alvo02fit.png?v=2" />
 
   <style>
     /* ==========================================================================
@@ -3286,7 +3286,7 @@
       <div class="container w-container">
         <div class="navbar-wrapper">
           <a href="/" aria-current="page" class="navbar-logo-link w-nav-brand w--current">
-            <img loading="lazy" src="./images/alvo02fit-logo.png" alt="Alvo02Fit - Academia" class="image" />
+            <img loading="lazy" src="./images/brand/alvo02fit-logo.png" alt="Alvo02Fit - Academia" class="image" />
           </a>
           <nav role="navigation" class="navigation w-nav-menu">
             <div class="navigation-inner-wrap">
@@ -3395,19 +3395,18 @@
     </div>
     <div id="hero" class="home-hero-bg-block">
       <div class="home-hero-bg-wrap">
-        <video id="hero-bg-video" class="home-hero-image home-hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hero-poster.jpg">
+        <video id="hero-bg-video" class="home-hero-image home-hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hero/hero-poster-desktop.jpg">
           <!-- Video Vertical para Dispositivo Movel (<= 768px) -->
-          <source src="./images/hero_cll.mp4" type="video/mp4" media="(max-width: 768px)" />
+          <source src="./videos/hero-mobile.mp4" type="video/mp4" media="(max-width: 768px)" />
           <!-- Video Horizontal para Computador / Desktop (> 768px) -->
-          <source src="./images/hero.mp4" type="video/mp4" />
-          <source src="./hero.mp4" type="video/mp4" />
-          <img src="./images/hero-poster.jpg" loading="eager" fetchpriority="high" alt="Alvo02Fit - Treino e Performance" class="home-hero-image" />
+          <source src="./videos/hero-desktop.mp4" type="video/mp4" />
+          <img src="./images/hero/hero-poster-desktop.jpg" loading="eager" fetchpriority="high" alt="Alvo02Fit - Treino e Performance" class="home-hero-image" />
         </video>
         <script>
           (function() {
             var v = document.getElementById('hero-bg-video');
             if (v && window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
-              v.setAttribute('poster', './images/hero-poster-mobile.jpg');
+              v.setAttribute('poster', './images/hero/hero-poster-mobile.jpg');
             }
           })();
         </script>
@@ -3449,7 +3448,7 @@
               style="box-sizing: border-box !important;">
               <div class="home-hero-left-card">
                 <img
-                  src="./images/69ccf9e3fcf95f9e2bbb3d63_Subtract.webp"
+                  src="./images/hero/hero-card-shape.webp"
                   loading="lazy" alt="" class="hero-card-bg-image" />
                 <div class="home-hero-card-content">
                   <div class="card-content-top"
@@ -3468,18 +3467,18 @@
                   </div>
                   <div class="card-content-bottom">
                     <img
-                      src="./images/69ccff1c36640a2e7960be3b_ac51cc667e0cae0445129cce11a0559d_Ellipse 2.webp"
+                      src="./images/hero/avatar-aluno-1.webp"
                       loading="lazy" alt="" class="card-circle-image" />
                     <img
-                      src="./images/69ccff1c99fe03e62ab1c3e2_fc2b58642a8b53e145c4f6144758ab92_Ellipse 4.webp"
+                      src="./images/hero/avatar-aluno-2.webp"
                       loading="lazy" alt="" class="card-circle-image _01" />
                     <img
-                      src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ccff6fb6bdacb33cfff003_Ellipse%204%20(2).webp"
+                      src="./images/hero/avatar-aluno-3.webp"
                       loading="lazy" alt="" class="card-circle-image _01" />
                     <a href="#modalidades" class="card-circle-image _01 hero-modalidades-btn"
                       title="Ver Modalidades" aria-label="Ir para a seção de modalidades">
                       <img
-                        src="./images/69ccff1c899f2421383fdee2_Group 96.svg"
+                        src="./images/icons/icone-membros.svg"
                         loading="lazy" alt="Ver Modalidades" style="width: 100%; height: 100%; display: block;" />
                     </a>
                   </div>
@@ -3517,7 +3516,7 @@
                   <div class="star-text-wrap">
                     <h2 class="_4-8-text">4.8</h2>
                     <img
-                      src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
+                      src="./images/icons/icone-estrela.svg"
                       loading="lazy" alt="Nota 4.8 estrelas" class="star-logo" />
                   </div>
                   <p class="paragraph" style="margin-bottom:0;">Avalia&ccedil;&atilde;o dos alunos</p>
@@ -3544,7 +3543,7 @@
                   <h3 class="marque-text">Muscula&ccedil;&atilde;o</h3>
                 </div>
                 <img
-                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/icons/icone-asterisco-marquee.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3552,7 +3551,7 @@
                   <h3 class="marque-text">Treino Funcional</h3>
                 </div>
                 <img
-                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/icons/icone-asterisco-marquee.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3560,7 +3559,7 @@
                   <h3 class="marque-text">Pilates</h3>
                 </div>
                 <img
-                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/icons/icone-asterisco-marquee.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3568,7 +3567,7 @@
                   <h3 class="marque-text">FitDance</h3>
                 </div>
                 <img
-                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/icons/icone-asterisco-marquee.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3576,7 +3575,7 @@
                   <h3 class="marque-text">Ritbox</h3>
                 </div>
                 <img
-                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/icons/icone-asterisco-marquee.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3584,7 +3583,7 @@
                   <h3 class="marque-text">Zumba</h3>
                 </div>
                 <img
-                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/icons/icone-asterisco-marquee.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3592,7 +3591,7 @@
                   <h3 class="marque-text">Cardio</h3>
                 </div>
                 <img
-                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/icons/icone-asterisco-marquee.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3600,7 +3599,7 @@
                   <h3 class="marque-text">Aulas Coletivas</h3>
                 </div>
                 <img
-                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/icons/icone-asterisco-marquee.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3608,7 +3607,7 @@
                   <h3 class="marque-text">Alongamento</h3>
                 </div>
                 <img
-                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/icons/icone-asterisco-marquee.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
             </div>
@@ -3622,7 +3621,7 @@
                   <h3 class="marque-text">FitDance</h3>
                 </div>
                 <img
-                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/icons/icone-asterisco-marquee.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3630,7 +3629,7 @@
                   <h3 class="marque-text">Muscula&ccedil;&atilde;o</h3>
                 </div>
                 <img
-                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/icons/icone-asterisco-marquee.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3638,7 +3637,7 @@
                   <h3 class="marque-text">Ritbox</h3>
                 </div>
                 <img
-                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/icons/icone-asterisco-marquee.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3646,7 +3645,7 @@
                   <h3 class="marque-text">Treino Funcional</h3>
                 </div>
                 <img
-                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/icons/icone-asterisco-marquee.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3654,7 +3653,7 @@
                   <h3 class="marque-text">Zumba</h3>
                 </div>
                 <img
-                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/icons/icone-asterisco-marquee.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3662,7 +3661,7 @@
                   <h3 class="marque-text">Pilates</h3>
                 </div>
                 <img
-                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/icons/icone-asterisco-marquee.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3670,7 +3669,7 @@
                   <h3 class="marque-text">Cardio</h3>
                 </div>
                 <img
-                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/icons/icone-asterisco-marquee.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3678,7 +3677,7 @@
                   <h3 class="marque-text">Aulas Coletivas</h3>
                 </div>
                 <img
-                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/icons/icone-asterisco-marquee.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3686,7 +3685,7 @@
                   <h3 class="marque-text">Alongamento</h3>
                 </div>
                 <img
-                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/icons/icone-asterisco-marquee.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3694,7 +3693,7 @@
                   <h3 class="marque-text">FitDance</h3>
                 </div>
                 <img
-                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/icons/icone-asterisco-marquee.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
               <div class="marque-content-wrap">
@@ -3702,7 +3701,7 @@
                   <h3 class="marque-text">Muscula&ccedil;&atilde;o</h3>
                 </div>
                 <img
-                  src="./images/69cd057cd134e60b2e94a923_9a6748741c24d86b61734fe66ba6f325_Frame.svg"
+                  src="./images/icons/icone-asterisco-marquee.svg"
                   loading="lazy" alt="" class="marque-logo-image" />
               </div>
             </div>
@@ -3759,7 +3758,7 @@
                 <div role="listitem" class="service-co-item w-dyn-item">
                   <a href="agendamento.html?modalidade=Muscula%C3%A7%C3%A3o" class="service-single-card-wrap w-inline-block" title="Agendar aula experimental de Musculação">
                     <div class="service-single-card sf-modalidade-card">
-                      <img src="./images/modalidade-musculacao.jpg" alt="Musculação - Academia Alvo02Fit" class="sf-card-bg-img" loading="lazy" />
+                      <img src="./images/modalidades/modalidade-musculacao.jpg" alt="Musculação - Academia Alvo02Fit" class="sf-card-bg-img" loading="lazy" />
                       <div class="sf-card-overlay"></div>
                       <div class="sf-card-content">
                         <div class="sf-card-info">
@@ -3779,7 +3778,7 @@
                 <div role="listitem" class="service-co-item w-dyn-item">
                   <a href="agendamento.html?modalidade=Treino%20Funcional" class="service-single-card-wrap w-inline-block" title="Agendar aula experimental de Treino Funcional">
                     <div class="service-single-card sf-modalidade-card">
-                      <img src="./images/modalidade-funcional.jpg" alt="Treino Funcional - Academia Alvo02Fit" class="sf-card-bg-img" loading="lazy" />
+                      <img src="./images/modalidades/modalidade-funcional.jpg" alt="Treino Funcional - Academia Alvo02Fit" class="sf-card-bg-img" loading="lazy" />
                       <div class="sf-card-overlay"></div>
                       <div class="sf-card-content">
                         <div class="sf-card-info">
@@ -3799,7 +3798,7 @@
                 <div role="listitem" class="service-co-item w-dyn-item">
                   <a href="agendamento.html?modalidade=Pilates" class="service-single-card-wrap w-inline-block" title="Agendar aula experimental de Pilates">
                     <div class="service-single-card sf-modalidade-card">
-                      <img src="./images/modalidade-pilates.jpg" alt="Pilates - Academia Alvo02Fit" class="sf-card-bg-img" loading="lazy" />
+                      <img src="./images/modalidades/modalidade-pilates.jpg" alt="Pilates - Academia Alvo02Fit" class="sf-card-bg-img" loading="lazy" />
                       <div class="sf-card-overlay"></div>
                       <div class="sf-card-content">
                         <div class="sf-card-info">
@@ -3819,7 +3818,7 @@
                 <div role="listitem" class="service-co-item w-dyn-item">
                   <a href="agendamento.html?modalidade=Ritbox" class="service-single-card-wrap w-inline-block" title="Agendar aula experimental de Ritbox">
                     <div class="service-single-card sf-modalidade-card">
-                      <img src="./images/modalidade-ritbox.jpg" alt="Ritbox - Academia Alvo02Fit" class="sf-card-bg-img" loading="lazy" />
+                      <img src="./images/modalidades/modalidade-ritbox.jpg" alt="Ritbox - Academia Alvo02Fit" class="sf-card-bg-img" loading="lazy" />
                       <div class="sf-card-overlay"></div>
                       <div class="sf-card-content">
                         <div class="sf-card-info">
@@ -3839,7 +3838,7 @@
                 <div role="listitem" class="service-co-item w-dyn-item">
                   <a href="agendamento.html?modalidade=FitDance" class="service-single-card-wrap w-inline-block" title="Agendar aula experimental de FitDance">
                     <div class="service-single-card sf-modalidade-card">
-                      <img src="./images/modalidade-fitdance.jpg" alt="FitDance - Academia Alvo02Fit" class="sf-card-bg-img" loading="lazy" />
+                      <img src="./images/modalidades/modalidade-fitdance.jpg" alt="FitDance - Academia Alvo02Fit" class="sf-card-bg-img" loading="lazy" />
                       <div class="sf-card-overlay"></div>
                       <div class="sf-card-content">
                         <div class="sf-card-info">
@@ -3859,7 +3858,7 @@
                 <div role="listitem" class="service-co-item w-dyn-item">
                   <a href="agendamento.html?modalidade=Zumba" class="service-single-card-wrap w-inline-block" title="Agendar aula experimental de Zumba">
                     <div class="service-single-card sf-modalidade-card">
-                      <img src="./images/modalidade-zumba.jpg" alt="Zumba - Academia Alvo02Fit" class="sf-card-bg-img" loading="lazy" />
+                      <img src="./images/modalidades/modalidade-zumba.jpg" alt="Zumba - Academia Alvo02Fit" class="sf-card-bg-img" loading="lazy" />
                       <div class="sf-card-overlay"></div>
                       <div class="sf-card-content">
                         <div class="sf-card-info">
@@ -3948,7 +3947,7 @@
                       </div>
                       <div class="button-arrow-wrap">
                         <img loading="lazy"
-                          src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ce23789b5884025bcce8c7_Arrow%20-%20Up.svg"
+                          src="./images/icons/icone-seta-topo.svg"
                           alt="" class="button-icon" />
                       </div>
                     </div>
@@ -4020,7 +4019,7 @@
                       </div>
                       <div class="button-arrow-wrap">
                         <img loading="lazy"
-                          src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ce23789b5884025bcce8c7_Arrow%20-%20Up.svg"
+                          src="./images/icons/icone-seta-topo.svg"
                           alt="" class="button-icon" />
                       </div>
                     </div>
@@ -4087,7 +4086,7 @@
                       </div>
                       <div class="button-arrow-wrap">
                         <img loading="lazy"
-                          src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ce23789b5884025bcce8c7_Arrow%20-%20Up.svg"
+                          src="./images/icons/icone-seta-topo.svg"
                           alt="" class="button-icon" />
                       </div>
                     </div>
@@ -4135,7 +4134,7 @@
                 <div class="design-card pos-active" data-card-idx="0">
                   <div class="design-card-inner">
                     <img
-                      src="./images/estrutura-1.webp"
+                      src="./images/estrutura/estrutura-1.webp"
                       loading="lazy" alt="Estrutura Alvo02 Fit - Musculação e Definição" class="design-image" />
                     <button type="button" class="design-card-zoom-btn" aria-label="Ampliar foto" title="Clique para ampliar">
                       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
@@ -4155,7 +4154,7 @@
                 <div class="design-card pos-next" data-card-idx="1">
                   <div class="design-card-inner">
                     <img
-                      src="./images/estrutura-2.webp"
+                      src="./images/estrutura/estrutura-2.webp"
                       loading="lazy" alt="Estrutura Alvo02 Fit - Treino com Halteres" class="design-image" />
                     <button type="button" class="design-card-zoom-btn" aria-label="Ampliar foto" title="Clique para ampliar">
                       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
@@ -4175,7 +4174,7 @@
                 <div class="design-card pos-back" data-card-idx="2">
                   <div class="design-card-inner">
                     <img
-                      src="./images/estrutura-3.jpg"
+                      src="./images/estrutura/estrutura-3.jpg"
                       loading="lazy" alt="Estrutura Alvo02 Fit - Peso Livre e Levantamento" class="design-image" />
                     <button type="button" class="design-card-zoom-btn" aria-label="Ampliar foto" title="Clique para ampliar">
                       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
@@ -4195,7 +4194,7 @@
                 <div class="design-card pos-prev" data-card-idx="3">
                   <div class="design-card-inner">
                     <img
-                      src="./images/estrutura-4.webp"
+                      src="./images/estrutura/estrutura-4.webp"
                       loading="lazy" alt="Estrutura Alvo02 Fit - Equipamentos Biomecânicos" class="design-image" />
                     <button type="button" class="design-card-zoom-btn" aria-label="Ampliar foto" title="Clique para ampliar">
                       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
@@ -4252,7 +4251,7 @@
                   </div>
                   <div class="button-arrow-wrap">
                     <img
-                      src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ce23789b5884025bcce8c7_Arrow%20-%20Up.svg"
+                      src="./images/icons/icone-seta-topo.svg"
                       loading="lazy" alt="" class="button-icon" />
                   </div>
                 </div>
@@ -4276,7 +4275,7 @@
             <div class="about-top-left-block">
               <div class="about-text">Sobre a Alvo02Fit</div>
               <div class="about-text-image-wrap">
-                <img loading="lazy" src="./images/alvo02fit-badge.svg" alt="" class="about-text-image" />
+                <img loading="lazy" src="./images/brand/alvo02fit-badge.svg" alt="" class="about-text-image" />
               </div>
             </div>
             <div class="about-top-right-block" style="gap: 28px !important; row-gap: 28px !important;">
@@ -4301,7 +4300,7 @@
                         </div>
                         <div class="button-arrow-wrap">
                           <img
-                            src="https://cdn.prod.website-files.com/69cc99c674ef20818f6f26db/69ce23789b5884025bcce8c7_Arrow%20-%20Up.svg"
+                            src="./images/icons/icone-seta-topo.svg"
                             loading="lazy" alt="" class="button-icon" />
                         </div>
                       </div>
@@ -4329,7 +4328,7 @@
                       <!-- Esfera Satelite Limpa: SEM sombra para evitar borda quadriculada/artefatos -->
                       <circle cx="530" cy="195" r="30" fill="url(#blobOrangeGrad)" />
                     </svg>
-                    <img src="./images/instrutor-alvo02fit.png" loading="lazy" alt="Instrutor Alvo02Fit"
+                    <img src="./images/hero/instrutor-alvo02fit.png" loading="lazy" alt="Instrutor Alvo02Fit"
                       class="about-instructor-image" />
                   </div>
                 </div>
@@ -4390,7 +4389,7 @@
                           </div>
                         </div>
                         <img loading="lazy"
-                          src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
+                          src="./images/icons/icone-estrela.svg"
                           alt="" class="star-image" />
                       </div>
                       <p class="counter-sub-text">Avalia&ccedil;&otilde;es</p>
@@ -4424,7 +4423,7 @@
                           </div>
                         </div>
                         <img loading="lazy"
-                          src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
+                          src="./images/icons/icone-estrela.svg"
                           alt="" class="star-image" />
                       </div>
                       <p class="counter-sub-text">Seguidores no Instagram</p>
@@ -4471,7 +4470,7 @@
                           </div>
                         </div>
                         <img loading="lazy"
-                          src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
+                          src="./images/icons/icone-estrela.svg"
                           alt="" class="star-image" />
                       </div>
                       <p class="counter-sub-text">Modalidades</p>
@@ -4518,7 +4517,7 @@
                           </div>
                         </div>
                         <img loading="lazy"
-                          src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
+                          src="./images/icons/icone-estrela.svg"
                           alt="" class="star-image" />
                       </div>
                       <p class="counter-sub-text">Aulas por semana</p>
@@ -4560,7 +4559,7 @@
                 <!-- Card TotalPass -->
                 <div class="faq-convenio-card">
                   <div class="faq-convenio-logo-box">
-                    <img loading="lazy" src="./images/totalpass-official-white.svg" alt="TotalPass - Convênio Aceito na Alvo02Fit" class="faq-convenio-img totalpass" />
+                    <img loading="lazy" src="./images/brand/totalpass-official-white.svg" alt="TotalPass - Convênio Aceito na Alvo02Fit" class="faq-convenio-img totalpass" />
                   </div>
                   <div class="faq-convenio-pill">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
@@ -4571,7 +4570,7 @@
                 <!-- Card Wellhub -->
                 <div class="faq-convenio-card">
                   <div class="faq-convenio-logo-box">
-                    <img loading="lazy" src="./images/wellhub-official-white.svg" alt="Wellhub (antigo Gympass) - Convênio Aceito na Alvo02Fit" class="faq-convenio-img wellhub" />
+                    <img loading="lazy" src="./images/brand/wellhub-official-white.svg" alt="Wellhub (antigo Gympass) - Convênio Aceito na Alvo02Fit" class="faq-convenio-img wellhub" />
                   </div>
                   <div class="faq-convenio-pill">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
@@ -4870,19 +4869,19 @@
                     <h3 class="_4-8-text">5.0</h3>
                     <div class="star-image-wrap">
                       <img loading="lazy"
-                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/icons/icone-estrela.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/icons/icone-estrela.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/icons/icone-estrela.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/icons/icone-estrela.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/icons/icone-estrela.svg"
                         alt="" class="star-image" />
                     </div>
                   </div>
@@ -4899,19 +4898,19 @@
                     <h3 class="_4-8-text">5.0</h3>
                     <div class="star-image-wrap">
                       <img loading="lazy"
-                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/icons/icone-estrela.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/icons/icone-estrela.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/icons/icone-estrela.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/icons/icone-estrela.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/icons/icone-estrela.svg"
                         alt="" class="star-image" />
                     </div>
                   </div>
@@ -4928,19 +4927,19 @@
                     <h3 class="_4-8-text">5.0</h3>
                     <div class="star-image-wrap">
                       <img loading="lazy"
-                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/icons/icone-estrela.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/icons/icone-estrela.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/icons/icone-estrela.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/icons/icone-estrela.svg"
                         alt="" class="star-image" />
                       <img loading="lazy"
-                        src="./images/69cd01e3bf4928572c4eecfb_Star.svg"
+                        src="./images/icons/icone-estrela.svg"
                         alt="" class="star-image" />
                     </div>
                   </div>
@@ -5026,7 +5025,7 @@
 
               <!-- Logo Alvo02 Fit -->
               <div class="loc-maps-footer-brand">
-                <img src="./images/alvo02fit-logo.png" alt="Logo Alvo02 Fit" class="loc-maps-brand-logo" loading="lazy" />
+                <img src="./images/brand/alvo02fit-logo.png" alt="Logo Alvo02 Fit" class="loc-maps-brand-logo" loading="lazy" />
               </div>
             </div>
 
@@ -5159,25 +5158,25 @@
             <div class="review-card-wrapper">
               <div class="review-logo-single-card _01">
                 <div class="review-logo-wrap">
-                  <img loading="lazy" src="./images/patrocinio-01-primestar.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-01-primestar.png"
                     alt="PrimeStar Quiropraxia - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
               <div class="review-logo-single-card _02">
                 <div class="review-logo-wrap black">
-                  <img loading="lazy" src="./images/patrocinio-02-casasales.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-02-casasales.png"
                     alt="Casa Sales Materiais de Constru&ccedil;&atilde;o - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
               <div id="w-node-_476d08c7-26fd-8425-b765-3185de2d1e3f-de2d1e2f" class="review-logo-single-card _03">
                 <div class="review-logo-wrap">
-                  <img loading="lazy" src="./images/patrocinio-03-victorsilva.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-03-victorsilva.png"
                     alt="Centro Nutricional Victor Silva - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
               <div id="w-node-_476d08c7-26fd-8425-b765-3185de2d1e42-de2d1e2f" class="review-logo-single-card _04">
                 <div class="review-logo-wrap">
-                  <img loading="lazy" src="./images/patrocinio-04-dra-alexandra.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-04-dra-alexandra.png"
                     alt="Dra. Alexandra Alc&acirc;ntara Sa&uacute;de Est&eacute;tica e Bem-Estar - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
@@ -5185,25 +5184,25 @@
             <div class="review-card-wrapper">
               <div id="w-node-_476d08c7-26fd-8425-b765-3185de2d1e46-de2d1e2f" class="review-logo-single-card _05">
                 <div class="review-logo-wrap">
-                  <img loading="lazy" src="./images/patrocinio-05-studiolumier.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-05-studiolumier.png"
                     alt="Studio Lumier Lashes &amp; Est&eacute;tica - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
               <div id="w-node-_476d08c7-26fd-8425-b765-3185de2d1e49-de2d1e2f" class="review-logo-single-card _06">
                 <div class="review-logo-wrap black">
-                  <img loading="lazy" src="./images/patrocinio-06-bemdocado.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-06-bemdocado.png"
                     alt="Bem Do&ccedil;ado Bolos Caseiros - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
               <div id="w-node-_476d08c7-26fd-8425-b765-3185de2d1e4c-de2d1e2f" class="review-logo-single-card _07">
                 <div class="review-logo-wrap black">
-                  <img loading="lazy" src="./images/patrocinio-07-curainject.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-07-curainject.png"
                     alt="Curainject Aesthetics &amp; Wellness - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
               <div id="w-node-_476d08c7-26fd-8425-b765-3185de2d1e4f-de2d1e2f" class="review-logo-single-card _08">
                 <div class="review-logo-wrap">
-                  <img loading="lazy" src="./images/patrocinio-08-clinicadantas.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-08-clinicadantas.png"
                     alt="Cl&iacute;nica Dantas - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
@@ -5211,19 +5210,19 @@
             <div class="review-card-wrapper row-3">
               <div class="review-logo-single-card _09">
                 <div class="review-logo-wrap">
-                  <img loading="lazy" src="./images/patrocinio-09-monizemelo.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-09-monizemelo.png"
                     alt="Ateli&ecirc; Monize Melo - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
               <div class="review-logo-single-card _10">
                 <div class="review-logo-wrap black">
-                  <img loading="lazy" src="./images/patrocinio-10-rb.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-10-rb.png"
                     alt="RB Comunica&ccedil;&atilde;o Visual - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
               <div class="review-logo-single-card _11">
                 <div class="review-logo-wrap">
-                  <img loading="lazy" src="./images/patrocinio-11-hillarybeauty.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-11-hillarybeauty.png"
                     alt="Hillary Beauty - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
@@ -5231,67 +5230,67 @@
             <div class="review-card-wrapper-tab">
               <div class="review-logo-single-card _01">
                 <div class="review-logo-wrap">
-                  <img loading="lazy" src="./images/patrocinio-01-primestar.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-01-primestar.png"
                     alt="PrimeStar Quiropraxia - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
               <div class="review-logo-single-card _02">
                 <div class="review-logo-wrap black">
-                  <img loading="lazy" src="./images/patrocinio-02-casasales.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-02-casasales.png"
                     alt="Casa Sales Materiais de Constru&ccedil;&atilde;o - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
               <div class="review-logo-single-card _03">
                 <div class="review-logo-wrap">
-                  <img loading="lazy" src="./images/patrocinio-03-victorsilva.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-03-victorsilva.png"
                     alt="Centro Nutricional Victor Silva - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
               <div class="review-logo-single-card _04">
                 <div class="review-logo-wrap">
-                  <img loading="lazy" src="./images/patrocinio-04-dra-alexandra.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-04-dra-alexandra.png"
                     alt="Dra. Alexandra Alc&acirc;ntara Sa&uacute;de Est&eacute;tica e Bem-Estar - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
               <div class="review-logo-single-card _05">
                 <div class="review-logo-wrap">
-                  <img loading="lazy" src="./images/patrocinio-05-studiolumier.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-05-studiolumier.png"
                     alt="Studio Lumier Lashes &amp; Est&eacute;tica - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
               <div class="review-logo-single-card _06">
                 <div class="review-logo-wrap black">
-                  <img loading="lazy" src="./images/patrocinio-06-bemdocado.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-06-bemdocado.png"
                     alt="Bem Do&ccedil;ado Bolos Caseiros - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
               <div class="review-logo-single-card _07">
                 <div class="review-logo-wrap black">
-                  <img loading="lazy" src="./images/patrocinio-07-curainject.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-07-curainject.png"
                     alt="Curainject Aesthetics &amp; Wellness - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
               <div class="review-logo-single-card _08">
                 <div class="review-logo-wrap">
-                  <img loading="lazy" src="./images/patrocinio-08-clinicadantas.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-08-clinicadantas.png"
                     alt="Cl&iacute;nica Dantas - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
               <div class="review-logo-single-card _09">
                 <div class="review-logo-wrap">
-                  <img loading="lazy" src="./images/patrocinio-09-monizemelo.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-09-monizemelo.png"
                     alt="Ateli&ecirc; Monize Melo - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
               <div class="review-logo-single-card _10">
                 <div class="review-logo-wrap black">
-                  <img loading="lazy" src="./images/patrocinio-10-rb.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-10-rb.png"
                     alt="RB Comunica&ccedil;&atilde;o Visual - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
               <div class="review-logo-single-card _11">
                 <div class="review-logo-wrap">
-                  <img loading="lazy" src="./images/patrocinio-11-hillarybeauty.png"
+                  <img loading="lazy" src="./images/parceiros/patrocinio-11-hillarybeauty.png"
                     alt="Hillary Beauty - Parceria Alvo02 Fit" class="review-logo" />
                 </div>
               </div>
@@ -5311,7 +5310,7 @@
             <div class="footer-left-block">
               <a data-w-id="9ceb58aa-afd9-3ed3-d683-4313c017b121" href="/" aria-current="page"
                 class="footer-logo-link w-inline-block w--current">
-                <img loading="lazy" src="./images/alvo02fit-logo.png" alt="Alvo02Fit - Academia" class="footer-logo-image" />
+                <img loading="lazy" src="./images/brand/alvo02fit-logo.png" alt="Alvo02Fit - Academia" class="footer-logo-image" />
               </a>
               <div data-w-id="9ceb58aa-afd9-3ed3-d683-4313c017b123" class="social-media-link-holder">
                 <a href="https://www.facebook.com/" target="_blank" class="social-media-link-cover w-inline-block" aria-label="Facebook">
@@ -5418,7 +5417,7 @@
           </div>
           <div data-w-id="9ceb58aa-afd9-3ed3-d683-4313c017b17b" class="footer-bottom-content">
             <div class="footer-big-image-wrap">
-              <img loading="lazy" src="./images/alvo02fit-footer.svg" alt="" class="footer-big-image" />
+              <img loading="lazy" src="./images/brand/alvo02fit-footer.svg" alt="" class="footer-big-image" />
             </div>
             <div class="copyright-text-wrap">
               <div data-w-id="9ceb58aa-afd9-3ed3-d683-4313c017b17e" class="copyright-text">&copy; 2026 Alvo02Fit. Todos
@@ -5461,7 +5460,7 @@
 
       <!-- Imagem Ampliada -->
       <div class="gallery-lightbox-img-wrap">
-        <img id="gallery-lightbox-img" src="./images/estrutura-1.webp" alt="Estrutura Alvo02 Fit Ampliada" class="gallery-lightbox-img" />
+        <img id="gallery-lightbox-img" src="./images/estrutura/estrutura-1.webp" alt="Estrutura Alvo02 Fit Ampliada" class="gallery-lightbox-img" />
       </div>
 
       <!-- Barra Inferior com Informações e Contador -->
@@ -5594,25 +5593,25 @@
       // Dados para o Lightbox de Imagem Ampliada
       var galleryData = [
         {
-          src: './images/estrutura-1.webp',
+          src: './images/estrutura/estrutura-1.webp',
           alt: 'Estrutura Alvo02 Fit - Musculação e Definição',
           tag: 'ESTRUTURA 01',
           title: 'Musculação & Definição'
         },
         {
-          src: './images/estrutura-2.webp',
+          src: './images/estrutura/estrutura-2.webp',
           alt: 'Estrutura Alvo02 Fit - Treino com Halteres',
           tag: 'ESTRUTURA 02',
           title: 'Treino com Halteres'
         },
         {
-          src: './images/estrutura-3.jpg',
+          src: './images/estrutura/estrutura-3.jpg',
           alt: 'Estrutura Alvo02 Fit - Peso Livre e Levantamento',
           tag: 'ESTRUTURA 03',
           title: 'Peso Livre & Levantamento'
         },
         {
-          src: './images/estrutura-4.webp',
+          src: './images/estrutura/estrutura-4.webp',
           alt: 'Estrutura Alvo02 Fit - Equipamentos Biomecânicos',
           tag: 'ESTRUTURA 04',
           title: 'Equipamentos Biomecânicos'
@@ -5984,7 +5983,7 @@
     <div class="radial-menu-wrapper">
       <div class="radial-menu-header">
         <a href="#hero" class="radial-menu-logo" aria-label="Alvo02Fit - Voltar ao início">
-          <img src="./images/alvo02fit-logo.png" alt="Alvo02Fit - Academia" class="radial-logo-img" />
+          <img src="./images/brand/alvo02fit-logo.png" alt="Alvo02Fit - Academia" class="radial-logo-img" />
         </a>
         <button type="button" class="radial-menu-close-btn" id="radial-menu-close" aria-label="Fechar menu">
           <div class="custom-hamburger-ball close-ball">
@@ -6236,7 +6235,7 @@
       var lastIsMobile = mql.matches;
 
       function applyPoster(isMobile) {
-        var posterUrl = isMobile ? './images/hero-poster-mobile.jpg' : './images/hero-poster.jpg';
+        var posterUrl = isMobile ? './images/hero/hero-poster-mobile.jpg' : './images/hero/hero-poster-desktop.jpg';
         video.setAttribute('poster', posterUrl);
       }
 

@@ -9,6 +9,8 @@ desktop.ini
 *.swp
 *.log
 
-# Scripts temporarios e backups locais
+# Arquivos temporarios de desenvolvimento
 *.py
-_arquivos_originais_backup/
+*.ps1
+*.bat
+_tmp_*

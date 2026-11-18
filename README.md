@@ -1,65 +1,61 @@
-# 🎯 ALVO02FIT — Site Institucional
+# Academia Alvo02Fit — Website Oficial & Painel da Equipe
 
-Landing page oficial e institucional da **Academia ALVO02FIT**, localizada na Av. Sapopemba, Cidade São Mateus — São Paulo, SP.
+Site institucional, página de agendamento de aula experimental gratuita e painel administrativo de gestão de alunos da **Academia Alvo02Fit** (São Mateus, SP).
 
-Desenvolvida com foco em alta performance, identidade visual esportiva (Black & Electric Orange), tipografia de impacto (Anton, Onest, Inter Tight) e experiência fluida e moderna.
+## Páginas do Projeto
 
----
+- **`index.html`** — Landing page oficial (Hero com vídeo responsivo, Modalidades, Estrutura, Planos, Convênios Wellhub/TotalPass, Avaliações, Parceiros, Localização e FAQ).
+- **`agendamento.html`** — Fluxo de agendamento online de Aula Experimental Gratuita, integrado em tempo real com o painel da recepção.
+- **`painel.html`** — Painel administrativo restrito por login e senha (KPIs com seletor Dia/Semana/Mês, busca e filtros, status de comparecimento, check-in rápido, contato via WhatsApp, exportação CSV, folha de impressão e aba de gestão de usuários/senhas para o administrador).
 
-## ⚡ Recursos e Funcionalidades
-
-- **Hero Cinemática com Vídeo de Fundo:** Vídeo em loop contínuo de névoa e iluminação de academia, com suporte nativo a cross-browser (`playsinline`, `autoplay`, `muted`).
-- **Seção Sobre a Alvo02Fit:** Atleta oficial emoldurado por uma mancha laranja orgânica fluida com profundidade e satélite dinâmico.
-- **Grade Interativa de Modalidades e Aulas:** Musculação, Treino Funcional, Pilates Solo, FitDance, Lutas e Alongamento.
-- **Página de Agendamento Online:** Fluxo dedicado para escolha de horários e modalidades (`agendamento.html`).
-- **Canais e Localização Integrada:** Trajeto direto via **Google Maps** e **Waze**, status de funcionamento em tempo real e links para Instagram e WhatsApp.
-- **Parcerias Oficiais:** Integração e badges de **Wellhub** (antigo Gympass), **TotalPass**, PrimeStar, Studio Lumiér e outros parceiros locais.
-- **Design 100% Responsivo:** Otimizado para telas ultra-wide, desktop, tablets e smartphones.
-
----
-
-## 📁 Estrutura do Projeto
+## Estrutura de Pastas
 
 ```text
-Alvo02/
-├── index.html                                        # Página principal da academia
-├── agendamento.html                                  # Página de agendamento de treinos e aulas
+.
+├── index.html
+├── agendamento.html
+├── painel.html
+├── favicon.ico
 ├── css/
-│   └── style.css                                     # Folha de estilos consolidada
-├── js/                                               # Scripts de interação e navegação
-├── images/                                           # Identidade visual, logos, ícones e mídias
-│   ├── instrutor-alvo02fit.png                       # Atleta com recorte e mancha orgânica
-│   ├── mancha-laranja.svg                            # Vetor da mancha laranja
-│   ├── hero-video.mp4                                # Vídeo de background do Hero
-│   └── ...                                           # Logos oficiais e parceiros
-├── Animate_background_fog_without_m…_dc2f279a_1080p.mp4 # Vídeo original do Hero
-├── start-server.ps1                                  # Servidor de desenvolvimento local
-└── README.md                                         # Documentação do projeto
+│   └── style.css
+├── fonts/
+│   ├── anton.woff2
+│   ├── inter-tight.woff2
+│   └── onest.woff2
+├── js/
+│   ├── gsap.min.js
+│   ├── jquery.min.js
+│   ├── ScrollTrigger.min.js
+│   ├── SplitText.min.js
+│   ├── webflow.js
+│   ├── webflow.schunk.*.js
+│   └── webfont.js
+├── videos/
+│   ├── hero-desktop.mp4
+│   └── hero-mobile.mp4
+└── images/
+    ├── brand/          # Logos, badges, favicons e convênios
+    ├── hero/           # Posters, instrutor e elementos do hero
+    ├── estrutura/      # Fotos da estrutura da academia
+    ├── modalidades/    # Fotos das modalidades
+    ├── parceiros/      # Logos dos parceiros locais
+    └── icons/          # Ícones locais otimizados
 ```
 
----
+## Deploy
 
-## 🚀 Como Executar Localmente
+Projeto 100% estático (HTML, CSS e JavaScript puro), pronto para deploy imediato em:
 
-Você pode executar o servidor local através do PowerShell:
+- **Vercel** (`Import Project` → sem comando de build, Output Directory: `.`)
+- **Netlify** (`Deploy from Git` → Publish directory: `.`)
+- **GitHub Pages** (`Settings → Pages → Branch: main / root`)
+- **Cloudflare Pages** (Framework preset: `None`, Build output: `.`)
 
-```powershell
-.\start-server.ps1
-```
+## Acesso ao Painel da Equipe
 
-Ou usando o servidor HTTP embutido do Python:
+Acesse `/painel.html` diretamente pela URL (não há link público exposto no site).
 
-```bash
-python -m http.server 8080
-```
+- **Login inicial**: `adm`
+- **Senha inicial**: `adm12`
 
-Acesse no navegador: `http://localhost:8080`
-
----
-
-## 📍 Localização & Contato
-
-- **Endereço:** Av. Sapopemba, 12.847 — Jardim Adutora / São Mateus, São Paulo - SP
-- **Instagram:** [@alvo02fit](https://www.instagram.com/alvo02fit/)
-- **WhatsApp Recepção:** (11) 93002-5829
-- **Slogan:** *#VEMPRAALVO02FIT — Seu objetivo começa aqui!*
+> Dentro do painel, o administrador pode criar novos usuários (Funcionário ou Administrador), visualizar senhas e alterar a senha do próprio `adm` na aba **Usuários & Senhas**.
